@@ -22,6 +22,16 @@ export default defineUserConfig({
   head: [
     // 配置站点图标
     ['link', { rel: 'icon', type: 'image/png', href: 'https://i.p-i.vip/47/20241024-67192acae3bb8.png' }],
+    // 配置网监控器
+    [
+      "script",
+      {
+        async: true,
+        defer: true,
+        "data-website-id": "92445f67-3d16-4d40-8122-50a4b92d6e60",
+        src: "https://umami.xingji.fun/script.js",
+      },
+    ],
   ],
 
   bundler: viteBundler(),
@@ -41,6 +51,22 @@ export default defineUserConfig({
     // lastUpdated: true,
     // contributors: true,
     // changelog: false,
+    // 贡献者配置
+    contributors: {
+      mode: 'block',
+      info: [
+        {
+          username: 'XingJi-love', // github username
+          alias: ['XingJi-love'], // 别名，本地 git 配置中的用户名
+        }
+      ]
+    },
+    changelog: true,
+
+    plugins: {
+      // 如果您在此处直接声明为 true，则表示开发环境和生产环境都启用该功能
+      git: process.env.NODE_ENV === 'production'
+    },
 
     /**
      * 编译缓存，加快编译速度

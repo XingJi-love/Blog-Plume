@@ -392,7 +392,7 @@
 }
 
 
-/* 自定义鼠标样式 */
+/* ========================自定义鼠标样式====================== */
 #aside-content .card-widget .card-info-social-icons,
 #bber>section>ul>li>div .bber-info-from,
 #bber>section>ul>li>div .bber-info-time,
@@ -450,7 +450,7 @@ textarea,
 time {
     cursor: url(https://cdn.npmmirror.com/packages/pixpro/1.7.6/files/static/images/text.png) 16 16, text !important
 }
-
+/* ========================twikoo美化====================== */
 
 
 
