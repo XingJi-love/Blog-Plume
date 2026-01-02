@@ -4,6 +4,11 @@ import NpmBadge from 'vuepress-theme-plume/features/NpmBadge.vue' // npm 徽章�
 import NpmBadgeGroup from 'vuepress-theme-plume/features/NpmBadgeGroup.vue' // npm 徽章组组件
 import Swiper from 'vuepress-theme-plume/features/Swiper.vue' // 轮播图组件
 
+
+import { h } from 'vue'
+import { Layout } from 'vuepress-theme-plume/client'
+import PageContextMenu from 'vuepress-theme-plume/features/PageContextMenu.vue' // 为站点添加 llms.txt组件
+
 // import CustomComponent from './theme/components/Custom.vue'
 
 // import './theme/styles/custom.css'
@@ -26,5 +31,12 @@ export default defineClientConfig({
     app.component('Homepage', Homepage) // 首页组件
 
     app.component('AllFriendContent', AllFriendContent) // 友链组件
+  },
+
+  layouts: {
+    Layout: h(Layout, null, {
+      // 将 PageContextMenu 添加到 doc-title-after 插槽，即文章标题的右侧
+      'doc-title-after': () => h(PageContextMenu), // 为站点添加 llms.txt组件
+    }),
   },
 })
