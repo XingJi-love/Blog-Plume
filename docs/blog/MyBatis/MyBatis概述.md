@@ -132,14 +132,14 @@ while(rs.next()){
    - MyBatis本是apache的一个开源项目iBatis，2010年这个项目由apache software foundation迁移到了google code，并且改名为MyBatis。2013年11月迁移到Github。
    - iBATIS一词来源于“internet”和“abatis”的组合，是一个基于Java的持久层框架。iBATIS提供的持久层框架包括SQL Maps和Data Access Objects（DAOs）。
 - 打开mybatis代码可以看到它的包结构中包含：ibatis
-   - ![](./MyBatis概述/img-2.jpg)
+   - ![MyBatis概述](./MyBatis概述/img-2.jpg)
 - ORM：对象关系映射
    - O（Object）：Java虚拟机中的Java对象
    - R（Relational）：关系型数据库
    - M（Mapping）：将Java虚拟机中的Java对象映射到数据库表中一行记录，或是将数据库表中一行记录映射成Java虚拟机中的一个Java对象。
    - ORM图示
-      - ![](./MyBatis概述/img-3.jpg)
-      - ![](./MyBatis概述/img-4.jpg)
+      - ![MyBatis概述](./MyBatis概述/img-3.jpg)
+      - ![MyBatis概述](./MyBatis概述/img-4.jpg)
    - MyBatis属于半自动化ORM框架。
    - Hibernate属于全自动化的ORM框架。
 - MyBatis框架特点：
