@@ -7,7 +7,7 @@ permalink: /blog/ehbjvsro/
 cover: ./MyBatis.jpg
 ---
 
-![](./MyBatis.jpg)
+![MyBatis概述](./MyBatis.jpg)
 
 ## MyBatis概述
 
@@ -27,7 +27,7 @@ cover: ./MyBatis.jpg
 
 ### 1.2 三层架构
 
-![三层架构.png](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659575815289-a76d30d9-f072-483a-bda7-b1fc8afc6f82.png#averageHue=%23d3d9de&clientId=u6b7aa99c-2be4-4&from=paste&height=430&id=u14695784&originHeight=804&originWidth=1448&originalType=binary&ratio=1&rotation=0&showTitle=false&size=95422&status=done&style=shadow&taskId=ufba163d4-60f2-4941-b75a-4c34720010f&title=&width=775)
+![MyBatis概述](./MyBatis概述/img-1.jpg)
 
 - 表现层（UI）：直接跟前端打交互（一是接收前端ajax请求，二是返回json数据给前端）
 - 业务逻辑层（BLL）：一是处理表现层转发过来的前端请求（也就是具体业务），二是将从持久层获取的数据返回到表现层。
@@ -132,14 +132,14 @@ while(rs.next()){
    - MyBatis本是apache的一个开源项目iBatis，2010年这个项目由apache software foundation迁移到了google code，并且改名为MyBatis。2013年11月迁移到Github。
    - iBATIS一词来源于“internet”和“abatis”的组合，是一个基于Java的持久层框架。iBATIS提供的持久层框架包括SQL Maps和Data Access Objects（DAOs）。
 - 打开mybatis代码可以看到它的包结构中包含：ibatis
-   - ![42857443-5184-45b5-8AD4-2B281C88A8CC.png](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659580495482-02167fb7-a183-4337-bfbe-f9ab50e736d6.png#averageHue=%23e8c273&clientId=u6b7aa99c-2be4-4&from=paste&height=146&id=u383be560&originHeight=146&originWidth=427&originalType=binary&ratio=1&rotation=0&showTitle=false&size=5675&status=done&style=none&taskId=uc32d6afd-346b-4151-8933-728a4a66a30&title=&width=427)
+   - ![](./MyBatis概述/img-2.jpg)
 - ORM：对象关系映射
    - O（Object）：Java虚拟机中的Java对象
    - R（Relational）：关系型数据库
    - M（Mapping）：将Java虚拟机中的Java对象映射到数据库表中一行记录，或是将数据库表中一行记录映射成Java虚拟机中的一个Java对象。
    - ORM图示
-      - ![C48A1A89-244D-40f4-85DB-F1E665A2EA62.png](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659580953095-86e388ac-13b5-4448-b90a-2aacd36688ef.png#averageHue=%23d7d9d2&clientId=u6b7aa99c-2be4-4&from=paste&height=200&id=uebaeb73c&originHeight=200&originWidth=579&originalType=binary&ratio=1&rotation=0&showTitle=false&size=98143&status=done&style=none&taskId=ua834ac11-2f7e-406c-9c58-d7665141cb3&title=&width=579)
-      - ![A21555BB-55B7-4d7c-8AB0-F49B10E96BD3.png](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659580965550-87c43dee-f1c4-4bdd-b15e-14f831b3d0da.png#averageHue=%23efa67e&clientId=u6b7aa99c-2be4-4&from=paste&height=333&id=u6c63cd39&originHeight=333&originWidth=465&originalType=binary&ratio=1&rotation=0&showTitle=false&size=92293&status=done&style=none&taskId=u65b49126-aa66-4916-8c8f-7799b39c26c&title=&width=465)
+      - ![](./MyBatis概述/img-3.jpg)
+      - ![](./MyBatis概述/img-4.jpg)
    - MyBatis属于半自动化ORM框架。
    - Hibernate属于全自动化的ORM框架。
 - MyBatis框架特点：
@@ -185,10 +185,10 @@ while(rs.next()){
 ### 2.2 MyBatis下载
 
 - 从github上下载，地址：[https://github.com/mybatis/mybatis-3](https://github.com/mybatis/mybatis-3)
-   - ![2FFBA369-A41E-4b17-81C5-68A18B8A428F.png](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659582991347-ee21a960-e4ae-45a0-83cf-74b3f1f3825c.png#averageHue=%23f7f5f4&clientId=u6b7aa99c-2be4-4&from=paste&height=583&id=u79fa1b52&originHeight=583&originWidth=895&originalType=binary&ratio=1&rotation=0&showTitle=false&size=52133&status=done&style=none&taskId=u6d588ea3-579a-43ba-a3e5-47f665a9063&title=&width=895)
-   - ![0D36080D-53BB-42ac-9E19-26260818134E.png](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659583157781-fd860428-d25b-4c4c-9e68-0219de7d3ba9.png#averageHue=%23fefbfb&clientId=u6b7aa99c-2be4-4&from=paste&height=764&id=u173d560e&originHeight=764&originWidth=909&originalType=binary&ratio=1&rotation=0&showTitle=false&size=61215&status=done&style=none&taskId=u328f6d3e-c76d-41c2-af07-e4cbaef3550&title=&width=909)
+   - ![](./MyBatis概述/img-5.jpg)
+   - ![](./MyBatis概述/img-6.jpg)
 - 将框架以及框架的源码都下载下来，下载框架后解压，打开mybatis目录
-   - ![55C87E1A-E3AA-414f-9281-CE7D5702EA17.png](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659583275291-4ba5ba90-5420-449e-97f4-2ec759c994ca.png#averageHue=%23fcf3f1&clientId=u6b7aa99c-2be4-4&from=paste&height=121&id=u45bb9d9a&originHeight=121&originWidth=249&originalType=binary&ratio=1&rotation=0&showTitle=false&size=5298&status=done&style=none&taskId=u2c199df7-1df7-48e9-b3f4-6354160cf01&title=&width=249)
+   - ![](./MyBatis概述/img-7.jpg)
    - 通过以上解压可以看到，框架一般都是以jar包的形式存在。我们的mybatis课程使用maven，所以这个jar我们不需要。
    - 官方手册需要。
 
@@ -207,16 +207,16 @@ while(rs.next()){
       - produce_time：生产时间【char，年月日即可，10个长度，'2022-10-11'】
       - car_type：汽车类型（燃油车、电车、氢能源）【varchar】
    - 使用navicat for mysql工具建表
-      - ![16B6D507-440F-460f-9D1F-39653A3B6EC2.png](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659596348287-5876735d-ba3b-43d2-9e73-1c4bdb29e8b5.png#averageHue=%23f7f6f5&clientId=u6b7aa99c-2be4-4&from=paste&height=288&id=u664bee8c&originHeight=288&originWidth=960&originalType=binary&ratio=1&rotation=0&showTitle=false&size=18316&status=done&style=none&taskId=udecdafbb-71bd-4e05-b034-f1a2f812112&title=&width=960)
+      - ![](./MyBatis概述/img-8.jpg)
    - 使用navicat for mysql工具向t_car表中插入两条数据，如下：
-      - ![7E8510B9-9886-41c9-9495-0AE7888560B9.png](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659596615335-60a93468-5a9e-48b8-acb7-cb4be313b8f1.png#averageHue=%23f5f3f2&clientId=u6b7aa99c-2be4-4&from=paste&height=170&id=u8c4dc450&originHeight=170&originWidth=566&originalType=binary&ratio=1&rotation=0&showTitle=false&size=9743&status=done&style=none&taskId=ua73fd204-98f9-4141-85f1-53e5ef0e674&title=&width=566)
+      - ![](./MyBatis概述/img-9.jpg)
    - 创建Project：建议创建Empty Project，设置Java版本以及编译版本等。
-      - ![52176FB4-6DB5-4264-8940-34A3506C2A0C.png](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659585665160-94c930e0-611c-46fa-b87d-aa9489ec85c8.png#averageHue=%233d4144&clientId=u6b7aa99c-2be4-4&from=paste&height=604&id=uabae2fee&originHeight=604&originWidth=782&originalType=binary&ratio=1&rotation=0&showTitle=false&size=25720&status=done&style=none&taskId=u0f32e2ca-e7a1-4982-894f-73729a33c21&title=&width=782)
-      - ![1C8EB1AF-0465-4e2d-816A-B7FFBA2E42C4.png](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659585756219-b17df6ac-8bb8-4d3e-bd4b-44f5d41c41c0.png#averageHue=%233d4146&clientId=u6b7aa99c-2be4-4&from=paste&height=383&id=u97e3ab74&originHeight=383&originWidth=750&originalType=binary&ratio=1&rotation=0&showTitle=false&size=19995&status=done&style=none&taskId=u2debb595-ca67-40c5-a1f8-c7ad79a72b4&title=&width=750)
+      - ![](./MyBatis概述/img-10.jpg)
+      - ![](./MyBatis概述/img-11.jpg)
    - 设置IDEA的maven
-      - ![3EA79931-EE2C-46f4-BDB2-6AB99EDFCA87.png](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659586287914-4b6d4e74-f5f4-4800-901e-04f017d65ce0.png#averageHue=%233d4246&clientId=u6b7aa99c-2be4-4&from=paste&height=701&id=u3b9af48c&originHeight=701&originWidth=977&originalType=binary&ratio=1&rotation=0&showTitle=false&size=39072&status=done&style=none&taskId=uba85744a-5efc-48cd-8461-f8df0fc000c&title=&width=977)
+      - ![](./MyBatis概述/img-12.jpg)
    - 创建Module：普通的Maven Java模块
-      - ![8F6F3B34-B1F7-4fcb-9584-AF629200534F.png](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659586416938-a08b3128-4232-425b-a4a0-958956c52bc8.png#averageHue=%233d4144&clientId=u6b7aa99c-2be4-4&from=paste&height=603&id=ua350e75f&originHeight=603&originWidth=779&originalType=binary&ratio=1&rotation=0&showTitle=false&size=30514&status=done&style=none&taskId=u99122205-9b44-42de-a7c4-ae6d927c61c&title=&width=779)
+      - ![](./MyBatis概述/img-13.jpg)
 
 
 :::: steps
@@ -366,8 +366,10 @@ public class MyBatisIntroductionTest {
 
 
 6. **步骤6：运行程序，查看运行结果，以及数据库表中的数据**
-   - ![211D2E7E-E62B-413a-9710-72AC1EC7D894.png](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659599289005-00bae72a-c64f-41b5-9b87-162f8958efa5.png#averageHue=%23998366&clientId=u6b7aa99c-2be4-4&from=paste&height=171&id=u1f6e97f2&originHeight=171&originWidth=458&originalType=binary&ratio=1&rotation=0&showTitle=false&size=9426&status=done&style=none&taskId=u004b6ae8-ff94-42f0-bf96-9acc738af9d&title=&width=458)
-   - ![2A4C1E6E-56B8-440e-A368-F10434EACC2D.png](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659599334361-3c2733c1-29d5-474c-a217-552ec331b523.png#averageHue=%23f4f3f1&clientId=u6b7aa99c-2be4-4&from=paste&height=189&id=u5cad9434&originHeight=189&originWidth=611&originalType=binary&ratio=1&rotation=0&showTitle=false&size=11487&status=done&style=none&taskId=u065d7ebf-be3a-4f82-8bae-c9c4550558c&title=&width=611)
+   
+   ![](./MyBatis概述/img-14.jpg)
+   
+   ![](./MyBatis概述/img-15.jpg)
 
 ::::
 
@@ -423,7 +425,7 @@ public class MyBatisConfigFilePath {
 }
 ```
 > 以上程序运行后，看到数据库表t_car中又新增一条数据，如下（成功了）：
-> ![3DD22C5B-8359-4644-853E-A27AF1D0FBBA.png](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659600237949-1e023d27-7d43-4eb5-ad3d-56464d6cd38d.png#averageHue=%23f2f0ee&clientId=u6b7aa99c-2be4-4&from=paste&height=198&id=u6ac1b1fb&originHeight=198&originWidth=556&originalType=binary&ratio=1&rotation=0&showTitle=false&size=12412&status=done&style=none&taskId=u4429dd30-c97c-47a2-bbe9-f8033d7702b&title=&width=556)
+> ![](./MyBatis概述/img-16.jpg)
 
 ::: tip
 
@@ -580,22 +582,17 @@ JDBC中的事务：
 ### 2.6MyBatis第一个比较完整的代码写法
 
 ```java
-package com.powernode.mybatis;
+package fun.xingji.mybatis.test;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import java.io.IOException;
-
 /**
- * 比较完整的第一个mybatis程序写法
- * @author 老杜
- * @since 1.0
- * @version 1.0
+ * 采用正规的方式，写一个完整的mybatis程序
  */
-public class MyBatisCompleteCodeTest {
+public class MyBatisCompleteTest {
     public static void main(String[] args) {
         SqlSession sqlSession = null;
         try {
@@ -603,21 +600,24 @@ public class MyBatisCompleteCodeTest {
             SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
             // 2.创建SqlSessionFactory对象
             SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBuilder.build(Resources.getResourceAsStream("mybatis-config.xml"));
-            // 3.创建SqlSession对象
+
+            // 3.创建sqlSession开启会话（底层会开启事务）
             sqlSession = sqlSessionFactory.openSession();
-            // 4.执行SQL
+
+            // 4.执行SQL语句，处理相关业务
             int count = sqlSession.insert("insertCar");
-            System.out.println("更新了几条记录：" + count);
-            // 5.提交
+            System.out.println("插入了几条记录：" + count);
+
+            // 执行到这里，没有发生任何异常，提交事务。终止事务。
             sqlSession.commit();
         } catch (Exception e) {
-            // 回滚
+            // 最好回滚事务
             if (sqlSession != null) {
                 sqlSession.rollback();
             }
             e.printStackTrace();
         } finally {
-            // 6.关闭
+            // 关闭会话，释放资源
             if (sqlSession != null) {
                 sqlSession.close();
             }
@@ -626,7 +626,7 @@ public class MyBatisCompleteCodeTest {
 }
 ```
 运行后数据库表的变化：
-![EC983E7A-7A85-4df7-B5FC-5C4FDC8EA592.png](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659604100979-edc9b06f-93bb-4c55-880b-38e219d9d9e3.png#averageHue=%23f3f1ef&clientId=u6b7aa99c-2be4-4&from=paste&height=206&id=u4da72fe6&originHeight=206&originWidth=590&originalType=binary&ratio=1&rotation=0&showTitle=false&size=13721&status=done&style=none&taskId=u6651710f-a20b-4007-b39b-0a2f73d81c6&title=&width=590)
+![](./MyBatis概述/img-17.jpg)
 
 
 
@@ -639,10 +639,32 @@ public class MyBatisCompleteCodeTest {
    - 我们要对我们自己写的每一个业务方法负责任，要保证每个业务方法在进行测试的时候都能通过。
    - 测试的过程中涉及到两个概念：
       - 期望值
+      
+      ```java
+      // 期望值
+      int expected = 3;
+      ```
+      
       - 实际值
+      
+      ```java
+      // 获取实际值
+      int actual = mathService.sum(1, 2);
+      ```
    - 期望值和实际值相同表示测试通过，期望值和实际值不同则单元测试执行时会报错。
+   
+   ```java
+   // 加断言进行测试
+   Assert.assertEquals(expected, actual);
+   ```
+   
+   
+   
 - 这里引入JUnit是为了代替main方法。
-- 使用JUnit步骤：
+
+   
+
+   > **使用JUnit步骤：**
 
 :::: steps
 
@@ -658,10 +680,17 @@ public class MyBatisCompleteCodeTest {
 </dependency>
 ```
 
+
+
 2. 第二步：编写单元测试类【测试用例】，测试用例中每一个测试方法上使用@Test注解进行标注。
+
+    ::: note
+
     - 测试用例的名字以及每个测试方法的定义都是有规范的：
         - 测试用例的名字：XxxTest
         - 测试方法声明格式：public void test业务方法名(){}
+
+    :::
 
 ```java
 // 测试用例
@@ -671,20 +700,26 @@ public class CarMapperTest{
     @Test
     public void testInsert(){}
     
-    @Test
-    public void testUpdate(){}
-    
 }
 ```
 
+
+
 3. 第三步：可以在类上执行，也可以在方法上执行
-    - 在类上执行时，该类中所有的测试方法都会执行。
-    - 在方法上执行时，只执行当前的测试方法。
+
+    ::: note
+
+    - **`在类上执行`时，该类中`所有的测试方法`都会执行。**
+    - **`在方法上执行`时，只执行`当前的测试方法`。**
+
+    :::
+
     
+
 4. 编写一个测试用例，来测试insertCar业务
 
 ```java
-package com.powernode.mybatis;
+package fun.ximngji.mybatis.test;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -693,30 +728,34 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
 public class CarMapperTest {
-    
+
     @Test
-    public void testInsertCar(){
+    public void testtestInsertCar() {
+        // 编写mybatis方法
         SqlSession sqlSession = null;
         try {
             // 1.创建SqlSessionFactoryBuilder对象
             SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
             // 2.创建SqlSessionFactory对象
             SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBuilder.build(Resources.getResourceAsStream("mybatis-config.xml"));
-            // 3.创建SqlSession对象
+
+            // 3.创建sqlSession开启会话（底层会开启事务）
             sqlSession = sqlSessionFactory.openSession();
-            // 4.执行SQL
+
+            // 4.执行SQL语句，处理相关业务
             int count = sqlSession.insert("insertCar");
-            System.out.println("更新了几条记录：" + count);
-            // 5.提交
+            System.out.println("插入了几条记录：" + count);
+
+            // 执行到这里，没有发生任何异常，提交事务。终止事务。
             sqlSession.commit();
         } catch (Exception e) {
-            // 回滚
+            // 最好回滚事务
             if (sqlSession != null) {
                 sqlSession.rollback();
             }
             e.printStackTrace();
         } finally {
-            // 6.关闭
+            // 关闭会话，释放资源
             if (sqlSession != null) {
                 sqlSession.close();
             }
@@ -725,7 +764,7 @@ public class CarMapperTest {
 }
 ```
 执行单元测试，查看数据库表的变化：
-![AEE76A27-5761-4162-B9DB-CCE0814EC06C.png](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659604159905-5853a1c1-b266-4a74-8f25-8b7a326d84d6.png#averageHue=%23f3f1ee&clientId=u6b7aa99c-2be4-4&from=paste&height=224&id=ue1281902&originHeight=224&originWidth=562&originalType=binary&ratio=1&rotation=0&showTitle=false&size=15023&status=done&style=none&taskId=u8a987f16-e633-4fe7-a462-68ec6db2bb0&title=&width=562)
+![](./MyBatis概述/img-18.jpg)
 
 ::::
 
@@ -735,17 +774,22 @@ public class CarMapperTest {
 
 ### 2.8 引入日志框架logback
 
-- 引入日志框架的目的是为了看清楚mybatis执行的具体sql。
-- 启用标准日志组件，只需要在mybatis-config.xml文件中添加以下配置：【可参考mybatis手册】
+::: note
+
+- **引入日志框架的目的是为了`看清楚mybatis执行的具体sql`。**
+- **启用`标准日志组件`，只需要在`mybatis-config.xml`文件中添加以下配置：【可参考mybatis手册】**
 ```xml
 <settings>
-  <setting name="logImpl" value="STDOUT_LOGGING" />
+  <setting name="logImpl" value="STDOUT_LOGGING"/>
 </settings>
 ```
 标准日志也可以用，但是配置不够灵活，可以集成其他的日志组件，例如：log4j，logback等。
 
 - logback是目前日志框架中性能较好的，较流行的，所以我们选它。
-- 引入logback的步骤：
+
+  :::
+
+  >  **引入logback的步骤：**
 
 
 :::: steps
@@ -761,6 +805,8 @@ public class CarMapperTest {
 </dependency>
 ```
 
+
+
 2. 第二步：引入logback相关配置文件（文件名叫做logback.xml或logback-test.xml，放到类路径当中）
 
 ```xml
@@ -771,25 +817,8 @@ public class CarMapperTest {
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+            <pattern>[%thread] %-5level %logger{50} - %msg%n</pattern>
         </encoder>
-    </appender>
-    <!-- 按照每天生成日志文件 -->
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!--日志文件输出的文件名-->
-            <FileNamePattern>${LOG_HOME}/TestWeb.log.%d{yyyy-MM-dd}.log</FileNamePattern>
-            <!--日志文件保留天数-->
-            <MaxHistory>30</MaxHistory>
-        </rollingPolicy>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
-        </encoder>
-        <!--日志文件最大的大小-->
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <MaxFileSize>100MB</MaxFileSize>
-        </triggeringPolicy>
     </appender>
 
     <!--mybatis log configure-->
@@ -807,8 +836,10 @@ public class CarMapperTest {
 </configuration>
 ```
 
+
+
 3. 再次执行单元测试方法testInsertCar，查看控制台是否有sql语句输出
-![E75C0BCA-F8D3-44f8-AABB-282510093C8C.png](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659610464472-e3b9e8b9-d29b-4f9b-ad34-dab427fe3a45.png#averageHue=%2334312f&clientId=u6b7aa99c-2be4-4&from=paste&height=528&id=uce9a4d58&originHeight=528&originWidth=1644&originalType=binary&ratio=1&rotation=0&showTitle=false&size=113799&status=done&style=none&taskId=ub0b377eb-9933-4c71-a4e7-2d75cda3771&title=&width=1644)
+    ![](./MyBatis概述/img-19.jpg)
 
 ::::
 
@@ -820,42 +851,51 @@ public class CarMapperTest {
 
 - 每一次获取SqlSession对象代码太繁琐，封装一个工具类
 ```java
-package com.powernode.mybatis.utils;
+package fun.xingji.mybatis.utils;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import java.io.IOException;
+
 /**
- * MyBatis工具类
- *
- * @author 老杜
- * @version 1.0
- * @since 1.0
+ * mybatis工具类
  */
 public class SqlSessionUtil {
+
+    // 工具类的构造方法一般都是私有化的。
+    // 工具类中所有的方法都是静态的，直接采用类名即可调用。不需要new对象。
+    // 为了防止new对象，构造方法私有化。
+    private SqlSessionUtil(){}
+
     private static SqlSessionFactory sqlSessionFactory;
 
-    /**
-     * 类加载时初始化sqlSessionFactory对象
-     */
+    // 类加载时执行
+    // SqlSessionUtil工具类在进行第一次加载的时候，解析mybatis-config.xml文件。创建SqlSessionFactory对象。
     static {
         try {
-            SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
-            sqlSessionFactory = sqlSessionFactoryBuilder.build(Resources.getResourceAsStream("mybatis-config.xml"));
-        } catch (Exception e) {
-            e.printStackTrace();
+            sqlSessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("mybatis-config.xml"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
+   /* public static SqlSession openSession(){
+        SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
+        // SqlSessionFactory对象：一个SqlSessionFactory对应一个environment，一个environment通常是一个数据库。
+        SqlSessionFactory  sqlSessionFactory = sqlSessionFactoryBuilder.build(Resources.getResourceAsStream("mybatis-config.xml"));
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        return sqlSession;
+    }*/
+
     /**
-     * 每调用一次openSession()可获取一个新的会话，该会话支持自动提交。
-     *
-     * @return 新的会话对象
+     * 获取会话对象。
+     * @return 会话对象
      */
-    public static SqlSession openSession() {
-        return sqlSessionFactory.openSession(true);
+    public static SqlSession openSession(){
+        return sqlSessionFactory.openSession();
     }
 }
 ```
@@ -863,16 +903,19 @@ public class SqlSessionUtil {
 - 测试工具类，将testInsertCar()改造
 ```java
 @Test
-public void testInsertCar(){
-    SqlSession sqlSession = SqlSessionUtil.openSession();
-    // 执行SQL
-    int count = sqlSession.insert("insertCar");
-    System.out.println("插入了几条记录:" + count);
-    sqlSession.close();
+public void testInsertCarByUtil(){
+      SqlSession sqlSession = SqlSessionUtil.openSession();
+      // 执行SQL
+      int count = sqlSession.insert("insertCar");
+      System.out.println("插入了几条记录:" + count);
+      sqlSession.commit();
+      sqlSession.close();
 }
 ```
 
+![](./MyBatis概述/img-21.jpg)
 
+![](./MyBatis概述/img-20.jpg)
 
 
 
