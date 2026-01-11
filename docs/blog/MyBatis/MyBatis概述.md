@@ -367,9 +367,9 @@ public class MyBatisIntroductionTest {
 
 6. **步骤6：运行程序，查看运行结果，以及数据库表中的数据**
    
-   ![](./MyBatis概述/img-14.jpg)
+![](./MyBatis概述/img-14.jpg)
    
-   ![](./MyBatis概述/img-15.jpg)
+![](./MyBatis概述/img-15.jpg)
 
 ::::
 
@@ -427,6 +427,8 @@ public class MyBatisConfigFilePath {
 > 以上程序运行后，看到数据库表t_car中又新增一条数据，如下（成功了）：
 > ![](./MyBatis概述/img-16.jpg)
 
+
+
 ::: tip
 
 ```java
@@ -472,7 +474,6 @@ InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("mybatis
             底层的源代码其实就是：
             InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("mybatis-config.xml");
 ```
-
 :::
 
 
@@ -490,9 +491,6 @@ InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("mybatis
   +  <mapper url="file:///d:/CarMapper.xml"/> url属性：这种方式是从绝对路径当中加载资源。
 
 :::
-
-
-
 
 
 ### 2.5关于mybatis的事务管理机制。（深度剖析）
@@ -523,7 +521,7 @@ InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("mybatis
 
 4. DBC事务管理器
 
-+ mybatis框架自己管理事务，自己采用原生的JDBC代码去管理事务：
+  > mybatis框架自己管理事务，自己采用原生的JDBC代码去管理事务：
 
   ```java
   conn.setAutoCommit(false); 开启事务。
@@ -531,9 +529,9 @@ InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("mybatis
   conn.commit(); 手动提交事务
   ```
 
-+ 使用JDBC事务管理器的话，底层创建的事务管理器对象：JdbcTransaction对象。
+  > 使用JDBC事务管理器的话，底层创建的事务管理器对象：JdbcTransaction对象。
 
-+ 如果你编写的代码是下面的代码：
+  > 如果你编写的代码是下面的代码：
 
   ```java
   SqlSession sqlSession = sqlSessionFactory.openSession(true);
@@ -573,10 +571,6 @@ JDBC中的事务：
 ```
 
 ::::
-
-
-
-
 
 
 ### 2.6MyBatis第一个比较完整的代码写法
@@ -625,7 +619,7 @@ public class MyBatisCompleteTest {
     }
 }
 ```
-运行后数据库表的变化：
+> 运行后数据库表的变化：
 ![](./MyBatis概述/img-17.jpg)
 
 
@@ -657,9 +651,6 @@ public class MyBatisCompleteTest {
    // 加断言进行测试
    Assert.assertEquals(expected, actual);
    ```
-   
-   
-   
 - 这里引入JUnit是为了代替main方法。
 
    
@@ -681,16 +672,15 @@ public class MyBatisCompleteTest {
 ```
 
 
-
 2. 第二步：编写单元测试类【测试用例】，测试用例中每一个测试方法上使用@Test注解进行标注。
 
-    ::: note
+::: note
 
-    - 测试用例的名字以及每个测试方法的定义都是有规范的：
-        - 测试用例的名字：XxxTest
-        - 测试方法声明格式：public void test业务方法名(){}
+- 测试用例的名字以及每个测试方法的定义都是有规范的：
+    - 测试用例的名字：XxxTest
+    - 测试方法声明格式：public void test业务方法名(){}
 
-    :::
+:::
 
 ```java
 // 测试用例
@@ -707,12 +697,13 @@ public class CarMapperTest{
 
 3. 第三步：可以在类上执行，也可以在方法上执行
 
-    ::: note
+::: note
 
-    - **`在类上执行`时，该类中`所有的测试方法`都会执行。**
-    - **`在方法上执行`时，只执行`当前的测试方法`。**
+- **`在类上执行`时，该类中`所有的测试方法`都会执行。**
 
-    :::
+- **`在方法上执行`时，只执行`当前的测试方法`。**
+
+:::
 
     
 
@@ -787,10 +778,10 @@ public class CarMapperTest {
 
 - logback是目前日志框架中性能较好的，较流行的，所以我们选它。
 
-  :::
+:::
 
-  >  **引入logback的步骤：**
 
+>  **引入logback的步骤：**
 
 :::: steps
 
