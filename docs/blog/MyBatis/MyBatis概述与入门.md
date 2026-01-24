@@ -1,5 +1,5 @@
 ---
-title: MyBatis概述
+title: MyBatis | MyBatis概述与入门
 tags:
     - MyBatis
 createTime: 2026/01/04 15:40:34
@@ -7,9 +7,9 @@ permalink: /blog/ehbjvsro/
 cover: ./MyBatis.jpg
 ---
 
-![MyBatis概述](./MyBatis.jpg)
+![MyBatis概述与入门](./MyBatis.jpg)
 
-## MyBatis概述
+## MyBatis概述与入门
 
 ### 1.1 框架
 
@@ -27,7 +27,7 @@ cover: ./MyBatis.jpg
 
 ### 1.2 三层架构
 
-![MyBatis概述](./MyBatis概述/img-1.jpg)
+![MyBatis概述与入门](./MyBatis概述与入门/img-1.jpg)
 
 - 表现层（UI）：直接跟前端打交互（一是接收前端ajax请求，二是返回json数据给前端）
 - 业务逻辑层（BLL）：一是处理表现层转发过来的前端请求（也就是具体业务），二是将从持久层获取的数据返回到表现层。
@@ -132,14 +132,14 @@ while(rs.next()){
    - MyBatis本是apache的一个开源项目iBatis，2010年这个项目由apache software foundation迁移到了google code，并且改名为MyBatis。2013年11月迁移到Github。
    - iBATIS一词来源于“internet”和“abatis”的组合，是一个基于Java的持久层框架。iBATIS提供的持久层框架包括SQL Maps和Data Access Objects（DAOs）。
 - 打开mybatis代码可以看到它的包结构中包含：ibatis
-   - ![MyBatis概述](./MyBatis概述/img-2.jpg)
+   - ![MyBatis概述与入门](./MyBatis概述与入门/img-2.jpg)
 - ORM：对象关系映射
    - O（Object）：Java虚拟机中的Java对象
    - R（Relational）：关系型数据库
    - M（Mapping）：将Java虚拟机中的Java对象映射到数据库表中一行记录，或是将数据库表中一行记录映射成Java虚拟机中的一个Java对象。
    - ORM图示
-      - ![MyBatis概述](./MyBatis概述/img-3.jpg)
-      - ![MyBatis概述](./MyBatis概述/img-4.jpg)
+      - ![MyBatis概述与入门](./MyBatis概述与入门/img-3.jpg)
+      - ![MyBatis概述与入门](./MyBatis概述与入门/img-4.jpg)
    - MyBatis属于半自动化ORM框架。
    - Hibernate属于全自动化的ORM框架。
 - MyBatis框架特点：
@@ -185,10 +185,10 @@ while(rs.next()){
 ### 2.2 MyBatis下载
 
 - 从github上下载，地址：[https://github.com/mybatis/mybatis-3](https://github.com/mybatis/mybatis-3)
-   - ![](./MyBatis概述/img-5.jpg)
-   - ![](./MyBatis概述/img-6.jpg)
+   - ![](./MyBatis概述与入门/img-5.jpg)
+   - ![](./MyBatis概述与入门/img-6.jpg)
 - 将框架以及框架的源码都下载下来，下载框架后解压，打开mybatis目录
-   - ![](./MyBatis概述/img-7.jpg)
+   - ![](./MyBatis概述与入门/img-7.jpg)
    - 通过以上解压可以看到，框架一般都是以jar包的形式存在。我们的mybatis课程使用maven，所以这个jar我们不需要。
    - 官方手册需要。
 
@@ -207,16 +207,16 @@ while(rs.next()){
       - produce_time：生产时间【char，年月日即可，10个长度，'2022-10-11'】
       - car_type：汽车类型（燃油车、电车、氢能源）【varchar】
    - 使用navicat for mysql工具建表
-      - ![](./MyBatis概述/img-8.jpg)
+      - ![](./MyBatis概述与入门/img-8.jpg)
    - 使用navicat for mysql工具向t_car表中插入两条数据，如下：
-      - ![](./MyBatis概述/img-9.jpg)
+      - ![](./MyBatis概述与入门/img-9.jpg)
    - 创建Project：建议创建Empty Project，设置Java版本以及编译版本等。
-      - ![](./MyBatis概述/img-10.jpg)
-      - ![](./MyBatis概述/img-11.jpg)
+      - ![](./MyBatis概述与入门/img-10.jpg)
+      - ![](./MyBatis概述与入门/img-11.jpg)
    - 设置IDEA的maven
-      - ![](./MyBatis概述/img-12.jpg)
+      - ![](./MyBatis概述与入门/img-12.jpg)
    - 创建Module：普通的Maven Java模块
-      - ![](./MyBatis概述/img-13.jpg)
+      - ![](./MyBatis概述与入门/img-13.jpg)
 
 
 :::: steps
@@ -367,9 +367,10 @@ public class MyBatisIntroductionTest {
 
 6. **步骤6：运行程序，查看运行结果，以及数据库表中的数据**
    
-![](./MyBatis概述/img-14.jpg)
-   
-![](./MyBatis概述/img-15.jpg)
+
+![](./MyBatis概述与入门/img-14.jpg)
+
+![](./MyBatis概述与入门/img-15.jpg)
 
 ::::
 
@@ -425,7 +426,7 @@ public class MyBatisConfigFilePath {
 }
 ```
 > 以上程序运行后，看到数据库表t_car中又新增一条数据，如下（成功了）：
-> ![](./MyBatis概述/img-16.jpg)
+> ![](./MyBatis概述与入门/img-16.jpg)
 
 
 
@@ -620,13 +621,13 @@ public class MyBatisCompleteTest {
 }
 ```
 > 运行后数据库表的变化：
-![](./MyBatis概述/img-17.jpg)
+![](./MyBatis概述与入门/img-17.jpg)
 
 
 
 
 
-### 2.67引入JUnit
+## 引入JUnit
 
 - JUnit是专门做单元测试的组件。
    - 在实际开发中，单元测试一般是由我们Java程序员来完成的。
@@ -705,7 +706,7 @@ public class CarMapperTest{
 
 :::
 
-    
+​    
 
 4. 编写一个测试用例，来测试insertCar业务
 
@@ -755,7 +756,7 @@ public class CarMapperTest {
 }
 ```
 执行单元测试，查看数据库表的变化：
-![](./MyBatis概述/img-18.jpg)
+![](./MyBatis概述与入门/img-18.jpg)
 
 ::::
 
@@ -763,7 +764,7 @@ public class CarMapperTest {
 
 
 
-### 2.8 引入日志框架logback
+## 引入日志框架logback
 
 ::: note
 
@@ -830,7 +831,7 @@ public class CarMapperTest {
 
 
 3. 再次执行单元测试方法testInsertCar，查看控制台是否有sql语句输出
-    ![](./MyBatis概述/img-19.jpg)
+    ![](./MyBatis概述与入门/img-19.jpg)
 
 ::::
 
@@ -838,7 +839,7 @@ public class CarMapperTest {
 
 
 
-### 2.9 MyBatis工具类SqlSessionUtil的封装
+## SqlSessionUtil的封装(MyBatis工具类)
 
 - 每一次获取SqlSession对象代码太繁琐，封装一个工具类
 ```java
@@ -904,9 +905,9 @@ public void testInsertCarByUtil(){
 }
 ```
 
-![](./MyBatis概述/img-21.jpg)
+![](./MyBatis概述与入门/img-21.jpg)
 
-![](./MyBatis概述/img-20.jpg)
+![](./MyBatis概述与入门/img-20.jpg)
 
 
 
