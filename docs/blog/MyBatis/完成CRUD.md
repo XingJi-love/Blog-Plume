@@ -79,9 +79,9 @@ ps.setString(5,"燃油车");
 
 ::: tip
 
-**<font style="color:#E8323C;">在Java程序中，将数据放到Map集合中</font>**
+**在Java程序中，将数据放到Map集合中**
 
-**<font style="color:#E8323C;">在sql语句中使用 #{map集合的key} 来完成传值，#{} 等同于JDBC中的 ? ，#{}就是占位符</font>**
+**在sql语句中使用 #{map集合的key} 来完成传值，#{} 等同于JDBC中的 ? ，#{}就是占位符**
 
 :::
 
@@ -142,7 +142,7 @@ SQL语句这样写：
 </mapper>
 ```
 
-**<font style="color:#E8323C;">#{} 的里面必须填写map集合的key，不能随便写。</font>**运行测试程序，查看数据库：
+**#{} 的里面必须填写map集合的key，不能随便写。**运行测试程序，查看数据库：
 
 ![insert（Create）](./完成CRUD/img-1.jpg)
 
@@ -175,7 +175,6 @@ SQL语句这样写：
 > **通过测试，看到程序并没有报错。正常执行。不过 #{k} 的写法导致`无法获取到map集合中的数据`，最终导致`数据库表car_num插入了NULL`。**
 
 :::
-
 
 
 > **在以上sql语句中，可以看到`#{k1} #{k2} #{k3} #{k4} #{k5}`的`可读性太差`，为了增强可读性，我们可以将Java程序做如下修改：**
@@ -214,7 +213,7 @@ SQL语句做如下修改，这样可以增强程序的可读性：
 
 
 
-> 使用`Map集合可以传参`，那使用**<font style="color:#E8323C;">pojo</font>**（简单普通的java对象）可以完成传参吗？测试一下：
+> 使用`Map集合可以传参`，那使用**pojo**（简单普通的java对象）可以完成传参吗？测试一下：
 
 + 第一步：定义一个pojo类Car，提供相关属性。
 
@@ -356,7 +355,7 @@ public void testInsertCarByPOJO(){
 
 错误信息中描述：在Car类中没有找到a属性的getter方法。
 
-修改POJO类Car的代码，**<font style="color:#E8323C;">只将getCarNum()方法名修改为getA()，其他代码不变</font>**，如下：
+修改POJO类Car的代码，**只将getCarNum()方法名修改为getA()，其他代码不变**，如下：
 
 ![](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659668831506-d7700b47-d87a-417b-bd86-46467edd968c.png)
 
@@ -366,11 +365,11 @@ public void testInsertCarByPOJO(){
 
 ::: tip
 
-**<font style="color:#E8323C;">经过测试得出结论：</font>**
+**经过测试得出结论：**
 
-**<font style="color:#E8323C;">如果采用map集合传参，#{} 里写的是map集合的key，如果key不存在不会报错，数据库表中会插入NULL。</font>**
+**如果采用map集合传参，#{} 里写的是map集合的key，如果key不存在不会报错，数据库表中会插入NULL。**
 
-**<font style="color:#E8323C;">如果采用POJO传参，#{} 里写的是get方法的方法名去掉get之后将剩下的单词首字母变小写（例如：getAge对应的是#{age}，getUserName对应的是#{userName}），如果这样的get方法不存在会报错。</font>**
+**如果采用POJO传参，#{} 里写的是get方法的方法名去掉get之后将剩下的单词首字母变小写（例如：getAge对应的是#{age}，getUserName对应的是#{userName}），如果这样的get方法不存在会报错。**
 
 注意：其实传参数的时候有一个属性parameterType，这个属性用来指定传参的数据类型，不过这个属性是可以省略的
 
@@ -385,8 +384,6 @@ public void testInsertCarByPOJO(){
 ```
 
 :::
-
-
 
 
 
@@ -419,7 +416,7 @@ public void testDeleteByCarNum(){
 
 ![](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659671944122-784bbd93-06dc-4faf-a18a-6beef6cf15b5.png)
 
-**<font style="color:#E8323C;">注意：当占位符只有一个的时候，${} 里面的内容可以随便写。</font>**
+**注意：当占位符只有一个的时候，${} 里面的内容可以随便写。**
 
 
 
@@ -470,7 +467,7 @@ Java代码如下：
 
 ![](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659681391738-02de5e94-8880-4754-b08a-0e807362ba3c.png)
 
-当然了，如果使用**<font style="color:#E8323C;">map</font>**传数据也是可以的。
+当然了，如果使用**map**传数据也是可以的。
 
 
 
@@ -517,7 +514,7 @@ public void testSelectCarById(){
 
 以上的异常大致的意思是：对于一个查询语句来说，你需要指定它的“结果类型”或者“结果映射”。
 
-所以说，你想让mybatis查询之后返回一个Java对象的话，至少你要告诉mybatis返回一个什么类型的Java对象，可以在<select>标签中添加resultType属性，用来指定查询要转换的类型：
+所以说，你想让mybatis查询之后返回一个Java对象的话，至少你要告诉mybatis返回一个什么类型的Java对象，可以在`<select>`标签中添加resultType属性，用来指定查询要转换的类型：
 
 ```xml
 <select id="selectCarById" resultType="com.powernode.mybatis.pojo.Car">
@@ -556,7 +553,7 @@ Car类的属性名：id, carNum, brand, guidePrice, produceTime, carType
 
 ![](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659684140382-c8d05a79-7906-4a8f-8301-3cd8097b3eff.png)
 
-通过测试得知，如果当查询结果的字段名和java类的属性名对应不上的话，可以采用as关键字起别名，**<font style="color:#E8323C;">当然还有其它解决方案，我们后面再看</font>**。
+通过测试得知，如果当查询结果的字段名和java类的属性名对应不上的话，可以采用as关键字起别名，**当然还有其它解决方案，我们后面再看**。
 
 
 
@@ -603,7 +600,7 @@ public void testSelectCarAll(){
 
 ## SQL Mapper的namespace
 
-在SQL Mapper配置文件中<mapper>标签的namespace属性可以翻译为命名空间，这个命名空间主要是为了防止sqlId冲突的。
+在SQL Mapper配置文件中`<mapper>`标签的namespace属性可以翻译为命名空间，这个命名空间主要是为了防止sqlId冲突的。
 
 创建CarMapper2.xml文件，代码如下：
 
@@ -676,4 +673,3 @@ public void testNamespace(){
 运行结果如下：
 
 ![](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659686031615-93ca679e-0695-4984-bc4c-af596fe5f2a0.png)
-
