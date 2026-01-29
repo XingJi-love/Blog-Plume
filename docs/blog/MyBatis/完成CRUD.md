@@ -2,10 +2,9 @@
 title: MyBatis | 完成CRUD
 tags:
     - MyBatis
-createTime: 
-permalink: 
+createTime: 2026/01/20 15:40:34
+permalink: /blog/ehbjvkl/
 cover: ./MyBatis.jpg
-
 ---
 
 ![完成CRUD](./MyBatis.jpg)
@@ -13,12 +12,13 @@ cover: ./MyBatis.jpg
 ## 什么是CRUD
 
 ::: tip
-
 **C: Create增**
-**R: Retrieve查（检索）**
-**U: Update改**
-**D: Delete删**
 
+**R: Retrieve查（检索）**
+
+**U: Update改**
+
+**D: Delete删**
 :::
 
 
@@ -42,7 +42,7 @@ cover: ./MyBatis.jpg
 
 
 
-### 1.1 insert（Create）
+### insert（Create）
 
 分析以下SQL映射文件中SQL语句存在的问题
 
@@ -200,7 +200,7 @@ SQL语句做如下修改，这样可以增强程序的可读性：
 <mapper namespace="car">
     <!--insert sql：保存一个汽车信息-->
     <insert id="insertCar">
-    <!--insert into t_car(id,car_num,brand,guide_price,produce_time,car_type) values(null,#{k},#{k2},#{k3},#{k4},#{k5})-->
+    <!--insert into t_car(id,car_num,brand,guide_price,produce_time,car_type) values(null,#{k1},#{k2},#{k3},#{k4},#{k5})-->
         
         insert into t_car(id,car_num,brand,guide_price,produce_time,car_type) values(null,#{carNum},#{brand},#{guidePrice},#{produceTime},#{carType})
     </insert>
@@ -213,20 +213,21 @@ SQL语句做如下修改，这样可以增强程序的可读性：
 
 
 
+::: tip
+
 > 使用`Map集合可以传参`，那使用**pojo**（简单普通的java对象）可以完成传参吗？测试一下：
 
 + 第一步：定义一个pojo类Car，提供相关属性。
 
 ```java
-package com.powernode.mybatis.pojo;
+package fun.xingji.mybatis.pojo;
 
 /**
- * POJOs，简单普通的Java对象。封装数据用的。
- * @author 老杜
- * @version 1.0
- * @since 1.0
+ * 封装汽车相关信息的pojo类。普通的java类
  */
 public class Car {
+    // 数据库表当中的字段应该和pojo类的属性一一对应。
+    // 建议使用包装类，这样可以防止null的问题。
     private Long id;
     private String carNum;
     private String brand;
@@ -244,18 +245,6 @@ public class Car {
                 ", produceTime='" + produceTime + '\'' +
                 ", carType='" + carType + '\'' +
                 '}';
-    }
-
-    public Car() {
-    }
-
-    public Car(Long id, String carNum, String brand, Double guidePrice, String produceTime, String carType) {
-        this.id = id;
-        this.carNum = carNum;
-        this.brand = brand;
-        this.guidePrice = guidePrice;
-        this.produceTime = produceTime;
-        this.carType = carType;
     }
 
     public Long getId() {
@@ -313,27 +302,35 @@ public class Car {
 ```java
 @Test
 public void testInsertCarByPOJO(){
-    // 创建POJO，封装数据
-    Car car = new Car();
-    car.setCarNum("103");
-    car.setBrand("奔驰C200");
-    car.setGuidePrice(33.23);
-    car.setProduceTime("2020-10-11");
-    car.setCarType("燃油车");
-    // 获取SqlSession对象
-    SqlSession sqlSession = SqlSessionUtil.openSession();
-    // 执行SQL，传数据
-    int count = sqlSession.insert("insertCarByPOJO", car);
-    System.out.println("插入了几条记录" + count);
+        // 获取SqlSession对象
+        SqlSession sqlSession = SqlSessionUtil.openSession();
+
+        // 创建POJO，封装数据
+        Car car = new Car();
+
+        car.setId(null);
+        car.setCarNum("3333");
+        car.setBrand("比亚迪秦");
+        car.setGuidePrice(30.0);
+        car.setProduceTime("2020-11-11");
+        car.setCarType("新能源");
+
+        // 执行sql
+        int count =  sqlSession.insert("insertCar",car);
+        System.out.println("插入了几条记录" + count);
+
+        sqlSession.commit();
+        sqlSession.close();
 }
 ```
 
 + 第三步：SQL语句
 
 ```xml
-<insert id="insertCarByPOJO">
-  <!--#{} 里写的是POJO的属性名-->
-  insert into t_car(car_num,brand,guide_price,produce_time,car_type) values(#{carNum},#{brand},#{guidePrice},#{produceTime},#{carType})
+<insert id="insertCar">
+    <!--#{} 里写的是POJO的属性名-->
+    insert into t_car(id,car_num,brand,guide_price,produce_time,car_type)
+    values(null,#{carNum},#{brand},#{guidePrice},#{produceTime},#{carType})
 </insert>
 ```
 
@@ -363,6 +360,10 @@ public void testInsertCarByPOJO(){
 
 ![](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659668909618-59bddd05-fcfa-41cc-8c87-a7bcd7060c2f.png)
 
+:::
+
+
+
 ::: tip
 
 **经过测试得出结论：**
@@ -387,7 +388,7 @@ public void testInsertCarByPOJO(){
 
 
 
-### 1.2 delete（Delete）
+### delete（Delete）
 
 需求：根据car_num进行删除。
 
@@ -420,7 +421,7 @@ public void testDeleteByCarNum(){
 
 
 
-### 1.3 update（Update）
+### update（Update）
 
 需求：修改id=34的Car信息，car_num为102，brand为比亚迪汉，guide_price为30.23，produce_time为2018-09-10，car_type为电车
 
@@ -473,13 +474,13 @@ Java代码如下：
 
 
 
-### 1.4 select（Retrieve）
+### select（Retrieve）
 
 select语句和其它语句不同的是：查询会有一个结果集。来看mybatis是怎么处理结果集的！！！
 
 
 
-#### 1.4.1 查询一条数据
+#### 查询一条数据
 
 需求：查询id为1的Car信息
 
@@ -559,7 +560,7 @@ Car类的属性名：id, carNum, brand, guidePrice, produceTime, carType
 
 
 
-#### 1.4.2 查询多条数据
+#### 查询多条数据
 
 需求：查询所有的Car信息。
 
