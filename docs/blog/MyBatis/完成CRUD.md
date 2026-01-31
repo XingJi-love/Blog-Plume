@@ -12,13 +12,15 @@ cover: ./MyBatis.jpg
 ## 什么是CRUD
 
 ::: tip
-**C: Create增**
 
-**R: Retrieve查（检索）**
++ **C: Create增**
 
-**U: Update改**
++ **R: Retrieve查（检索）**
 
-**D: Delete删**
++ **U: Update改**
+
++ **D: Delete删**
+
 :::
 
 
@@ -79,9 +81,9 @@ ps.setString(5,"燃油车");
 
 ::: tip
 
-**在Java程序中，将数据放到Map集合中**
++ **在Java程序中，将数据放到Map集合中**
 
-**在sql语句中使用 #{map集合的key} 来完成传值，#{} 等同于JDBC中的 ? ，#{}就是占位符**
++ **在sql语句中使用 #{map集合的key} 来完成传值，#{} 等同于JDBC中的 ? ，#{}就是占位符**
 
 :::
 
@@ -142,13 +144,15 @@ SQL语句这样写：
 </mapper>
 ```
 
-**#{} 的里面必须填写map集合的key，不能随便写。**运行测试程序，查看数据库：
+> **`#{} `的里面必须填写`map集合的key`，`不能随便写`。**运行测试程序，查看数据库：
 
 ![insert（Create）](./完成CRUD/img-1.jpg)
 
 ![insert（Create）](./完成CRUD/img-2.jpg)
 
-::: tip
+
+
+::: warning
 
 > **如果`#{}里写的是map集合中不存在的key`会有什么问题？**
 
@@ -175,6 +179,10 @@ SQL语句这样写：
 > **通过测试，看到程序并没有报错。正常执行。不过 #{k} 的写法导致`无法获取到map集合中的数据`，最终导致`数据库表car_num插入了NULL`。**
 
 :::
+
+
+
+::: tip
 
 
 > **在以上sql语句中，可以看到`#{k1} #{k2} #{k3} #{k4} #{k5}`的`可读性太差`，为了增强可读性，我们可以将Java程序做如下修改：**
@@ -211,11 +219,13 @@ SQL语句做如下修改，这样可以增强程序的可读性：
 
 ![insert（Create）](./完成CRUD/img-5.jpg)
 
+:::
+
 
 
 ::: tip
 
-> 使用`Map集合可以传参`，那使用**pojo**（简单普通的java对象）可以完成传参吗？测试一下：
+> **使用`Map集合可以传参`，那使用**pojo**（简单普通的java对象）可以完成传参吗？测试一下：**
 
 + 第一步：定义一个pojo类Car，提供相关属性。
 
@@ -316,7 +326,7 @@ public void testInsertCarByPOJO(){
         car.setCarType("新能源");
 
         // 执行sql
-        int count =  sqlSession.insert("insertCar",car);
+        int count =  sqlSession.insert("insertCar",car); // ORM
         System.out.println("插入了几条记录" + count);
 
         sqlSession.commit();
@@ -336,29 +346,35 @@ public void testInsertCarByPOJO(){
 
 + 运行程序，查看数据库表：
 
-![](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659668224378-2070e0f4-8252-4978-8204-bb247d172152.png)
+![insert（Create）](./完成CRUD/img-6.jpg)
 
-#{} 里写的是POJO的属性名，如果写成其他的会有问题吗？
+:::
+
+::: warning
+
+> **#{} 里写的是POJO的属性名，如果`写成其他的`会有问题吗？**
 
 ```xml
 <insert id="insertCarByPOJO">
-  insert into t_car(car_num,brand,guide_price,produce_time,car_type) values(#{a},#{brand},#{guidePrice},#{produceTime},#{carType})
+  insert into t_car(car_num,brand,guide_price,produce_time,car_type) values(#{xyz},#{brand},#{guidePrice},#{produceTime},#{carType})
 </insert>
 ```
 
 运行程序，出现了以下异常：
 
-![](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659668583320-e0b198ac-df57-47f9-8520-7bb86f4b56fe.png)
+![insert（Create）](./完成CRUD/img-7.jpg)
 
-错误信息中描述：在Car类中没有找到a属性的getter方法。
+> **错误信息中描述：在Car类中`没有找到a属性的getter方法`。**
 
-修改POJO类Car的代码，**只将getCarNum()方法名修改为getA()，其他代码不变**，如下：
+修改POJO类Car的代码，**只将getCarNum()方法名修改为getXyz()，其他代码不变**，如下：
 
-![](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659668831506-d7700b47-d87a-417b-bd86-46467edd968c.png)
+![insert（Create）](./完成CRUD/img-8.jpg)
 
-再运行程序，查看数据库表中数据：
+> **再运行程序，查看数据库表中数据：**
 
-![](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659668909618-59bddd05-fcfa-41cc-8c87-a7bcd7060c2f.png)
+![insert（Create）](./完成CRUD/img-9.jpg)
+
+![insert（Create）](./完成CRUD/img-10.jpg)
 
 :::
 
@@ -366,20 +382,20 @@ public void testInsertCarByPOJO(){
 
 ::: tip
 
-**经过测试得出结论：**
+> **经过测试得出结论：**
 
-**如果采用map集合传参，#{} 里写的是map集合的key，如果key不存在不会报错，数据库表中会插入NULL。**
++ **如果`采用map集合传参`，`#{} 里`写的是`map集合的key`，如果`key不存在不会报错`，数据库表中会`插入NULL`。**
 
-**如果采用POJO传参，#{} 里写的是get方法的方法名去掉get之后将剩下的单词首字母变小写（例如：getAge对应的是#{age}，getUserName对应的是#{userName}），如果这样的get方法不存在会报错。**
++ **如果`采用POJO传参`，`#{} `里写的是`get方法的方法名去掉get之后将剩下的单词首字母变小写（例如：getAge对应的是#{age}`，`getUserName对应的是#{userName}）`，如果这样的get方法`不存在会报错`。**
 
-注意：其实传参数的时候有一个属性parameterType，这个属性用来指定传参的数据类型，不过这个属性是可以省略的
+> **注意：其实传参数的时候有一个属性parameterType，这个属性用来指定传参的数据类型，不过这个属性是可以省略的**
 
 ```xml
 <insert id="insertCar" parameterType="java.util.Map">
   insert into t_car(car_num,brand,guide_price,produce_time,car_type) values(#{carNum},#{brand},#{guidePrice},#{produceTime},#{carType})
 </insert>
 
-<insert id="insertCarByPOJO" parameterType="com.powernode.mybatis.pojo.Car">
+<insert id="insertCarByPOJO" parameterType="fun.xingji.mybatis.pojo.Car">
   insert into t_car(car_num,brand,guide_price,produce_time,car_type) values(#{carNum},#{brand},#{guidePrice},#{produceTime},#{carType})
 </insert>
 ```
@@ -390,7 +406,7 @@ public void testInsertCarByPOJO(){
 
 ### delete（Delete）
 
-需求：根据car_num进行删除。
+> **需求：根据`id进行删除`。**
 
 SQL语句这样写：
 
