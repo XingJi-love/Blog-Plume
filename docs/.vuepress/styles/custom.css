@@ -737,3 +737,10 @@ time {
   transform: translate(-50%, -48px);
 }
 /* ========================twikoo输入内容提示=============== */
+
+
+/* ==============霞鹜文楷字体=============== */
+body {
+    font-family: "LXGW WenKai";
+    font-weight: normal;
+}

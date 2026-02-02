@@ -21,7 +21,11 @@ export default defineUserConfig({
 
   head: [
     // 配置站点图标
-    ['link', { rel: 'icon', type: 'image/png', href: 'https://i.p-i.vip/47/20241024-67192acae3bb8.png' }],
+    ['link', 
+      { 
+        rel: 'icon', type: 'image/png', href: 'https://i.p-i.vip/47/20241024-67192acae3bb8.png' 
+      }
+    ],
     // 配置网监控器
     [
       "script",
@@ -32,6 +36,14 @@ export default defineUserConfig({
         src: "https://umami.xingji.fun/script.js",
       },
     ],
+    // 霞鹜文楷字体
+    [
+      "link",
+      {
+        rel: "stylesheet",
+        href: "https://fontsapi.zeoseven.com/292/main/result.css",
+      }, 
+    ], 
   ],
 
   bundler: viteBundler(),
