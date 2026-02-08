@@ -257,6 +257,20 @@ public class Car {
                 '}';
     }
 
+    /*有参构成方法*/
+    public Car(Long id, String carNum, String brand, Double guidePrice, String produceTime, String carType) {
+        this.id = id;
+        this.carNum = carNum;
+        this.brand = brand;
+        this.guidePrice = guidePrice;
+        this.produceTime = produceTime;
+        this.carType = carType;
+    }
+
+    /*无参构造方法*/
+    public Car() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -268,6 +282,10 @@ public class Car {
     public String getCarNum() {
         return carNum;
     }
+
+    /*public String getXyz() {
+        return carNum;
+    }*/
 
     public void setCarNum(String carNum) {
         this.carNum = carNum;
@@ -324,6 +342,10 @@ public void testInsertCarByPOJO(){
         car.setGuidePrice(30.0);
         car.setProduceTime("2020-11-11");
         car.setCarType("新能源");
+    
+    /*合并以上两个步骤
+    Car car = new Car(null, "3333", "比亚迪秦", 30.0, "2020-11-11", "新能源");
+    */
 
         // 执行sql
         int count =  sqlSession.insert("insertCar",car); // ORM
@@ -411,8 +433,8 @@ public void testInsertCarByPOJO(){
 SQL语句这样写：
 
 ```xml
-<delete id="deleteByCarNum">
-  delete from t_car where car_num = #{SuiBianXie}
+<delete id="deleteById">
+     delete from t_car where id = #{id}
 </delete>
 ```
 
@@ -420,71 +442,77 @@ Java程序这样写：
 
 ```java
 @Test
-public void testDeleteByCarNum(){
-    // 获取SqlSession对象
-    SqlSession sqlSession = SqlSessionUtil.openSession();
-    // 执行SQL语句
-    int count = sqlSession.delete("deleteByCarNum", "102");
-    System.out.println("删除了几条记录：" + count);
+public void testDeleteById() {
+      // 获取SqlSession对象
+      SqlSession sqlSession = SqlSessionUtil.openSession();
+
+      // 执行SQL语句
+      int count = sqlSession.delete("deleteById",23);  
+      System.out.println("删除了几条记录" + count);
+
+      sqlSession.commit();
+      sqlSession.close();
 }
 ```
 
 运行结果：
 
-![](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659671944122-784bbd93-06dc-4faf-a18a-6beef6cf15b5.png)
+![delete（Delete）](./完成CRUD/img-11.jpg)
 
-**注意：当占位符只有一个的时候，${} 里面的内容可以随便写。**
+> **注意：当占位符只有一个的时候，${} 里面的内容可以随便写。**
 
 
 
 ### update（Update）
 
-需求：修改id=34的Car信息，car_num为102，brand为比亚迪汉，guide_price为30.23，produce_time为2018-09-10，car_type为电车
+> **需求：修改id=3的Car信息，car_num为9999，brand为凯美瑞，guide_price为30.3，produce_time为1999-11-10，car_type为燃油车**
 
 修改前：
 
-![](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659680723161-c7563b14-b4f7-4467-90b5-4dfca148ca83.png)
+![update（Update）](./完成CRUD/img-11.jpg)
 
 SQL语句如下：
 
 ```xml
-<update id="updateCarByPOJO">
-  update t_car set 
-    car_num = #{carNum}, brand = #{brand}, 
-    guide_price = #{guidePrice}, produce_time = #{produceTime}, 
-    car_type = #{carType} 
-  where id = #{id}
+<update id="updateById">
+        update t_car set
+            car_num=#{carNum},
+            brand=#{brand},
+            guide_price=#{guidePrice},
+            produce_time=#{produceTime},
+            car_type=#{carType}
+        where
+            id = #{id}
 </update>
 ```
 
 Java代码如下：
 
 ```java
-    @Test
-    public void testUpdateCarByPOJO(){
-        // 准备数据
-        Car car = new Car();
-        car.setId(34L);
-        car.setCarNum("102");
-        car.setBrand("比亚迪汉");
-        car.setGuidePrice(30.23);
-        car.setProduceTime("2018-09-10");
-        car.setCarType("电车");
-        // 获取SqlSession对象
-        SqlSession sqlSession = SqlSessionUtil.openSession();
-        // 执行SQL语句
-        int count = sqlSession.update("updateCarByPOJO", car);
-        System.out.println("更新了几条记录：" + count);
-    }
+@Test
+public void updateById() {
+      // 获取SqlSession对象
+      SqlSession sqlSession = SqlSessionUtil.openSession();
+
+      // 准备数据
+      Car car = new Car(3L, "9999", "凯美瑞", 30.3, "1999-11-10", "燃油车");
+
+      // 执行SQL语句
+      int count = sqlSession.update("updateById", car);
+      System.out.println("更新了几条记录" + count);
+
+      sqlSession.commit();
+      sqlSession.close();
+}
 ```
 
 运行结果：
 
 ![](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659681449799-48b44db3-d006-452c-8bd8-d088850c4394.png)
 
-![](https://cdn.nlark.com/yuque/0/2022/png/21376908/1659681391738-02de5e94-8880-4754-b08a-0e807362ba3c.png)
+![update（Update）](./完成CRUD/img-11.jpg)
 
-当然了，如果使用**map**传数据也是可以的。
+> **当然了，如果使用**map**传数据也是可以的。**
 
 
 

@@ -140,7 +140,9 @@ export default defineUserConfig({
         acfun: true,        // 启用嵌入 acfun视频 语法 @[acfun](avid)
     //   artPlayer: true,    // 启用嵌入 artPlayer 本地视频 语法 @[artPlayer](url)
     //   audioReader: true,  // 启用嵌入音频朗读功能 语法 @[audioReader](url)
-        icon: { provider: 'iconify' },        // 启用内置图标语法  ::icon-name::
+        icon: { 
+          provider: 'iconify' 
+        },// 启用内置图标语法  ::icon-name::
         codeTree: true,     // 启用代码树容器语法 ::: code-tree
         field: true,        // 启用字段容器语法 ::: field
         qrcode: true,       // 启用二维码容器语法 ::: qrcode
