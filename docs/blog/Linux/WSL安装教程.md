@@ -3,13 +3,12 @@ title: Linux | WSL 安装教程
 tags:
   - Linux
   - WSL
-categories:
 createTime: 2025/04/01 22:45:58
 permalink: /blog/8gwjgg4y/
 cover: /Linux.png
 ---
 
-![WSL安装教程](./WSL安装教程/Linux.png)
+![WSL安装教程](./Linux.png)
 
 ## 开启 WSL 的两个前提
 
