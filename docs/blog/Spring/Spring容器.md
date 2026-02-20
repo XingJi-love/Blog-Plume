@@ -205,6 +205,20 @@ public class Spring01IocApplication {
 
 > **组件名字`全局唯一`；`组件名重复`了，一定`只会给容器中放`一个`最先声明`的哪个。**
 >
+> ::: warning
+>
+> **新版Spring已经不允许使用这个语法了,如果要使用请添加如下配置信息到`application.properties`文件中:**
+>
+> + **application.properties**
+>
+> ```properties
+> spring.main.allow-bean-definition-overriding=true
+> ```
+>
+> ![Spring容器](./Spring容器/img-34.jpg)
+>
+> :::
+>
 > ![Spring容器](./Spring容器/img-16.jpg)
 
 小结：
@@ -220,7 +234,9 @@ public class Spring01IocApplication {
 
 :::
 
-#### 组件不存在，抛异常：NoSuchBeanDefinitionException(组件不存在)
+#### 组件不存在，抛异常
+
+> **抛`NoSuchBeanDefinitionException(组件不存在)`异常**
 
 ![Spring容器](./Spring容器/img-12.jpg)
 
@@ -303,6 +319,8 @@ public class Dog {
 
 
 
+
+
 ### 实验3：@Configuration - 配置类
 
 + **PersonConfig.java**
@@ -328,7 +346,7 @@ public class PersonConfig {
     }
 
     // 给容器中注册一个自己的组件；容器中的每个组件都有自己的名字，方法名就是组件的名字
-    @Bean("zhangsan1")
+    @Bean("zhangsan")
     public Person zhangsan(){
         Person person = new Person();
         person.setName("张三1");
@@ -415,11 +433,89 @@ public static void main(String[] args) {
 
 
 
+
+
 ### 实验4-7：@Controller、@Service、@Respository、@Component - MVC分层注解
 
++ **UserController.java**
 
+```java
+package fun.xingji.spring.ioc.controller;
 
+import org.springframework.stereotype.Controller;
 
+@Controller
+public class UserController {
+}
+```
+
++ **UserService.java**
+
+```java
+package fun.xingji.spring.ioc.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserService {
+}
+```
+
++ **UserDao.java**
+
+```java
+package fun.xingji.spring.ioc.dao;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class UserDao {
+}
+```
+
++ **Spring01IocApplication.java**
+
+```java
+/**
+     * 默认，分层注解能起作用的前提是：这些组件必须在主程序所在的包及其子包结构下
+     * Spring 为我们提供了快速的 MVC分层注解
+     *      1、@Controller 控制器
+     *      2、@Service 服务层
+     *      3、@Repository 持久层
+     *      4、@Component 组件(出现在非MVC三层的任何地方且包含MVC三层)
+     * @param args
+     */
+    public static void main(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+
+        System.out.println("=====================================================");
+
+        UserController bean = ioc.getBean(UserController.class);
+        System.out.println("bean = " + bean);
+
+        UserService bean2 = ioc.getBean(UserService.class);
+        System.out.println("bean2 = " + bean2);
+
+        UserDao bean3 = ioc.getBean(UserDao.class);
+        System.out.println("bean3 = " + bean3);
+    }
+```
+
+>**使用`@Component注解`也行**
+
+![Spring容器](./Spring容器/img-23.jpg)
+
+![Spring容器](./Spring容器/img-22.jpg)
+
+:::tip
+
+> **分层注解底层都是 `@Component`**
+>
+> ![Spring容器](./Spring容器/img-30.jpg)
+>
+> ![Spring容器](./Spring容器/img-31.jpg)
+>
+> ![Spring容器](./Spring容器/img-32.jpg)
 
 
 
@@ -427,17 +523,561 @@ public static void main(String[] args) {
 
 ### 实验8：@ComponentScan - 批量扫描
 
++ **Spring01IocApplication.java**
+
+```java
+package fun.xingji.spring.ioc;
+
+import fun.xingji.spring.ioc.bean.Dog;
+import fun.xingji.spring.ioc.bean.Person;
+import fun.xingji.spring.ioc.controller.UserController;
+import fun.xingji.spring.ioc.dao.UserDao;
+import fun.xingji.spring.ioc.service.UserService;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+
+import java.util.Map;
+
+/**
+ * 这个是主入口类，称为主程序类
+ */
+@ComponentScan(basePackages = "fun.xingji.spring") // 组件批量扫描；只扫利用Spring相关注解注册到容器中的组件
+@SpringBootApplication
+public class Spring01IocApplication {
+
+
+    /**
+     * 默认，分层注解能起作用的前提是：这些组件必须在主程序所在的包及其子包结构下
+     * Spring 为我们提供了快速的 MVC分层注解
+     *      1、@Controller 控制器
+     *      2、@Service 服务层
+     *      3、@Repository 持久层
+     *      4、@Component 组件(出现在非MVC三层的任何地方且包含MVC三层)
+     * @param args
+     */
+    public static void main(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+
+        System.out.println("=====================================================");
+
+        UserController bean = ioc.getBean(UserController.class);
+        System.out.println("bean = " + bean);
+
+        UserService bean2 = ioc.getBean(UserService.class);
+        System.out.println("bean2 = " + bean2);
+
+        UserDao bean3 = ioc.getBean(UserDao.class);
+        System.out.println("bean3 = " + bean3);
+    }
+}
+```
+
+:::tip
+
++ 扫描的范围
+
+![Spring容器](./Spring容器/img-24.jpg)
+
+:::
+
+
+
+### 实验9：@Import - 按需导入第三方库
+
+:::tip
+
+**第三方组件想要导入容器中：`没办法快速标注分层注解`**
+
+ * 1、**@Bean：自己new，注册给容器**
+
+![Spring容器](./Spring容器/img-25.jpg)
+
+ * 2、**@Component 等分层注解(没办法快速标注分层注解)**
+ * 3、**@Import：快速导入组件**
+
+![Spring容器](./Spring容器/img-26.jpg)
+
+:::
+
+> **编写一个`放置相关注解`的配置类**
+
+![Spring容器](./Spring容器/img-27.jpg)
+
++ **AppConfig.java**
+
+```java
+package fun.xingji.spring.ioc.config;
+
+
+import ch.qos.logback.core.CoreConstants;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+
+@Import({CoreConstants.class})
+@Configuration
+@ComponentScan(basePackages = "fun.xingji.spring") // 组件批量扫描；只扫利用Spring相关注解注册到容器中的组件
+public class AppConfig {
+}
+```
+
+> **查看刚才导入的第三方库有没有导入相关组件**
+>
+> ![Spring容器](./Spring容器/img-28.jpg)
+>
+> ![Spring容器](./Spring容器/img-29.jpg)
+>
+> > **ok,已经完美导入**
 
 
 
 
 
+### 实验10：@Scope - 调整组件作用域
+
+![Spring容器](./Spring容器/img-33.jpg)
+
+::: tip
+
+**@Scope 调整组件的作用域：**
+1、**@Scope("prototype")：非单实例:**
+		**容器启动的时候不会创建非单实例组件的对象。**
+       	 **`什么时候获取，什么时候创建`**
+ 2、**@Scope("singleton")：单实例： 默认值**
+         	**容器启动的时候会创建单实例组件的对象。**
+                 **`容器启动完成之前`就会创建好**
+       @**Lazy：懒加载**
+ 		**`容器启动完成之前`不会`创建懒加载组件`的对象**
+                 **什么时候获取，什么时候创建**
+3、**@Scope("request")：同一个请求单实例**
+4、**@Scope("session")：同一次会话单实例**
+
+:::
+
++ **@Scope("singleton")：单实例： 默认值**
+
+::: tip
+
+**singleton**：容器启动时（或第一次获取时）创建，整个应用生命周期内`只有一个实例`。适合`无状态或只读的Bean`。
+
+:::
+
+```java
+package fun.xingji.spring.ioc.config;
+
+import fun.xingji.spring.ioc.bean.Person;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+
+@Configuration //告诉Spring容器，这是一个配置类
+public class PersonConfig {
+
+    @Scope("singleton")
+    @Bean("zhangsan")
+    public Person haha(){
+        Person person = new Person();
+        person.setName("张三2");
+        person.setAge(20);
+        person.setGender("男");
+
+        return person;
+    }
+
+    // 3.给容器中注册一个自己的组件；容器中的每个组件都有自己的名字，方法名就是组件的名字
+    @Bean("zhangsan")
+    public Person zhangsan(){
+        Person person = new Person();
+        person.setName("张三1");
+        person.setAge(20);
+        person.setGender("男");
+
+        return person;
+    }
+
+    @Bean("lisi")
+    public Person lisi(){
+        Person person = new Person();
+        person.setName("李四");
+        person.setAge(20);
+        person.setGender("男");
+
+        return person;
+    }
+}
+```
+
+![Spring容器](./Spring容器/img-35.jpg)
+
+```java
+/**
+     * @Scope 调整组件的作用域：
+     * 1、@Scope("prototype")：非单实例:
+     *      容器启动的时候不会创建非单实例组件的对象。
+     *      什么时候获取，什么时候创建
+     * 2、@Scope("singleton")：单实例： 默认值
+     *      容器启动的时候会创建单实例组件的对象。
+     *      容器启动完成之前就会创建好
+     *    @Lazy：懒加载
+     *      容器启动完成之前不会创建懒加载组件的对象
+     *      什么时候获取，什么时候创建
+     * 3、@Scope("request")：同一个请求单实例
+     * 4、@Scope("session")：同一次会话单实例
+     *
+     * @return
+     */
+    public static void main(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+
+        System.out.println("=================ioc容器创建完成===================");
+        Object zhangsan1 = ioc.getBean("zhangsan");
+        System.out.println("zhangsan1 = " + zhangsan1);
+
+        Object zhangsan2 = ioc.getBean("zhangsan");
+        System.out.println("zhangsan2 = " + zhangsan2);
+
+        // 容器创建的时候(完成之前)就把所有的单例对象创建完成
+        System.out.println(zhangsan1 == zhangsan2);
+    }
+```
+
+> **验证:**
+>
+> ![Spring容器](./Spring容器/img-36.jpg)
+
+
+
++ **@Scope("prototype")：非单实例**
+
+::: tip
+
+**prototype**：每次通过`getBean()`或`注入`（注意：注入时`只在初始化时创建一次`，若需每次新建需配合`ObjectFactory`或`@Lookup`）都会`创建新实例`。适合`有状态的Bean`。
+
+:::
+
+![Spring容器](./Spring容器/img-37.jpg)
+
+![Spring容器](./Spring容器/img-38.jpg)
+
+> **验证:**
+>
+> ![Spring容器](./Spring容器/img-39.jpg)
 
 
 
 
 
+### 实验11：@Lazy - 单例情况下的懒加载
 
+::: tip
+**@Scope("singleton")：单实例： 默认值**
+	**容器启动的时候会创建单实例组件的对象。**
+	**`容器启动完成之前`就会创建好**
+**@Lazy：懒加载**
+	**容器`启动完成之前`不会`创建懒加载组件`的对象**
+	**什么时候获取，什么时候创建**
+
+:::
+
++ **@Scope("singleton")：单实例： 默认值**
+
+![Spring容器](./Spring容器/img-41.jpg)
+
+![Spring容器](./Spring容器/img-40.jpg)
+
+
+
++ **@Lazy：懒加载**
+
+![Spring容器](./Spring容器/img-42.jpg)
+
+![Spring容器](./Spring容器/img-43.jpg)
+
+
+
+
+
+### 实验12：FactoryBean - 利用工厂制作复杂Bean
+
++ **BYDFactory.java**
+
+```java
+package fun.xingji.spring.ioc.factory;
+
+import fun.xingji.spring.ioc.bean.Car;
+import org.springframework.beans.factory.FactoryBean;
+import org.springframework.stereotype.Component;
+
+// 场景：如果制造某些对象比较复杂的时候，利用工厂方法进行创建。
+@Component
+public class BYDFactory implements FactoryBean<Car> {
+
+    /**
+     * 调用此方法给容器中制造对象
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Car getObject() throws Exception {
+        System.out.println("BYDFactory 正在制造Car对象...");
+        Car car = new Car();
+        return car;
+    }
+
+    /**
+     * 说明造的东西的类型
+     * @return
+     */
+    @Override
+    public Class<?> getObjectType() {
+        return Car.class;
+    }
+
+    /**
+     * 是单例？
+     *      true: 是单例的
+     *      false： 不是单例的
+     * @return
+     */
+    @Override
+    public boolean isSingleton() {
+        return true;
+    }
+}
+```
+
+
+
++ **Spring01IocApplication.java**
+
+```java
+// FactoryBean在容器中放的组件的类型，是接口中泛型指定的类型，组件的名字是 工厂自己的名字
+    public static void main(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+
+        System.out.println("=================ioc容器创建完成===================");
+
+        Car bean1 = ioc.getBean(Car.class);
+        Car bean2 = ioc.getBean(Car.class);
+        System.out.println(bean1 == bean2);
+
+        Map<String, Car> beansOfType = ioc.getBeansOfType(Car.class);
+        System.out.println("beansOfType:" + beansOfType);
+    }
+```
+
+
+
+
+
+### 实验13：@Conditional【难点】 - 条件注册
+
+::: info
+
++ **源码层面**
+
+![Spring容器](./Spring容器/img-44.jpg)
+
+![Spring容器](./Spring容器/img-45.jpg)
+
+:::
+
++ **WindowsCondition.java**
+
+```java
+package fun.xingji.spring.ioc.condition;
+
+import org.springframework.context.annotation.Condition;
+import org.springframework.context.annotation.ConditionContext;
+import org.springframework.core.env.Environment;
+import org.springframework.core.type.AnnotatedTypeMetadata;
+
+public class WindowsCondition implements Condition {
+    @Override
+    public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+        // 判断环境变量中的OS 包含windows，就是windows系统
+        // 获取到环境变量
+        Environment environment = context.getEnvironment();
+        // 获取环境变量属性
+        String property = environment.getProperty("OS");
+
+        // 判断语句
+        /*if (property != null && property.contains("Windows")) {
+            return true;
+        }
+        return false;*/
+        // 合并语句
+        return property.contains("Windows");
+    }
+}
+```
+
++ **MacCondition.java**
+
+```java
+package fun.xingji.spring.ioc.condition;
+
+import org.springframework.context.annotation.Condition;
+import org.springframework.context.annotation.ConditionContext;
+import org.springframework.core.env.Environment;
+import org.springframework.core.type.AnnotatedTypeMetadata;
+
+public class MacCondition implements Condition {
+    @Override
+    public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+        // 判断环境变量中的OS 包含windows，就是windows系统
+        // 获取到环境变量
+        Environment environment = context.getEnvironment();
+        // 获取环境变量属性
+        String property = environment.getProperty("OS");
+
+        return property.contains("mac");
+    }
+}
+```
+
++ 
+
+```java
+package fun.xingji.spring.ioc.config;
+
+import fun.xingji.spring.ioc.bean.Person;
+import fun.xingji.spring.ioc.condition.MacCondition;
+import fun.xingji.spring.ioc.condition.WindowsCondition;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration //告诉Spring容器，这是一个配置类
+public class PersonConfig {
+
+    //场景：判断当前电脑的操作系统是windows还是mac
+    //  windows 系统，容器中有 bill
+    //  mac 系统，容器中有 joseph
+
+    @Conditional(MacCondition.class)
+    @Bean("joseph")
+    public Person joseph() {
+        Person person = new Person();
+        person.setName("乔布斯");
+        person.setAge(20);
+        person.setGender("男");
+
+        return person;
+    }
+
+
+    @Conditional(WindowsCondition.class)
+    @Bean("bill")
+    public Person bill() {
+        Person person = new Person();
+        person.setName("比尔盖茨");
+        person.setAge(20);
+        person.setGender("男");
+
+        return  person;
+    }
+
+
+    /*@Scope("prototype")*/
+    @Bean("zhangsan")
+    public Person haha(){
+        Person person = new Person();
+        person.setName("张三2");
+        person.setAge(20);
+        person.setGender("男");
+
+        return person;
+    }
+
+    // 3.给容器中注册一个自己的组件；容器中的每个组件都有自己的名字，方法名就是组件的名字
+    @Bean("zhangsan")
+    public Person zhangsan(){
+        Person person = new Person();
+        person.setName("张三1");
+        person.setAge(20);
+        person.setGender("男");
+
+        return person;
+    }
+
+    @Bean("lisi")
+    public Person lisi(){
+        Person person = new Person();
+        person.setName("李四");
+        person.setAge(20);
+        person.setGender("男");
+
+        return person;
+    }
+}
+```
+
+::: note
+
+![Spring容器](./Spring容器/img-46.jpg)
+
+:::
+
++ **Spring01IocApplication.java**
+
+```java
+	/**
+     * 条件注册
+     * @param args
+     */
+    public static void main(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+
+        // 获取Person.class类型的所有对象
+        Map<String, Person> beans = ioc.getBeansOfType(Person.class);
+        System.out.println("beans = " + beans);
+
+        //拿到环境变量
+        ConfigurableEnvironment environment = ioc.getEnvironment();
+
+        String property = environment.getProperty("OS");
+        System.out.println("property = " + property);
+    }
+```
+
+> **验证:**
+>
+> ![Spring容器](./Spring容器/img-47.jpg)
+>
+> ![Spring容器](./Spring容器/img-48.jpg)
+>
+> ![Spring容器](./Spring容器/img-49.jpg)
+
+
+
+### Conditional 派生注解
+
+![Spring容器](./Spring容器/img-50.jpg)
+
+![Spring容器](./Spring容器/img-51.jpg)
+
++ **ConditionalOnMissingBean - 容器中没有指定组件，则判断true**
+
+![Spring容器](./Spring容器/img-52.jpg)
+
+
+
++ **ConditionalOnClass - 如果存在某个类，则判定true**
+
+
+
++ **Profile - 如果是指定Profile标识，则判定true**
+
+
+
++ **ConditionalOnResource - 如果系统中存在某个资源文件，则判断true**
+
+
+
++ **ConditionalOnProperty - 如果存在指定属性，则判断true**
 
 
 
