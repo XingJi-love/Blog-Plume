@@ -15,6 +15,22 @@ export default defineNavbarConfig([
   { text: '关于', link: '/about/', icon: 'fa:child' },
   {
     text: '笔记',
-    items: [{ text: '示例', link: '/demo/README.md' }]
+    icon: 'mdi:learn-outline',
+    items: [
+      {
+        text: '算法',
+        icon: 'fa7-brands:leetcode',
+        items: [
+          { text: 'Leetcode', link: '/Leetcode/算法入门/', icon: 'fa7-brands:leetcode' },
+        ],
+      },
+      {
+        text: '八股文',
+        icon: 'ic:twotone-cloud',
+        items: [
+          { text: 'JVM', link: '/JVM/初识JVM/', icon: 'devicon-plain:java' },
+        ],
+      },
+    ],
   },
 ])
