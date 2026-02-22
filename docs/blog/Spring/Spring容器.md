@@ -1063,19 +1063,23 @@ public class PersonConfig {
 
 ![Spring容器](./Spring容器/img-52.jpg)
 
+![Spring容器](./Spring容器/img-53.jpg)
 
++ **添加一条系统环境变量(OS=mac)**
+
+![Spring容器](./Spring容器/img-48.jpg)
+
+![Spring容器](./Spring容器/img-54.jpg)
 
 + **ConditionalOnClass - 如果存在某个类，则判定true**
 
-
-
 + **Profile - 如果是指定Profile标识，则判定true**
-
-
 
 + **ConditionalOnResource - 如果系统中存在某个资源文件，则判断true**
 
+![Spring容器](./Spring容器/img-55.jpg)
 
+![Spring容器](./Spring容器/img-56.jpg)
 
 + **ConditionalOnProperty - 如果存在指定属性，则判断true**
 
@@ -1084,6 +1088,28 @@ public class PersonConfig {
 
 
 ## 注入组件
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
