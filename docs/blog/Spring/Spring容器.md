@@ -1089,6 +1089,463 @@ public class PersonConfig {
 
 ## 注入组件
 
+![Spring容器](./Spring容器/img-57.jpg)
+
+
+
+### 实验1：@Autowired
+
+![Spring容器](./Spring容器/img-58.jpg)![Spring容器](./Spring容器/img-59.jpg)
+
++ **Spring01IocApplication.java**
+
+```java
+/**
+     * 测试自动注入: 代码在 UserController 中
+     * @param args
+     */
+    public static void main(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+
+        System.out.println("=================ioc容器创建完成===================");
+
+        UserController userController = ioc.getBean(UserController.class);
+
+        System.out.println("userController = " + userController);
+    }
+```
+
++ **UserController**
+
+```java
+package fun.xingji.spring.ioc.controller;
+
+import fun.xingji.spring.ioc.bean.Person;
+import fun.xingji.spring.ioc.service.UserService;
+import lombok.Data;
+import lombok.ToString;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Controller;
+
+import java.util.List;
+import java.util.Map;
+
+@ToString
+@Data
+@Controller
+public class UserController {
+
+    /**
+     * 自动装配流程（先按照类型，再按照名称）
+     * 1、按照类型，找到这个组件；
+     *      1.0、只有且找到一个，直接注入，名字无所谓
+     *      1.1、如果找到多个，再按照名称去找; 变量名就是名字（新版）。
+     *           1.1.1、如果找到： 直接注入。
+     *           1.1.2、如果找不到，报错
+     */
+    @Autowired //自动装配； 原理：Spring 调用 容器.getBean
+    UserService abc;
+
+    @Autowired
+    Person bill;
+
+    @Autowired //把这个类型的所有组件都拿来
+    List<Person> personList;
+
+    @Autowired
+    Map<String,Person> personMap;
+
+    @Autowired //注入ioc容器自己
+    ApplicationContext applicationContext;
+}
+```
+
+::: info
+
+**自动装配流程（先按照`类型`，再按照`名称`）:**
+
+**按照类型，找到这个组件；**
+
+1. 只有且找到一个，直接注入，名字无所谓
+
+![Spring容器](./Spring容器/img-60.jpg)
+
+2.如果找到多个，再按照名称去找; 变量名就是名字（新版）。
+
++ 如果找到： 直接注入。
+
+![Spring容器](./Spring容器/img-62.jpg)
+
++ 如果找不到，报错 
+
+![Spring容器](./Spring容器/img-61.jpg)
+
+:::
+
+
+
+
+
+### 实验2-3：@Qualifier、@Primary
+
++ **Spring01IocApplication.java**
+
+```java
+/**
+     * 测试自动注入: 代码在 UserService 中
+     * @param args
+     */
+    public static void main(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+
+        System.out.println("=================ioc容器创建完成===================");
+
+        UserService bean = ioc.getBean(UserService.class);
+        System.out.println("UserService = " + bean);
+    }
+```
+
++ **UserService.java**
+
+```java
+package fun.xingji.spring.ioc.service;
+
+import fun.xingji.spring.ioc.bean.Person;
+import lombok.Data;
+import lombok.ToString;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+@ToString
+@Data
+@Service
+public class UserService {
+
+    /**
+     * Consider marking one of the beans as @Primary,
+     * updating the consumer to accept multiple beans,
+     * or using @Qualifier to identify the bean that should be consumed
+     */
+    //    @Qualifier("bill") //精确指定：如果容器中这样的组件存在多个，则使用@Qualifier精确指定组件名
+
+    @Qualifier("bill") //精确指定：如果容器中这样的组件存在多个，且有默认组件。我们可以使用 @Qualifier 切换别的组件。
+    @Autowired
+    Person atom; // @Primary 一旦存在，改属性名就不能实现组件切换了。
+}
+```
+
+::: tip
+
+![Spring容器](./Spring容器/img-62.jpg)![Spring容器](./Spring容器/img-63.jpg)![Spring容器](./Spring容器/img-64.jpg)
+
+![Spring容器](./Spring容器/img-65.jpg)
+
+:::
+
+
+
+
+
+### 实验4：@Resource()
+
++ **Spring01IocApplication.java**
+
+```java
+/**
+     * 测试自动注入: 代码在 UserDao 中
+     * @param args
+     */
+    public static void main(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+
+        System.out.println("=================ioc容器创建完成===================");
+
+        UserDao bean = ioc.getBean(UserDao.class);
+        System.out.println("bean = " + bean);
+    }
+```
+
+::: tip
+
+> **扩展其他`非Spring注解`支持**
+>
+> ![Spring容器](./Spring容器/img-66.jpg)
+
+**面试题：`@Resource` 和 `@Autowired` 区别？**
+1、**@Autowired 和 @Resource 都是做`bean的注入`用的，都可以放在属性上**
+2、**@Resource 具有`更强的通用性`**
+
+:::
+
+![Spring容器](./Spring容器/img-67.jpg)
+
+
+
+
+
+### 实验5：setter方法注入
+
++ **Spring01IocApplication.java**
+
+```java
+/**
+     * 测试自动注入: 代码在 UserDao 中
+     * @param args
+     */
+    public static void main(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+
+        System.out.println("=================ioc容器创建完成===================");
+
+        UserDao bean = ioc.getBean(UserDao.class);
+        System.out.println("bean = " + bean);
+    }
+```
+
+![Spring容器](./Spring容器/img-70.jpg)
+
+
+
+
+
+### 实验6：构造器注入
+
++ **Spring01IocApplication.java**
+
+```java
+/**
+     * 测试自动注入: 代码在 UserDao 中
+     * @param args
+     */
+    public static void main(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+
+        System.out.println("=================ioc容器创建完成===================");
+
+        UserDao bean = ioc.getBean(UserDao.class);
+        System.out.println("bean = " + bean);
+    }
+```
+
+![Spring容器](./Spring容器/img-68.jpg)
+
+![Spring容器](./Spring容器/img-69.jpg)
+
+![Spring容器](./Spring容器/img-70.jpg)
+
+
+
+### 实验7：xxxAware(感知接口)
+
++ **Spring01IocApplication.java**
+
+```java
+public static void main(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+        System.out.println("=================ioc容器创建完成===================");
+
+
+        HahaService hahaService = ioc.getBean(HahaService.class);
+        System.out.println("hahaService = " + hahaService);
+
+
+        String osType = hahaService.getOsType();
+        System.out.println("osType = " + osType);
+
+
+        String myName = hahaService.getMyName();
+        System.out.println("myName = " + myName);
+    }
+```
+
+![Spring容器](./Spring容器/img-71.jpg)
+
+![Spring容器](./Spring容器/img-72.jpg)
+
+
+
+
+
+### 实验8：@Value(配置文件取值)
+
++ **Spring01IocApplication.java**
+
+```java
+public static void main(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+        System.out.println("=================ioc容器创建完成===================");
+
+        Dog bean = ioc.getBean(Dog.class);
+        System.out.println("bean = " + bean);
+    }
+```
+
++ **Dog.java**
+
+```java
+@Data
+@ToString
+@Component // 扫描组件加入
+public class Dog {
+
+    //  @Autowired // 自动注入组件的。基本类型，自己搞。
+
+
+    /**
+     * 1、@Value("字面值"): 直接赋值
+     * 2、@Value("${key}")：动态从配置文件中取出某一项的值。
+     * 3、@Value("#{SpEL}")：Spring Expression Language；Spring 表达式语言
+     *      更多写法：https://docs.spring.io/spring-framework/reference/core/expressions.html
+     */
+    @Value("旺财") // 直接赋值
+    private String name;
+
+    @Value("18")
+    // @Value("${dog.age}") 需要在application.propertices文件中配置花括号中的key及对应的值(如key=10)
+    private Integer age;
+
+    public Dog(){
+        String string = UUID.randomUUID().toString();
+        System.out.println("Dog构造器...");
+    }
+}
+```
+
+![Spring容器](./Spring容器/img-72.jpg)
+
+
+
+
+
+
+
+
+
+### 实验9：SpEL(Spring表达式基本使用)
+
++ **Spring01IocApplication.java**
+
+```java
+public static void main(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+        System.out.println("=================ioc容器创建完成===================");
+
+        Dog bean = ioc.getBean(Dog.class);
+        System.out.println("bean = " + bean);
+    }
+```
+
++ **Dog.java**
+
+```java
+@Data
+@ToString
+@Component // 扫描组件加入
+public class Dog {
+
+    //  @Autowired // 自动注入组件的。基本类型，自己搞。
+
+
+    /**
+     * 1、@Value("字面值"): 直接赋值
+     * 2、@Value("${key}")：动态从配置文件中取出某一项的值。
+     * 3、@Value("#{SpEL}")：Spring Expression Language；Spring 表达式语言
+     *      更多写法：https://docs.spring.io/spring-framework/reference/core/expressions.html
+     */
+    
+    // @Value("#{SqEL}") 进行数据运算
+    @Value("#{10*20}")
+    private String color;
+
+    // 获取不同的UUID
+    @Value("#{T(java.util.UUID).randomUUID().toString()}")
+    private String id;
+
+    // 截取字符串
+    @Value("#{'Hello World!'.substring(0, 5)}")
+    private String msg;
+
+    // 进行三元运算
+    @Value("#{1>2?'haha':'hehe'}")
+    private String flag;
+
+    // 将小写字母转换为大写字母
+    @Value("#{new String('haha').toUpperCase()}")
+    private String flag1;
+
+    // 创建数组
+    @Value("#{new int[] {1, 2, 3}}")
+    private int[] hahaha;
+
+    public Dog(){
+        String string = UUID.randomUUID().toString();
+        System.out.println("Dog构造器...");
+    }
+}
+```
+
+![Spring容器](./Spring容器/img-72.jpg)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
