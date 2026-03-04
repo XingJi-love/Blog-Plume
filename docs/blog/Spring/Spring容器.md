@@ -7,7 +7,7 @@ permalink: /blog/q8wt71y8/
 cover: ./Spring.jpg
 ---
 
-![Spring介绍](./Spring.jpg)
+![Spring容器](./Spring.jpg)
 
 ## 组件和容器
 
@@ -1413,7 +1413,9 @@ public class Dog {
 }
 ```
 
-![Spring容器](./Spring容器/img-72.jpg)
+![Spring容器](./Spring容器/img-73.jpg)
+
+![Spring容器](./Spring容器/img-74.jpg)
 
 
 
@@ -1486,83 +1488,336 @@ public class Dog {
 }
 ```
 
-![Spring容器](./Spring容器/img-72.jpg)
+![Spring容器](./Spring容器/img-75.jpg)
 
 
 
 
 
+### 实验10：@PropertySource(properties文件注入)
 
+::: tip
 
++ **@PropertySource注解的相关用法**
 
+![Spring容器](./Spring容器/img-76.jpg)
 
+```java
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
 
+package org.springframework.context.annotation;
 
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Repeatable;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import org.springframework.core.io.support.PropertySourceFactory;
 
+/**
+ * 用于指定要加载的属性资源文件（如 properties 文件）的注解。
+ * 该注解可用于类级别，通常与 @Configuration 类一起使用。
+ */
+@Target({ElementType.TYPE})          // 指定该注解只能用于类、接口（包括注解类型）或枚举声明上
+@Retention(RetentionPolicy.RUNTIME)  // 该注解在运行时保留，可通过反射读取
+@Documented                           // 表示使用该注解的元素会被 Javadoc 工具记录
+@Repeatable(PropertySources.class)    // 允许在同一个声明上重复使用 @PropertySource 注解，
+                                      // 重复的注解将存储在 @PropertySources 容器注解中
+public @interface PropertySource {
+    
+    /**
+     * 属性源的名称。如果未指定，则根据资源描述生成一个默认名称。
+     */
+    String name() default "";
 
+    /**
+     * 指定资源文件的位置，可以是类路径或文件系统中的路径。
+     * 例如："classpath:/com/example/app.properties"
+     */
+    String[] value();
 
+    /**
+     * 如果资源文件不存在，是否忽略异常而不抛出 FileNotFoundException。
+     */
+    boolean ignoreResourceNotFound() default false;
 
+    /**
+     * 指定读取属性文件时使用的字符编码，例如 "UTF-8"。
+     */
+    String encoding() default "";
 
+    /**
+     * 指定用于加载属性源的自定义工厂类，该工厂必须实现 PropertySourceFactory 接口。
+     * 默认使用默认的工厂实现。
+     */
+    Class<? extends PropertySourceFactory> factory() default PropertySourceFactory.class;
+}
+```
 
+:::
 
++ **cat.properties**
 
+```properties
+cat.name=Tom
+cat.age=2
+```
 
+::: note
 
+> **说明属性来源： 把`指定的文件`导入`容器`中，供我们取值使用**
 
+1、**classpath:cat.properties；从`自己的项目类路径`下找**
 
+2、**classpath*:Log4j-charsets.properties；从`所有包的类路径`下找**
 
+:::
 
+![Spring容器](./Spring容器/img-77.jpg)
 
+![Spring容器](./Spring容器/img-78.jpg)
 
 
 
+### 补充1：ResourceUtils - 获取资源工具类
 
+![Spring容器](./Spring容器/img-80.jpg)
 
+![Spring容器](./Spring容器/img-79.jpg)
 
 
 
 
 
+### 实验11：@Profile(多环境)
 
++ **MyDataSource.java**
 
+```java
+package fun.xingji.spring.ioc.datasource;
 
+import lombok.Data;
 
+@Data
+public class MyDataSource {
+    private String url;
 
+    private String username;
 
+    private String password;
+}
+```
 
 
 
++ **DataSourceConfig.java**
 
+```java
+package fun.xingji.spring.ioc.config;
 
+import fun.xingji.spring.ioc.datasource.MyDataSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
+//@Profile("dev") //整体激活
+@Configuration
+public class DataSourceConfig {
 
+    //1、定义环境标识：自定义【dev、test、prod】； 默认【default】
+    //2、激活环境标识：
+    //      明确告诉Spring当前处于什么环境。
+    //      你要不说是啥环境，就是 default 环境
 
+    //利用条件注解，只在某种环境下激活一个组件。
+    @Profile({"dev","default"})  //  @Profile("环境标识")。当这个环境被激活的时候，才会加入如下组件。
+    @Bean
+    public MyDataSource dev(){
+        MyDataSource myDataSource = new MyDataSource();
+        myDataSource.setUrl("jdbc:mysql://localhost:3306/dev");
+        myDataSource.setUsername("dev_user");
+        myDataSource.setPassword("dev_pwd");
 
+        return myDataSource;
+    }
 
+    @Profile({"test"})
+    @Bean
+    public MyDataSource test(){
+        MyDataSource myDataSource = new MyDataSource();
+        myDataSource.setUrl("jdbc:mysql://localhost:3306/test");
+        myDataSource.setUsername("test_user");
+        myDataSource.setPassword("test_pwd");
 
+        return myDataSource;
+    }
 
+    @Profile({"prod"})
+    @Bean
+    public MyDataSource prod(){
+        MyDataSource myDataSource = new MyDataSource();
+        myDataSource.setUrl("jdbc:mysql://localhost:3306/prod");
+        myDataSource.setUsername("prod_user");
+        myDataSource.setPassword("prod_pwd");
 
+        return myDataSource;
+    }
+}
+```
 
 
 
++ **DeliveryDao.java**
 
+```java
+package fun.xingji.spring.ioc.dao;
 
+import fun.xingji.spring.ioc.datasource.MyDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
+public class DeliveryDao {
 
+    /**
+     * 问题1：数据源组件有三个。
+     * 1. @Primary: dev
+     * 效果：能不能自动？
+     * 1. 告诉Spring。哪个数据源哪种情况下才生效。@Conditional
+     */
+    @Autowired
+    MyDataSource myDataSource;
 
+    public void saveDelivery() {
+        System.out.println("数据源：保存数据" + myDataSource);
+    }
 
+}
+```
 
 
 
++ **Spring01IocApplication.java**
 
+```java
+public static void main(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+        System.out.println("=================ioc容器创建完成===================");
 
+        // 获取对象
+        DeliveryDao dao = ioc.getBean(DeliveryDao.class);
+        // 查看数据源存储位置
+        dao.saveDelivery();
+    }
+```
 
+::: warning
 
+1、**定义环境标识：自定义【dev、test、prod】； 默认【default】**
 
+2、**激活环境标识：**
+      **明确告诉Spring当前处于什么环境。**
 
+​      **你要不说是啥环境，就是`default 环境`**
 
+>  **利用条件注解，只在`某种环境下激活一个组件`。**
 
+```java
+//利用条件注解，只在某种环境下激活一个组件。
+    @Profile({"dev","default"})  //  @Profile("环境标识")。当这个环境被激活的时候，才会加入如下组件。
+    @Bean
+    public MyDataSource dev(){
+        MyDataSource myDataSource = new MyDataSource();
+        myDataSource.setUrl("jdbc:mysql://localhost:3306/dev");
+        myDataSource.setUsername("dev_user");
+        myDataSource.setPassword("dev_pwd");
 
+        return myDataSource;
+    }
+```
+
+:::
+
++ **测试:**
+
+![Spring容器](./Spring容器/img-81.jpg)
+
+::: tip 
+
+> **快速切换某一个组件的方法，可以在application.properties文件中配置**
+
+```properties
+spring.profiles.active=dev
+```
+
+![Spring容器](./Spring容器/img-82.jpg)
+
+:::
+
+
+
+
+
+### 补充2：原生方式使用容器
+
++ **Spring01IocApplication.java**
+
+```java
+/**
+  * 原生方式创建、使用Spring容器
+  * @param args
+*/
+public static void main(String[] args) {
+        // 1.自己创建
+        ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("classpath:ioc.xml");
+
+        /*// 文件系统：其他盘中找、
+        new FileSystemXmlApplicationContext("classpath:系统文件路径");*/
+
+        // 2.底层组件
+        for (String definitionName : ioc.getBeanDefinitionNames()) {
+            System.out.println("definitionName:" + definitionName);
+        }
+
+        // 获取所有组件对象
+        Map<String, Person> type = ioc.getBeansOfType(Person.class);
+        System.out.println("type:" + type);
+    }
+```
+
+![Spring容器](./Spring容器/img-83.jpg)
+
++ **ioc.xml**
+
+```java
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="zhangsan" class="fun.xingji.spring.ioc.bean.Person"></bean>
+
+    <bean id="lisi" class="fun.xingji.spring.ioc.bean.Person">
+        <property name="name" value="李四"></property>
+        <property name="age" value="#{10*10}"></property>
+    </bean>
+
+    <!--配置批量扫描-->
+    <context:component-scan base-package="fun.xingji.spring"/>
+
+    <!--导入外部属性文件-->
+    <context:property-placeholder location="dog.properties"/>
+</beans>
+```
+
++ **测试:**
+
+![Spring容器](./Spring容器/img-84.jpg)
 
 
 
@@ -1571,3 +1826,446 @@ public class Dog {
 
 
 ## 组件生命周期
+
+
+
+### 实验1：@Bean - 指定生命周期初始化和销毁方法
+
+![Spring容器](./Spring容器/img-85.jpg)
+
++ **User.java**
+
+```java
+package fun.xingji.spring.ioc.bean;
+
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+
+@Data
+public class User {
+    private String username;
+
+    private String password;
+
+    private Car car;
+
+    @Autowired
+    public void setCar(Car car) {
+        System.out.println("自动注入: 属性值: " + car);
+        this.car = car;
+    }
+
+
+    public User() {
+        System.out.println("User 构造器...");
+    }
+
+
+    // 初始化方法
+    public void initUser(){
+        System.out.println("@Bean 初始化: initUser");
+    }
+
+    // 销毁方法
+    public void destroyUser(){
+        System.out.println("@Bean 销毁: destroyUser");
+    }
+}
+```
+
+
+
++ **UserConfig.java**
+
+```java
+package fun.xingji.spring.ioc.config;
+
+
+import fun.xingji.spring.ioc.bean.User;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class UserConfig {
+
+    // 放入容器中
+    // 进行初始化调用initUser方法，销毁调用destroyUser方法
+    @Bean(initMethod = "initUser",destroyMethod = "destroyUser")
+    public User user() {
+        return new User();
+    }
+}
+```
+
+
+
++ **Spring01IocApplication.java**
+
+```java
+/**
+     * 生命周期
+     * @param args
+     */
+    public static void main(String[] args) {
+        ConfigurableApplicationContext ioc = SpringApplication.run(Spring01IocApplication.class, args);
+        System.out.println("=================ioc容器创建完成===================");
+
+        User bean = ioc.getBean(User.class);
+        System.out.println("运行:" + bean);
+    }
+```
+
+
+
++ **测试:**
+
+![Spring容器](./Spring容器/img-86.jpg)
+
+
+
+
+
+### 实验2-3：InitializingBean(Bean初始化)、DisposableBean(Bean销毁)
+
++ **User.java**
+
+```java
+package fun.xingji.spring.ioc.bean;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import lombok.Data;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+
+@Data
+public class User implements InitializingBean, DisposableBean {
+
+    /**
+     * 属性设置之后进行调用
+     * @throws Exception
+     */
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("[InitializingBean] === afterPropertiesSet...");
+    }
+
+    /**
+     * 容器运行结束后进行调用
+     * @throws Exception
+     */
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("[DisposableBean] === destroy...");
+    }
+
+    private String username;
+
+    private String password;
+
+    private Car car;
+
+    @Autowired
+    public void setCar(Car car) {
+        System.out.println("setter 自动注入: 属性值: " + car);
+        this.car = car;
+    }
+
+
+    public User() {
+        System.out.println("User 构造器...");
+    }
+
+
+    // 初始化方法
+    public void initUser(){
+        System.out.println("@Bean 初始化: initUser");
+    }
+
+    // 销毁方法
+    public void destroyUser(){
+        System.out.println("@Bean 销毁: destroyUser");
+    }
+}
+```
+
+![Spring容器](./Spring容器/img-87.jpg)
+
+![Spring容器](./Spring容器/img-88.jpg)
+
+
+
+
+
+### 实验4-5：@PostConstruct(构造器**后置**处理钩子)、@PreDestroy(销毁预处理钩子)
+
++ **User.java**
+
+```java
+package fun.xingji.spring.ioc.bean;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import lombok.Data;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+
+@Data
+public class User implements InitializingBean, DisposableBean {
+
+    @PostConstruct // 构造器之后
+    public void PostConstruct(){
+        System.out.println("@PostConstruct...");
+    }
+
+    @PreDestroy // DisposableBean之前
+    public void PreDestroy(){
+        System.out.println("@PreDestroy...");
+    }
+
+    /**
+     * 属性设置之后进行调用
+     * @throws Exception
+     */
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("[InitializingBean] === afterPropertiesSet...");
+    }
+
+    /**
+     * 容器运行结束后进行调用
+     * @throws Exception
+     */
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("[DisposableBean] === destroy...");
+    }
+
+    private String username;
+
+    private String password;
+
+    private Car car;
+
+    @Autowired
+    public void setCar(Car car) {
+        System.out.println("setter 自动注入: 属性值: " + car);
+        this.car = car;
+    }
+
+
+    public User() {
+        System.out.println("User 构造器...");
+    }
+
+
+    // 初始化方法
+    public void initUser(){
+        System.out.println("@Bean 初始化: initUser");
+    }
+
+    // 销毁方法
+    public void destroyUser(){
+        System.out.println("@Bean 销毁: destroyUser");
+    }
+}
+```
+
+![Spring容器](./Spring容器/img-89.jpg)
+
+
+
+
+
+
+
+### 实验6：BeanPostProcessor(后置处理器机制-Bean外挂修改器)
+
++ **User.java**
+
+```java
+package fun.xingji.spring.ioc.bean;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import lombok.Data;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+
+
+//BeanPostProcessor：Bean外挂修改器
+
+@Data
+public class User implements InitializingBean, DisposableBean {
+
+    @PostConstruct // 构造器之后
+    public void PostConstruct(){
+        System.out.println("[User] ==> @PostConstruct...");
+    }
+
+    @PreDestroy // DisposableBean之前
+    public void PreDestroy(){
+        System.out.println("[User] ==> @PreDestroy...");
+    }
+
+    /**
+     * 属性设置之后进行调用
+     * @throws Exception
+     */
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("[User] ==> [InitializingBean] === afterPropertiesSet...");
+    }
+
+    /**
+     * 容器运行结束后进行调用
+     * @throws Exception
+     */
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("[User] ==> [DisposableBean] === destroy...");
+    }
+
+    private String username;
+
+    private String password;
+
+    private Car car;
+
+    @Autowired
+    public void setCar(Car car) {
+        System.out.println("[User] ==> setter 自动注入: 属性值: " + car);
+        this.car = car;
+    }
+
+
+    public User() {
+        System.out.println("[User] ==> User 构造器...");
+    }
+
+
+    // 初始化方法
+    public void initUser(){
+        System.out.println("[User] ==> @Bean 初始化: initUser");
+    }
+
+    // 销毁方法
+    public void destroyUser(){
+        System.out.println("[User] ==> @Bean 销毁: destroyUser");
+    }
+}
+```
+
++ **MyTestBeanPostProcessor.java**
+
+```java
+package fun.xingji.spring.ioc.processor;
+
+import fun.xingji.spring.ioc.bean.User;
+import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.stereotype.Component;
+
+@Component // 拦截所有Bean的后置处理器
+public class MyTestBeanPostProcessor implements BeanPostProcessor {
+
+    @Override
+    public Object postProcessAfterInitialization(Object bean, String beanName){
+        System.out.println("[postProcessAfterInitialization]: " + beanName);
+        return bean;
+    }
+
+    @Override
+    public Object postProcessBeforeInitialization(Object bean, String beanName){
+        System.out.println("[postProcessBeforeInitialization]: " + beanName);
+
+        if(bean instanceof User hello){
+            hello.setUsername("张三测试");
+        }
+        return bean;
+    }
+}
+```
+
+![Spring容器](./Spring容器/img-90.jpg)
+
+![Spring容器](./Spring容器/img-92.jpg)
+
+![Spring容器](./Spring容器/img-91.jpg)
+
+
+
+
+
+### 补充：BeanPostProcessor能做什么
+
+::: tip
+
++ **生命周期完整流程**
+
+![Spring容器](./Spring容器/img-93.jpg)
+
+![Spring容器](./Spring容器/img-94.jpg)
+
+:::
+
+![Spring容器](./Spring容器/img-95.jpg)
+
++ **UUID.java(自定义注解)**
+
+```java
+package fun.xingji.spring.ioc.annotation;
+
+import java.lang.annotation.*;
+
+@Target({ ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface UUID {
+
+}
+```
+
+
+
++ **Car.java**
+
+```java
+package fun.xingji.spring.ioc.bean;
+
+import fun.xingji.spring.ioc.annotation.UUID;
+import lombok.Data;
+
+@Data
+public class Car {
+
+    @UUID
+    private String id;
+}
+```
+
+
+
+
+
+## 容器篇 - 小结
+
+1. 熟悉组件的各种注册方式
+
+2. 熟悉组件注入机制
+
+3. 理解组件生命周期
+
+4. 理解容器
+
+5. 理解几个重难点
+
+   + SpEL
+
+   + @PropertySource
+
+   + @Conditional、@Profile
+
+   + IoC容器基本原理；容器三级缓存Map
