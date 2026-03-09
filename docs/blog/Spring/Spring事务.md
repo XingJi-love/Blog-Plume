@@ -474,21 +474,269 @@ public class AccountDaoTest {
 
 ::: tip 
 
-1. 声明式 vs 编程式
+1. **声明式 vs 编程式**
 
-​	编程式：通过编写业务代码，程序员自行完成指定功能
+​	**编程式：通过编写业务代码，程序员自行完成指定功能**
 
-​	声明式：通过声明业务需求，框架自动完成指定功能
+​	**声明式：通过声明业务需求，框架自动完成指定功能**
 
-2.声明式事务：
+2.**声明式事务：**
 
-​	定义：只需要告诉框架，这个方法需要事务，框架会自动在运行方法时执行事务的流程控制逻辑。
+​	**定义：只需要告诉框架，这个方法`需要事务`，框架会自动在运行方法时执行事务的`流程控制逻辑`。**
 
-​	Spring支持：@Transactional
+​	**Spring支持：`@Transactional`**
 
-3.@Transactional 属性
+3.**@Transactional 属性**
 
 ![Spring事务](./Spring事务/img-20.jpg)
+
+:::
+
+![Spring事务](./Spring事务/img-21.jpg)
+
++ **UserServiceImpl.java**
+
+```java
+package fun.xingji.spring.tx.service.impl;
+
+import fun.xingji.spring.tx.bean.Book;
+import fun.xingji.spring.tx.dao.AccountDao;
+import fun.xingji.spring.tx.dao.BookDao;
+import fun.xingji.spring.tx.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+
+    @Autowired
+    BookDao bookDao;
+
+    @Autowired
+    AccountDao accountDao;
+
+    @Transactional // 开启事务管理
+    @Override
+    public void checkout(String username, Integer bookId, Integer buyNum) {
+        // 1. 查询图书信息
+        Book bookById = bookDao.getBookById(bookId);
+
+        BigDecimal price = bookById.getPrice();
+        // 2. 计算扣减额度
+        BigDecimal total = new BigDecimal(buyNum).multiply(price);
+
+        // 3. 扣减余额
+        accountDao.updateBalanceByUsername(username, total);
+        // 4. 扣减库存
+        bookDao.updateBookStock(bookId, buyNum);
+
+        int i = 10 / 0;
+    }
+}
+```
+
+![Spring事务](./Spring事务/img-22.jpg)
+
++ **测试:**
+
+![Spring事务](./Spring事务/img-23.jpg)
+
+
+
+
+
+### 事务管理器的原理
+
+::: tip 
+
+**事务细节：**
+
+**transactionManager：`事务管理器`; 控制事务的`获取、提交、回滚`。**
+
+**底层默认使用哪个事务管理器？默认使用 `JdbcTransactionManager`；**
+
+![Spring事务](./Spring事务/img-24.jpg)
+
+> **原理：**
+>
+> 1、**事务管理器：`TransactionManager`； 控制`提交和回滚`**
+>
+> 2、**事务拦截器：`TransactionInterceptor`： 控制`何时提交和回滚`**
+>
+>  * **`completeTransactionAfterThrowing(txInfo, ex); ` 在这个时候`回滚`**
+>  * **`commitTransactionAfterReturning(txInfo);`  在这个时候`提交`**
+
+:::
+
++ **Spring事务面试题**
+
+::: note 
+
+
+
+:::
+
+
+
+
+
++ **一些注意事项**
+
+::: tip 
+
+1.timeout（同 timeoutString）：超时时间； 事务超时，秒为单位；
+
++ 一旦超过约定时间，事务就会回滚。
++ 超时时间是指：从方法开始，到最后一次数据库操作结束的时间。
+
+2.readOnly：只读优化
+
+3.rollbackFor（同rollbackForClassName）：指明哪些异常需要回滚。不是所有异常都一定引起事务回滚。
+
+异常：
+
+运行时异常（unchecked exception【非受检异常】）
+
+编译时异常（checked exception【受检异常】）
+
+【回滚的默认机制】
+
+运行时异常：回滚
+
+编译时异常：不回滚
+
+【可以指定哪些异常需要回滚】；
+
+【回滚 = 运行时异常 + 指定回滚异常】
+
+4.noRollbackFor（同 noRollbackForClassName）：指明哪些异常不需要回滚。
+
++ 【不回滚 = 编译时异常 + 指定不回滚异常】
+
+:::
+
+```java
+package fun.xingji.spring.tx.service.impl;
+
+import fun.xingji.spring.tx.bean.Book;
+import fun.xingji.spring.tx.dao.AccountDao;
+import fun.xingji.spring.tx.dao.BookDao;
+import fun.xingji.spring.tx.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+
+    @Autowired
+    BookDao bookDao;
+
+    @Autowired
+    AccountDao accountDao;
+
+
+    /**
+     * 事务细节：
+     * 1、transactionManager：事务管理器; 控制事务的获取、提交、回滚。
+     *     底层默认使用哪个事务管理器？默认使用 JdbcTransactionManager；
+     *     原理：
+     *     1、事务管理器：TransactionManager； 控制提交和回滚
+     *     2、事务拦截器：TransactionInterceptor： 控制何时提交和回滚
+     *              completeTransactionAfterThrowing(txInfo, ex);  在这个时候回滚
+     *              commitTransactionAfterReturning(txInfo);  在这个时候提交
+     *
+     * 2、propagation：传播行为； 事务的传播行为。
+     *
+     * 3、isolation：隔离级别
+     *
+     * 4、timeout（同 timeoutString）：超时时间； 事务超时，秒为单位；
+     *      一旦超过约定时间，事务就会回滚。
+     *      超时时间是指：从方法开始，到最后一次数据库操作结束的时间。
+     * 5、readOnly：只读优化
+     * 6、rollbackFor（同rollbackForClassName）：指明哪些异常需要回滚。不是所有异常都一定引起事务回滚。
+     *     异常：
+     *          运行时异常（unchecked exception【非受检异常】）
+     *          编译时异常（checked exception【受检异常】）
+     *     【回滚的默认机制】
+     *          运行时异常：回滚
+     *          编译时异常：不回滚
+     *
+     *    【可以指定哪些异常需要回滚】；
+     *    【回滚 = 运行时异常 + 指定回滚异常】
+     *
+     * 7、noRollbackFor（同 noRollbackForClassName）：指明哪些异常不需要回滚。
+     *    【不回滚 = 编译时异常 + 指定不回滚异常】
+     */
+
+    @Transactional(timeout = 3,
+            /*readOnly = true,*/
+            /*rollbackFor = {IOException.class},
+            rollbackForClassName = {"java.lang.Exception"} ,指定那些异常需要回滚*/
+            noRollbackFor = {ArithmeticException.class}
+    ) // 开启事务管理
+    @Override
+    public void checkout(String username, Integer bookId, Integer buyNum) throws InterruptedException, IOException {
+        // 1. 查询图书信息
+        Book bookById = bookDao.getBookById(bookId);
+
+        BigDecimal price = bookById.getPrice();
+        // 2. 计算扣减额度
+        BigDecimal total = new BigDecimal(buyNum).multiply(price);
+
+        // 3. 扣减余额
+        accountDao.updateBalanceByUsername(username, total);
+
+        /*// 模拟网络延迟
+        Thread.sleep(3000);*/
+
+        // 4. 扣减库存
+        bookDao.updateBookStock(bookId, buyNum);
+
+        //5、抛出异常
+        // int i = 10/0;
+
+       /* FileInputStream stream = new FileInputStream("D:\\123.txt");
+        System.out.println("stream.available() = " + stream.available());*/
+    }
+}
+```
+
+
+
+
+
+
+
+## 隔离级别
+
+::: tip 
+
+读未提交（Read Uncommitted）
+
++ 事务可以读取未被提交的数据，易产生脏读、不可重复读和幻读等问题
+
+读已提交（Read Committed）
+
++ 事务只能读取已经提交的数据，可避免脏读，但可能引发不可重复读和幻读。
+
+可重复读（Repeatable Read）
+
++ 同一事务期间多次重复读取的数据相同。避免脏读和不可重复读，但仍有幻读的问题
+
+串行化（Serializable）
+
++ 最高隔离级别，完全禁止了并发，只允许一个事务执行完毕之后才能执行另一个事务
+
+![Spring事务](./Spring事务/img-25.jpg)
 
 :::
 
@@ -499,30 +747,6 @@ public class AccountDaoTest {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 隔离级别
 
 
 
@@ -561,4 +785,28 @@ public class AccountDaoTest {
 
 
 ## 传播行为
+
+> **定义：当一个事务方法被另一个事务方法调用时，事务该以何种状态存在？事务属性该如何传播下去？**
+>
+> ![Spring事务](./Spring事务/img-26.jpg)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
