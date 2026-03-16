@@ -1,5 +1,5 @@
 ---
- title: MyBatis | MyBatis动态SQL
+title: MyBatis | MyBatis动态SQL
 tags:
     - MyBatis
 createTime: 2026/03/14 18:17:36
