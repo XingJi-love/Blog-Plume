@@ -199,23 +199,20 @@ SpringBoot场景启动器：
 
 :::
 
++ **导入场景:**
 
+![SpringBoot快速入门](./SpringBoot快速入门/img-14.jpg)
 
+![SpringBoot快速入门](./SpringBoot快速入门/img-15.jpg)
 
+![SpringBoot快速入门](./SpringBoot快速入门/img-17.jpg)
 
+![SpringBoot快速入门](./SpringBoot快速入门/img-16.jpg)
 
++ **自动装配：**
 
+![SpringBoot快速入门](./SpringBoot快速入门/img-18.jpg)
 
+![SpringBoot快速入门](./SpringBoot快速入门/img-19.jpg)
 
-
-
-
-
-
-
-
-
-
-
-
-
+![SpringBoot快速入门](./SpringBoot快速入门/img-20.jpg)
