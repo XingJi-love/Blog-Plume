@@ -37,10 +37,6 @@ cover: ./SpringBoot.jpg
 
 :::
 
-
-
-
-
 ### 快速部署
 
 ![SpringBoot快速入门](./SpringBoot快速入门/img-1.jpg)
