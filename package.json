@@ -7,7 +7,7 @@
   "author": "XingJi-love <3968523679@qq.com>",
   "license": "MIT",
   "scripts": {
-    "docs:build": "vuepress build docs --clean-cache --clean-temp",
+    "docs:build": "set NODE_OPTIONS=--max-old-space-size=4096 && vuepress build docs --clean-cache --clean-temp",
     "docs:dev": "vuepress dev docs",
     "docs:dev-clean": "vuepress dev docs --clean-cache --clean-temp",
     "docs:preview": "http-server docs/.vuepress/dist",
