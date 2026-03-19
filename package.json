@@ -7,7 +7,7 @@
   "author": "XingJi-love <3968523679@qq.com>",
   "license": "MIT",
   "scripts": {
-    "docs:build": "set NODE_OPTIONS=--max-old-space-size=4096 && vuepress build docs --clean-cache --clean-temp",
+    "docs:build": "cross-env NODE_OPTIONS=--max-old-space-size=4096 vuepress build docs --clean-cache --clean-temp",
     "docs:dev": "vuepress dev docs",
     "docs:dev-clean": "vuepress dev docs --clean-cache --clean-temp",
     "docs:preview": "http-server docs/.vuepress/dist",
@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@vuepress/bundler-vite": "2.0.0-rc.26",
+    "cross-env": "^10.1.0",
     "http-server": "^14.1.1",
     "twikoo": "^1.6.44",
     "typescript": "^5.9.3",
