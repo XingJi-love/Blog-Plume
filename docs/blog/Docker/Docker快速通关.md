@@ -55,7 +55,14 @@ sudo yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-pl ugin 
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<-'EOF'
 {
-  "registry-mirrors": ["https://mirror.ccs.tencentyun.com"] }
+  "registry-mirrors": [
+    "https://docker.1panel.live",
+    "https://docker.hlmirror.com",
+    "https://docker.apiba.cn",
+    "https://docker.1ms.run",
+    "https://5pox5fr3.mirror.aliyuncs.com"
+    ] 
+}
 EOF
 sudo systemctl daemon-reload
 sudo systemctl restart docker
