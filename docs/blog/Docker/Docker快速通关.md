@@ -76,41 +76,7 @@ sudo systemctl restart docker
 
 ## Docker命令
 
-```shell
-#运行一个新容器
-docker run nginx
-#停止容器
-docker stop keen_blackwell
-#启动容器
-docker start 592
-#重启容器
-docker restart 592
-#查看容器资源占用情况
-docker stats 592
-#查看容器日志
-docker logs 592
-#删除指定容器
-docker rm 592
-#强制删除指定容器
-docker rm -f 592
-# 后台启动容器
-docker run -d --name mynginx nginx
-# 后台启动并暴露端口
-docker run -d --name mynginx -p 80:80 nginx # 进入容器内部
-docker exec -it mynginx /bin/bash
-# 提交容器变化打成一个新的镜像
-docker commit -m "update index.html" mynginx mynginx:v1.0 # 保存镜像为指定文件
-docker save -o mynginx.tar mynginx:v1.0
-# 删除多个镜像
-docker rmi bde7d154a67f 94543a6c1aef e784f4560448
-# 加载镜像
-docker load -i mynginx.tar
-# 登录 docker hub
-docker login
-# 重新给镜像打标签
-docker tag mynginx:v1.0 leifengyang/mynginx:v1.0 # 推送镜像
-docker push leifengyang/mynginx:v1.0
-```
++ **官方命令: https://docs.docker.com/reference/cli/docker/**
 
 ![Docker快速通关](./Docker快速通关/img-4.jpg)
 
@@ -176,6 +142,32 @@ docker rmi e784f4560448
 
 
 ### 启动容器
+
+```shell
+#运行一个新容器
+docker run nginx
+
+#停止容器
+docker stop keen_blackwell
+
+#启动容器
+docker start 592
+
+#重启容器
+docker restart 592
+
+#查看容器资源占用情况
+docker stats 592
+
+#查看容器日志
+docker logs 592
+
+#删除指定容器
+docker rm 592
+
+#强制删除指定容器
+docker rm -f 592
+```
 
 ![Docker快速通关](./Docker快速通关/img-15.jpg)
 
@@ -253,6 +245,15 @@ docker rmi e784f4560448
 
 ### 修改页面
 
+```shell
+# 后台启动容器
+docker run -d --name mynginx nginx
+
+# 后台启动并暴露端口
+docker run -d --name mynginx -p 80:80 nginx # 进入容器内部
+docker exec -it mynginx /bin/bash
+```
+
 ![Docker快速通关](./Docker快速通关/img-30.jpg)
 
 
@@ -269,11 +270,34 @@ docker rmi e784f4560448
 
 ### 保存镜像
 
+```shell
+# 提交容器变化打成一个新的镜像
+docker commit -m "update index.html" mynginx mynginx:v1.0 # 保存镜像为指定文件
+docker save -o mynginx.tar mynginx:v1.0
+
+# 删除多个镜像
+docker rmi bde7d154a67f 94543a6c1aef e784f4560448
+
+# 加载镜像
+docker load -i mynginx.tar
+```
+
 ![Docker快速通关](./Docker快速通关/img-33.jpg)
 
 
 
 
+
+### 分享社区
+
+```shell
+# 登录 docker hub
+docker login
+
+# 重新给镜像打标签
+docker tag mynginx:v1.0 leifengyang/mynginx:v1.0 # 推送镜像
+docker push leifengyang/mynginx:v1.0
+```
 
 
 
