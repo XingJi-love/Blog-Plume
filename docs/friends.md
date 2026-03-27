@@ -20,7 +20,7 @@ copyright: false
 
 ```yaml
 我的名称: XINGJI
-网站地址: https://vue.xingji.fun
+网站地址: https://v.xingji.fun
 描述: 迄今所有人生都大写着失败，但不妨碍我继续向前✨
 头像: https://i.p-i.vip/47/20240920-66ed7b168c38c.jpg
 站点图片: https://i.p-i.vip/47/20250407-67f3f1eca1983.png
