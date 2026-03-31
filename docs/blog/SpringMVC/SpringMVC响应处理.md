@@ -415,3 +415,55 @@ public class PageTestController {
 + **测试:**
 
 ![SpringMVC响应处理](./SpringMVC响应处理/img-12.jpg)
+
+
+
+
+
+### Thymeleaf - 核心语法
+
+![SpringMVC响应处理](./SpringMVC响应处理/img-13.jpg)
+
+::: tip
+
+**th:xxx：**
+
++ **动态渲染指定的 html 标签属性值、或者th指令（遍历、判断等）**
+
++ **th:text：标签体内文本值渲染**
+
++ **th:属性：标签指定属性渲染**
+
++ **th:attr：标签任意属性渲染**
+
++ **th:if、th:each...：其他th指令**
+
+**取值:**
+
++ **${}：变量取值**
+
++ **@{}：url路径**
+
++ **其他：#{}：国际化消息、~{}：片段引用、*{}：变量选择**
+
+**遍历:**
+
++ **th:each="元素名,迭代状态 : ${集合}"**
+
+**判断:**
+
++ **th:if**
+
+**行内写法: [[ ]]**
+
+:::
+
+
+
+
+
+### 响应数据类型
+
+![SpringMVC响应处理](./SpringMVC响应处理/img-14.jpg)
+
+![SpringMVC响应处理](./SpringMVC响应处理/img-15.jpg)
