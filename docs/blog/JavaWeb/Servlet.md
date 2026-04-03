@@ -49,7 +49,7 @@ cover: /JavaWeb.jpg
 + Servlet是运行在服务端的,所以 Servlet必须在WEB项目中开发且在Tomcat这样的服务容器中运行
 > **`请求响应`与`HttpServletRequest`和`HttpServletResponse`之间的`对应关系`**
 
-![1681699577344](images/1681699577344.png)
+![1681699577344](./images/1681699577344.png)
 
 > **Servlet的运行流程:**
 >
@@ -261,7 +261,7 @@ post请求格式: http://127.0.0.1:8080/demo02/userServlet
 
 > **映射关系图**
 
-![1681550398774](images/1681550398774.png)
+![1681550398774](./images/1681550398774.png)
 
 ![Servlet开发流程](./Servlet/img-7.jpg)
 
@@ -837,7 +837,7 @@ public abstract class HttpServlet extends GenericServlet {
 
 > 继承关系图解
 
-![1682299663047](images/1682299663047.png)
+![1682299663047](./images/1682299663047.png)
 
 + **自定义Servlet中,`必须要对处理请求的方法进行重写`**
   
@@ -1340,7 +1340,7 @@ servletContext1.removeAttribute("keya");
 + **`HttpServletRequest`是T`omcat将请求报文转换封装而来的对象`,在Tomcat`调用service方法时传入`**
 + **`HttpServletRequest`代表`客户端发来的请求`,`所有请求中的信息`都可以通过该对象获得**
 
-![1681699577344](images/1681699577344.png)
+![1681699577344](./images/1681699577344.png)
 
 
 
@@ -1591,7 +1591,7 @@ hobby=[1, 2]
 + **`HttpServletResponse`是`Tomcat预先创建的`,在Tomcat`调用service方法时传入`**
 + **`HttpServletResponse`代表`对客户端的响应`,该对象会被转换成`响应的报文发送给客户端`,通过该对象我们可以`设置响应信息`**
 
-![1681699577344](images/1681699577344.png)
+![1681699577344](./images/1681699577344.png)
 
 
 
@@ -1736,7 +1736,7 @@ graph TD
 
 > **请求转发运行逻辑图**
 
-![1682321228643](images/1682321228643.png)
+![1682321228643](./images/1682321228643.png)
 
 ![请求转发](./Servlet/img-21.jpg)
 
@@ -1848,7 +1848,7 @@ http://localhost:8080/demo04/servletA?money=1000
 
 > **响应重定向运行逻辑图**
 
-![1682322460011](images/1682322460011.png)
+![1682322460011](./images/1682322460011.png)
 
 ![响应重定向](./Servlet/img-24.jpg)
 
@@ -2021,7 +2021,7 @@ http://localhost:8080/demo04/servlet2
 
 + 设置虚拟机加载.class文件的字符集和编译时使用的字符集一致
 
-![1695189588009](images/1695189588009.png)
+![1695189588009](./images/1695189588009.png)
 
 
 
@@ -2065,7 +2065,7 @@ http://localhost:8080/demo04/servlet2
 
 + 方式2 : 设置Tomcat10.1.7的URI解析字符集和GET请求发送时所使用URL转码时的字符集一致即可,修改conf/server.xml中 Connecter 添加 URIEncoding="GBK"  (不推荐)
 
-![1682386551684](images/1682386551684.png)
+![1682386551684](./images/1682386551684.png)
 
 <img src="./images/1682386611945.png" alt="1682386611945" style="zoom: 50%;" />
 
@@ -2124,7 +2124,7 @@ http://localhost:8080/demo04/servlet2
 
 
 
-![1682388204239](images/1682388204239.png)
+![1682388204239](./images/1682388204239.png)
 
 + 浏览器接收数据解析乱码
 
@@ -2182,7 +2182,7 @@ http://localhost:8080/demo04/servlet2
 
 > 前端项目结构
 
-![1682390999417](images/1682390999417.png)
+![1682390999417](./images/1682390999417.png)
 
 ##### 相对路径情况分析
 
@@ -2579,7 +2579,7 @@ public class ServletB extends HttpServlet {
 
 + **非前后端分离的MVC**
 
-![1690349913931](images/1690349913931.png)
+![1690349913931](./images/1690349913931.png)
 
 ```mermaid
 graph TB
@@ -2635,7 +2635,7 @@ graph TB
 
 + **前后端分离的MVC**
 
-![1683363039636](images/1683363039636-1690349401673.png)
+![1683363039636](./images/1683363039636-1690349401673.png)
 
 ```mermaid
 graph TB
@@ -2761,9 +2761,9 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 + 获得如下表格
 
-![1690362496438](images/1690362496438.png)
+![1690362496438](./images/1690362496438.png)
 
-![1690362518448](images/1690362518448.png)
+![1690362518448](./images/1690362518448.png)
 
 
 
@@ -2771,15 +2771,15 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 #### 项目结构
 
-![1690362672386](images/1690362672386.png)
+![1690362672386](./images/1690362672386.png)
 
-![1690362709902](images/1690362709902.png)
+![1690362709902](./images/1690362709902.png)
 
 
 
 #### 导入依赖
 
-![1690362787035](images/1690362787035.png)
+![1690362787035](./images/1690362787035.png)
 
 
 
@@ -3280,7 +3280,7 @@ public final class MD5Util {
 
 + 复制资源下的日程管理中的HTML到项目的web目录下即可
 
-![1690363965192](images/1690363965192.png)
+![1690363965192](./images/1690363965192.png)
 
 
 

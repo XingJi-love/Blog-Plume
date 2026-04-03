@@ -168,7 +168,7 @@ String value = element.attributeValue("属性名");
 -   硬件：电脑，提供服务供其它客户电脑访问
 -   软件：电脑上安装的服务器软件，安装后能提供服务给网络中的其他计算机，将本地文件映射成一个虚拟的url地址供网络中的其他人访问。
 
-![1681441674967](images/1681441674967.png)
+![1681441674967](./images/1681441674967.png)
 
 
 
@@ -320,7 +320,7 @@ String value = element.attributeValue("属性名");
 
 > 一个标准的可以用于发布的WEB项目标准结构如下
 
-![1681453620343](images/1681453620343.png)
+![1681453620343](./images/1681453620343.png)
 
 + app  本应用根目录
     + static 非必要目录,约定俗成的名字,一般在此处放静态资源 ( css  js  img)
@@ -332,7 +332,7 @@ String value = element.attributeValue("属性名");
 
 > url的组成部分和项目中资源的对应关系
 
-![1681456161723](images/1681456161723.png)
+![1681456161723](./images/1681456161723.png)
 
 ### WEB项目部署的方式
 
@@ -344,7 +344,7 @@ String value = element.attributeValue("属性名");
 
 + 在磁盘的自定义目录上准备一个app
 
-![1681456447284](images/1681456447284.png)
+![1681456447284](./images/1681456447284.png)
 
 + 在tomcat的conf下创建Catalina/localhost目录,并在该目录下准备一个app.xml文件
 
@@ -430,7 +430,7 @@ String value = element.attributeValue("属性名");
 
 > 删除index.jsp ,替换为 index.html
 
-![1681459080873](images/1681459080873.png)
+![1681459080873](./images/1681459080873.png)
 
 
 
@@ -453,23 +453,23 @@ String value = element.attributeValue("属性名");
 + 必须在WEB-INF下,且目录名必须叫lib!!!
 + 复制jar文件进入lib目录
 
-![1681461788411](images/1681461788411.png)
+![1681461788411](./images/1681461788411.png)
 
 + 将lib目录添加为当前项目的依赖,后续可以用maven统一解决
 
 <img src="./images/1681461846178.png" alt="1681461846178" style="zoom:67%;" />
 
-![1681461881121](images/1681461881121.png)
+![1681461881121](./images/1681461881121.png)
 
 + 环境级别推荐选择module 级别,降低对其他项目的影响,name可以空着不写
 
 
 
-![1681461923761](images/1681461923761.png)
+![1681461923761](./images/1681461923761.png)
 
 + 查看当前项目有那些环境依赖
 
-![1681463867295](images/1681463867295.png)
+![1681463867295](./images/1681463867295.png)
 
 <img src="./images/1681462179671.png" alt="1681462179671" style="zoom:50%;" />
 
@@ -483,7 +483,7 @@ String value = element.attributeValue("属性名");
 
 + 就是检查工程目录下,web目录有没有特殊的识别标记
 
-![1681462523901](images/1681462523901.png)
+![1681462523901](./images/1681462523901.png)
 
 + 以及artifacts下,有没有对应 _war_exploded,如果没有,就点击+号添加
 
@@ -536,7 +536,7 @@ String value = element.attributeValue("属性名");
 
 > 工程结构和可以发布的项目结构之间的目录对应关系
 
-![1681464081226](images/1681464081226.png)
+![1681464081226](./images/1681464081226.png)
 
 > IDEA部署并运行项目的原理
 
@@ -547,9 +547,9 @@ String value = element.attributeValue("属性名");
 + idea启动tomcat时,是让本地tomcat程序按照tomcat副本里的配置文件运行
 + idea的tomcat副本部署项目的模式是通过conf/Catalina/localhost/*.xml配置文件的形式实现项目部署的
 
-![Tomcat运行原理](images/1681521240438.png)
+![Tomcat运行原理](./images/1681521240438.png)
 
-![Tomcat运行原理](images/img-1.jpg)
+![Tomcat运行原理](./images/img-1.jpg)
 
 
 
@@ -625,7 +625,7 @@ String value = element.attributeValue("属性名");
 
 > 浏览器与服务器之间的通信过程要经历四个步骤
 
-![](images/1557672342250_1H8nt17MNz.png)
+![](./images/1557672342250_1H8nt17MNz.png)
 
 -   浏览器与WEB服务器的连接过程是短暂的，每次连接只处理一个请求和响应。对每一个页面的访问，浏览器与WEB服务器都要建立一次单独的连接。
 -   浏览器到WEB服务器之间的所有通讯都是完全独立分开的请求和响应对。
@@ -634,7 +634,7 @@ String value = element.attributeValue("属性名");
 
 > 在HTTP1.0版本中，浏览器请求一个带有图片的网页，会由于下载图片而与服务器之间开启一个新的连接；但在HTTP1.1版本中，允许浏览器在拿到当前请求对应的全部资源后再断开连接，提高了效率。
 
-![](images/1557672415271_EgyN-GdbWY.png)
+![](./images/1557672415271_EgyN-GdbWY.png)
 
 
 
@@ -703,7 +703,7 @@ String value = element.attributeValue("属性名");
 
 > 报文部首可以继续细分为  "行" 和 "头"
 
-![1681522998417](images/1681522998417.png)
+![1681522998417](./images/1681522998417.png)
 
 #### 请求报文
 
@@ -717,7 +717,7 @@ String value = element.attributeValue("属性名");
 
 > 浏览器 f12 网络下查看请求数据包
 
-![1681524200024](images/1681524200024.png)
+![1681524200024](./images/1681524200024.png)
 
 > form表单发送GET请求特点
 
@@ -775,7 +775,7 @@ Accept-Language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7
 
 + POST请求要求将form标签的method的属性设置为post
 
-![1681525012046](images/1681525012046.png)
+![1681525012046](./images/1681525012046.png)
 
 > 查看post的请求行 请求头 请求体
 
@@ -823,11 +823,11 @@ username=admin&password=1232131
 -   空行；
 -   响应体；
 
-![1681525347456](images/1681525347456.png)
+![1681525347456](./images/1681525347456.png)
 
 
 
-![1681525384347](images/1681525384347.png)
+![1681525384347](./images/1681525384347.png)
 
 + 响应行组成部分
     + 协议及版本 HTTP/1.1
