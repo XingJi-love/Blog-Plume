@@ -962,28 +962,7 @@ JavaBean也要分层，各种xxO：
 	VO：View/Value Object： 值对象，视图对象（专门用来封装前端数据的对象）
 ```
 
-+ **EmployRespVo.java**
-
-```java
-package fun.xingji.practice.vo.resp;
-
-import lombok.Data;
-
-import java.math.BigDecimal;
-
-@Data
-public class EmployRespVo {
-
-    private Long id;
-    private String name;
-    private String email;
-    private String gender;
-    private String address;
-    private BigDecimal salary;
-}
-```
-
-+ **EmployeeAddVo.java**
++ **EmployeeAddVo.java(封装添加员工对象)**
 
 ```java
 package fun.xingji.practice.vo.req;
@@ -1020,7 +999,7 @@ public class EmployeeAddVo {
 }
 ```
 
-+ **EmployeeUpdateVo.java**
++ **EmployeeUpdateVo.java(封装修改员工对象)**
 
 ```java
 package fun.xingji.practice.vo.req;
@@ -1043,15 +1022,101 @@ public class EmployeeUpdateVo {
 }
 ```
 
-
-
-```java
-```
-
-
++ **EmployRespVo.java(封装响应对象)**
 
 ```java
+package fun.xingji.practice.vo.resp;
+
+import lombok.Data;
+
+import java.math.BigDecimal;
+
+@Data
+public class EmployRespVo {
+
+    private Long id;
+    private String name;
+    private String email;
+    private String gender;
+    private String address;
+    private BigDecimal salary;
+}
 ```
+
++ **EmployeeRestController.java**
+
+```java
+/**
+     * 新增员工；
+     * 要求：前端发送请求把员工的json放在请求体中
+     * @param vo
+     * @return
+*/
+@PostMapping("/employee")
+// @Valid 校验请求体中的数据是否合法
+public R add(@RequestBody @Valid EmployeeAddVo vo){
+        // vo 转成 employee
+        Employee employee = new Employee();
+        // 拷贝属性
+        BeanUtils.copyProperties(vo,employee);
+        // 增加员工
+        employeeService.saveEmp(employee);
+        // 返回结果
+        return R.ok();
+}
+
+    /**
+     * 修改员工
+     * 要求：前端发送请求把员工的json放在请求体中； 必须携带id
+     * @param vo
+     * @return
+     */
+@PutMapping("/employee")
+public R update(@RequestBody EmployeeUpdateVo vo){
+        // vo 转成 employee
+        Employee employee = new Employee();
+        // 拷贝属性
+        BeanUtils.copyProperties(vo,employee);
+        // 修改员工
+        employeeService.updateEmp(employee);
+        // 返回结果
+        return R.ok();
+}
+
+
+/**
+   * 查询所有员工
+   * @return
+*/
+@GetMapping("/employees")
+public R all(){
+        // 查询所有员工
+        List<Employee> employees = employeeService.getList();
+
+        // VO: 脱敏，分层
+        // 员工列表 转 VO列表
+        List<EmployRespVo> collect = employees.stream()
+                .map(employee -> {
+                    // 员工 转 VO
+                    EmployRespVo vo = new EmployRespVo();
+                    // 拷贝属性
+                    BeanUtils.copyProperties(employee, vo);
+                    // 脱敏处理
+                    return vo;
+                }).collect(Collectors.toList());
+
+        // 返回结果
+        return R.ok(collect);
+}
+```
+
++ **测试:**
+
+![SpringMVC最佳实践](./SpringMVC最佳实践/img-18.jpg)
+
+![SpringMVC最佳实践](./SpringMVC最佳实践/img-19.jpg)
+
+![SpringMVC最佳实践](./SpringMVC最佳实践/img-20.jpg)
 
 
 
@@ -1067,37 +1132,108 @@ public class EmployeeUpdateVo {
 
 ## 接口文档
 
+::: tip 
 
++ **Swagger 可以快速生成实时接口文档，方便前后开发人员进行协调沟通。遵循OpenAPI规范。**
 
++ **Knife4j 是基于Swagger之上的增强套件**
 
+![SpringMVC最佳实践](./SpringMVC最佳实践/img-21.jpg)
 
++ **Knife4j 使用，参考：https://doc.xiaominfo.com/docs/quick-start**
 
++ **swagger标准常用注解；**
 
++ **访问 http://ip:port/doc.html 即可查看接口文档**
 
+![SpringMVC最佳实践](./SpringMVC最佳实践/img-22.jpg)
 
+:::
 
++ **首先，引用Knife4j的starter：**
 
+```xml
+<dependency>
+    <groupId>com.github.xiaoymin</groupId>
+    <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+    <version>4.4.0</version>
+</dependency>
+```
 
+> **降低spring-boot-starter-parent版本为3.3.3**
 
+```xml
+<parent>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-parent</artifactId>
+      <version>3.3.3</version>
+      <relativePath/> <!-- lookup parent from repository -->
+</parent>
+```
 
++ **引入之后，其余的配置，开发者即可完全参考[springdoc-openapi](https://springdoc.org/)的项目说明，Knife4j只提供了增强部分，如果要启用Knife4j的增强功能，可以在配置文件中进行开启**
 
+```yaml
+# springdoc-openapi项目配置
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: fun.xingji.practice.controller
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+```
 
++ **最后，使用OpenAPI3的规范注解，注释各个Spring的REST接口，示例代码如下：**
 
+  ```java
+  @RestController
+  @RequestMapping("body")
+  @Tag(name = "body参数")
+  public class BodyController {
+  
+     @Operation(summary = "普通body请求")
+     @PostMapping("/body")
+     public ResponseEntity<FileResp> body(@RequestBody FileResp fileResp){
+         return ResponseEntity.ok(fileResp);
+     }
+  
+     @Operation(summary = "普通body请求+Param+Header+Path")
+     @Parameters({
+             @Parameter(name = "id",description = "文件id",in = ParameterIn.PATH),
+             @Parameter(name = "token",description = "请求token",required = true,in = ParameterIn.HEADER),
+             @Parameter(name = "name",description = "文件名称",required = true,in=ParameterIn.QUERY)
+     })
+     @PostMapping("/bodyParamHeaderPath/{id}")
+     public ResponseEntity<FileResp> bodyParamHeaderPath(@PathVariable("id") String id,@RequestHeader("token") String token, @RequestParam("name")String name,@RequestBody FileResp fileResp){
+         fileResp.setName(fileResp.getName()+",receiveName:"+name+",token:"+token+",pathID:"+id);
+         return ResponseEntity.ok(fileResp);
+     }
+  }
+  ```
 
+  > **最后，访问Knife4j的文档地址：`http://ip:port/doc.html`即可查看文档**
 
+![SpringMVC最佳实践](./SpringMVC最佳实践/img-22.jpg)
 
+![SpringMVC最佳实践](./SpringMVC最佳实践/img-23.jpg)
 
+![SpringMVC最佳实践](./SpringMVC最佳实践/img-24.jpg)
 
+![SpringMVC最佳实践](./SpringMVC最佳实践/img-25.jpg)
 
+![SpringMVC最佳实践](./SpringMVC最佳实践/img-26.jpg)
 
-
-
-
-
-
-
-
-
+![SpringMVC最佳实践](./SpringMVC最佳实践/img-27.jpg)
 
 
 
@@ -1105,25 +1241,158 @@ public class EmployeeUpdateVo {
 
 ## 数据转换
 
+> **@JsonFormat：日期处理**
+>
+> ![SpringMVC最佳实践](./SpringMVC最佳实践/img-28.jpg)
+>
+> ![SpringMVC最佳实践](./SpringMVC最佳实践/img-29.jpg)
+
++ **Employee.java**
+
+```java
+package fun.xingji.practice.bean;
+
+import lombok.Data;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+@Data
+public class Employee {
+
+    private Long id;
+    private String name;
+    private Integer age;
+    private String email;
+    private String gender;
+    private String address;
+    private BigDecimal salary;
+
+    // 添加生日字段
+    private Date birth;
+}
+```
+
++ **EmployeeDaoImpl.java**
+
+```java
+// 新增员工
+@Override
+public void addEmp(Employee employee) {
+// 新增语句
+        String sql = "insert into employee(name,age,email,gender,address,salary,birth) values (?,?,?,?,?,?,?)";
+        // 执行新增
+        int update = jdbcTemplate.update(sql,
+                employee.getName(),
+                employee.getAge(),
+                employee.getEmail(),
+                employee.getGender(),
+                employee.getAddress(),
+                employee.getSalary(),
+                employee.getBirth());
+        // 打印结果
+        System.out.println("新增成功，影响行数：" + update);
+}
+```
+
+**EmployeeAddVo.java(封装添加员工对象)**
+
+```java
+package com.atguigu.practice.vo.req;
 
 
+import com.atguigu.practice.annotation.Gender;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.*;
+import lombok.Data;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+@Data
+public class EmployeeAddVo {
+
+    @NotBlank(message = "姓名不能为空")
+    private String name;
 
 
+    @NotNull(message = "年龄不能为空")
+    @Max(value = 150, message = "年龄不能超过150岁")
+    @Min(value = 0, message = "年龄不能小于0岁")
+    private Integer age;
 
 
+    @Email(message = "邮箱格式不正确")
+    private String email;
 
 
+    @Gender(message = "{gender.message}") //message = "{}" 占位符
+    private String gender;
+
+    private String address;
+
+    private BigDecimal salary;
 
 
+    //只要是日期：标注统一注解：@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    //默认的日期格式： 2024-09-05T08:47:58.000+00:00
+    //反序列化：前端提交日期字符串 ===> 日期对象
+    //序列化：  日期对象 ===> 日期字符串
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date birth;
+}
+```
 
++ **EmployRespVo.java(封装响应对象)**
 
+```java
+package fun.xingji.practice.vo.resp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 
+import java.math.BigDecimal;
+import java.util.Date;
 
+@Data
+public class EmployRespVo {
 
+    private Long id;
+    private String name;
+    private String email;
+    private String gender;
+    private String address;
+    private BigDecimal salary;
 
+    // 只要是日期：标注统一注解：@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date birth;
+}
+```
 
++ **EmployeeRestController.java**
 
+```java
+/**
+     * 新增员工；
+     * 要求：前端发送请求把员工的json放在请求体中
+     *
+     * @param vo
+     * @return
+*/
+@Operation(summary="新增员工")
+@PostMapping("/employee")
+// @Valid 校验请求体中的数据是否合法
+public R add(@RequestBody @Valid EmployeeAddVo vo) {
+        // vo 转成 employee
+        Employee employee = new Employee();
+        // 拷贝属性
+        BeanUtils.copyProperties(vo, employee);
+        // 增加员工
+        employeeService.saveEmp(employee);
+        // 返回结果
+        return R.ok();
+}
+```
 
-
-
+![SpringMVC最佳实践](./SpringMVC最佳实践/img-30.jpg)
