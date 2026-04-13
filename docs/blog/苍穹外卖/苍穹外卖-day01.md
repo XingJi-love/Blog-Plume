@@ -478,8 +478,6 @@ http://localhost:80
 
 ![苍穹外卖-day01](./苍穹外卖-day01/img-41.jpg)
 
-
-
 ### 使用步骤
 
 1. 导入 knife4j 的maven坐标
@@ -493,7 +491,7 @@ http://localhost:80
    </dependency>
    ```
 
-2. 在配置类中加入 knife4j 相关配置
+2. 在配置类中加入knife4j相关配置
 
    + **WebMvcConfiguration.java**
 
