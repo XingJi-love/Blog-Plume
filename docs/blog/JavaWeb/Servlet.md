@@ -1066,7 +1066,7 @@ public class Servlet2 extends HttpServlet {
 + **ServletContext对象为所有的Servlet所共享**
 + **ServletContext可以为所有的Servlet提供初始配置参数**
 
-![1682303205351](images/1682303205351.png)
+![1682303205351](./images/1682303205351.png)
 
 > **ServletContext怎么用**
 
