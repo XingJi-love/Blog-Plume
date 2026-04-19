@@ -21,7 +21,7 @@
     "typescript": "^5.9.3",
     "vue": "^3.5.32",
     "vuepress": "2.0.0-rc.28",
-    "vuepress-theme-plume": "1.0.0-rc.195"
+    "vuepress-theme-plume": "1.0.0-rc.196"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
@@ -33,7 +33,7 @@
     "node": "^20.19.0 || >=22.0.0"
   },
   "dependencies": {
-    "@iconify/json": "^2.2.463",
+    "@iconify/json": "^2.2.464",
     "@mathjax/src": "^4.1.1",
     "artplayer": "^5.4.0",
     "chart.js": "^4.5.1",
