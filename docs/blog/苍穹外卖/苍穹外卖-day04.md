@@ -343,11 +343,57 @@ public class AliOssUtil {
 
 ::: tip 
 
+![苍穹外卖-day04](./苍穹外卖-day04/img-25.jpg)
 
++ **DishController.java**
+
+![苍穹外卖-day04](./苍穹外卖-day04/img-26.jpg)
+
++ **SkyApplication.java**
+
+![苍穹外卖-day04](./苍穹外卖-day04/img-28.jpg)
+
++ **DishServiceImpl.java**
+
+![苍穹外卖-day04](./苍穹外卖-day04/img-27.jpg)
+
++ **DishMapper.xml(插入菜品信息)**
+
+![苍穹外卖-day04](./苍穹外卖-day04/img-29.jpg)
+
++ **DishFlavorMapper.xml(批量插入口味数据)**
+
+![苍穹外卖-day04](./苍穹外卖-day04/img-30.jpg)
 
 :::
 
 
+
+
+
+## 菜品分页查询
+
+> **业务规则：**
+>
+> + **根据页码展示菜品信息**
+>
+> + **每页展示10条数据**
+>
+> + **分页查询时可以根据需要输入`菜品名称、菜品分类、菜品状态`进行查询**
+
+![苍穹外卖-day04](./苍穹外卖-day04/img-33.jpg)
+
+![苍穹外卖-day04](./苍穹外卖-day04/img-34.jpg)
+
+![苍穹外卖-day04](./苍穹外卖-day04/img-31.jpg)
+
+![苍穹外卖-day04](./苍穹外卖-day04/img-32.jpg)
+
+::: tip
+
+
+
+:::
 
 
 
