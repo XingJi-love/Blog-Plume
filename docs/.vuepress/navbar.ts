@@ -31,6 +31,13 @@ export default defineNavbarConfig([
           { text: 'JVM', link: '/JVM/初识JVM/', icon: 'devicon-plain:java' },
         ],
       },
+      {
+        text: '求职',
+        icon: 'hugeicons:permanent-job',
+        items: [
+          { text: '求职指南', link: '/Job/1.求职指南/', icon: 'hugeicons:permanent-job' },
+        ],
+      },
     ],
   },
 ])

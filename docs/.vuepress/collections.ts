@@ -111,6 +111,14 @@ export default defineCollections([
     { text: '技巧', prefix: '技巧', items: 'auto' },
     ],
   },
+  {
+    type: "doc",
+    dir: "Job",
+    title: "Job",
+    sidebar: [
+    { text: '求职指南', prefix: '/Job/1.求职指南/', items: 'auto' },
+    ],
+  },
 
   // 文章
   {

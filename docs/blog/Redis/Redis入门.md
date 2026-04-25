@@ -221,6 +221,31 @@ cover: ./Redis.jpg
 
 
 
+##### Redis安装(Docker)
+
+**Docker运行Redis**: [https://redis.io/docs/latest/operate/oss_and_stack/install/install-stack/docker/](https://redis.io/docs/latest/operate/oss_and_stack/install/install-stack/docker/)
+
++ **安装redis镜像**
+
+```shell
+docker run -d --name redis -p 6379:6379 redis:<version>
+
+# 安装7.0.10版本
+docker run -d --name redis -p 6379:6379 redis:7.0.10
+```
+
+![Redis入门](./Redis入门/img-2.jpg)
+
++ **连接Docker容器中的redis-cli工具**
+
+```shell
+docker exec -it redis redis-cli
+```
+
+![Redis入门](./Redis入门/img-3.jpg)
+
+
+
 #### 2.3 Redis的启动和停止
 
 ##### 2.3.1 查看安装目录
@@ -353,11 +378,15 @@ flushall通杀全部库
 
 ##### （3）Redis单线程+IO多路复用
 
-Redis 之所以快速，是由于以下几个关键因素：
+::: tip 
 
-1. 内存存储：Redis 将数据存储在内存中，这使得数据的读取和写入非常快速。与传统的磁盘存储数据库相比，内存访问速度更快，因为它不需要进行磁盘 I/O 操作。
-2. 单线程模型：Redis 使用单线程模型，即每个 Redis 实例都是由单个主线程处理所有请求。这简化了内部数据结构和操作的管理，并避免了多线程之间的竞争条件和线程同步开销。
-3. 非阻塞I/O（Non-blocking I/O）和事件驱动：Redis 使用了一种称为多路 I/O 复用的技术，通过底层的 I/O 多路复用机制（如 select、poll、epoll）来处理并发连接请求。这意味着 Redis 可以同时处理多个客户端请求，而不需要为每个客户端连接创建一个线程。通过事件驱动的方式，Redis 可以高效地监听和处理网络和文件系统的 I/O 事件。
+> **Redis 之所以快速，是由于以下几个关键因素：**
+
+1. **内存存储：Redis 将数据存储在内存中，这使得数据的读取和写入非常快速。与传统的磁盘存储数据库相比，内存访问速度更快，因为它不需要进行磁盘 I/O 操作。**
+2. **单线程模型：Redis 使用单线程模型，即每个 Redis 实例都是由单个主线程处理所有请求。这简化了内部数据结构和操作的管理，并避免了多线程之间的竞争条件和线程同步开销。**
+3. **非阻塞I/O（Non-blocking I/O）和事件驱动：Redis 使用了一种称为多路 I/O 复用的技术，通过底层的 I/O 多路复用机制（如 select、poll、epoll）来处理并发连接请求。这意味着 Redis 可以同时处理多个客户端请求，而不需要为每个客户端连接创建一个线程。通过事件驱动的方式，Redis 可以高效地监听和处理网络和文件系统的 I/O 事件。**
+
+:::
 
 现在来解释一下多路 I/O 复用：
 
@@ -365,8 +394,10 @@ Redis 之所以快速，是由于以下几个关键因素：
 
 在 Redis 中，它使用多路 I/O 复用机制（如 select、poll、epoll）在一个线程中管理和处理多个客户端连接。通过监听套接字的读写事件，Redis 可以实现非阻塞的 I/O 操作。当一个连接有数据可读或可写时，Redis 就会触发相应的事件回调函数进行处理，而不需要阻塞等待每个连接的操作完成。
 
+![Redis入门](./Redis入门/img-1.jpg)
+
 多路 I/O 复用使得 Redis 可以高效地处理大量的客户端连接，同时保持响应性能。它减少了线程切换和创建线程的开销，并提供了高度并发和实时处理能力。
 
-需要注意的是，多路 I/O 复用对于 Redis 等单线程模型的数据库是非常适用的，但对于多线程或多进程的数据库，可能采用其他并发处理策略。
+> **需要注意的是，`多路 I/O 复用`对于 `Redis 等单线程模型的数据库`是非常适用的，但对于`多线程或多进程的数据库`，可能`采用其他并发处理策略`。**
 
 ![image-20230706100628816](./image/image-20230706100628816.png)
