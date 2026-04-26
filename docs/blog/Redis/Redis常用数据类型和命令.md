@@ -26,8 +26,6 @@ cover: ./Redis.jpg
 
 ![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-30.jpg)
 
-![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-31.jpg)
-
 
 
 ## 第一节 key操作的相关命令
@@ -53,6 +51,8 @@ cover: ./Redis.jpg
 ## 第二节 字符串类型(String)
 
 ### 2.1 简介
+
+![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-37.jpg)
 
 ::: tip
 
@@ -123,6 +123,8 @@ String的数据结构为简单动态字符串(Simple Dynamic String,缩写SDS)�
 
 ### 3.1 简介
 
+![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-38.jpg)
+
 ::: tip
 
 **单键多值, 一个键下的value是一个List.Redis 列表是简单的字符串列表，`按照插入顺序排序`。你可以添加一个元素到列表的`头部（左边）`或者`尾部（右边）`。它的底层实际是个`双向链表`，对两端的操作`性能很高`，通过索引下标的操作中间的节点性能会较差。**
@@ -169,32 +171,40 @@ String的数据结构为简单动态字符串(Simple Dynamic String,缩写SDS)�
 
 ### 4.1 简介
 
+![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-40.jpg)
+
+::: tip
+
 &#x20;   Redis set对外提供的功能与list类似是一个列表的功能，特殊之处在于set是可以**自动排重**的，当你需要存储一个列表数据，又不希望出现重复数据时，set是一个很好的选择，并且set提供了判断某个成员是否在一个set集合内的重要接口，这个也是list所不能提供的。
 
 &#x20;   Redis的Set是string类型的无序集合。它底层其实是一个value为null的hash表，所以添加，删除，查找的**复杂度都是O(1)**。一个算法，随着数据的增加，执行时间的长短，如果是O(1)，数据增加，查找数据的时间不变  &#x20;
 
+:::
+
 ### 4.2 常用命令
 
-| 语法                                     | 功能                                                         |
-| ---------------------------------------- | ------------------------------------------------------------ |
-| sadd \<key\>\<value1\>\<value2\> .....   | 将一个或多个 member 元素加入到集合 key 中，已经存在的 member 元素将被忽略 |
-| smembers \<key\>                         | 取出该集合的所有值。                                         |
-| sismember \<key\>\<value\>               | 判断集合\<key\>是否为含有该\<value\>值，有1，没有0           |
-| scard\<key\>                             | 返回该集合的元素个数。                                       |
-| srem \<key\>\<value1\>\<value2\> ....    | 删除集合中的某个元素。                                       |
-| spop \<key\>                             | 随机从该集合中吐出一个值                                     |
-| spop \<key\>\<N\>                        | 随机从该集合中吐出N个值。                                    |
-| srandmember \<key\>\<n\>                 | 随机从该集合中取出n个值。不会从集合中删除 。                 |
-| smove \<source\>\<destination\>\<value\> | 把集合中一个值从一个集合移动到另一个集合                     |
-| sinter \<key1\>\<key2\>                  | 返回两个集合的交集元素。                                     |
-| sunion \<key1\>\<key2\>                  | 返回两个集合的并集元素。                                     |
-| sdiff \<key1\>\<key2\>                   | 返回两个集合的**差集**元素(key1中的，不包含key2中的)         |
+| 语法                                         | 功能                                                         |
+| -------------------------------------------- | ------------------------------------------------------------ |
+| **sadd \<key\>\<value1\>\<value2\> .....**   | **将一个或多个 member 元素`加入到集合 key 中`，已经`存在的 member 元素`将被`忽略`**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-32.jpg) |
+| **smembers \<key\>**                         | **取出`该集合的所有值`。**                                   |
+| **sismember \<key\>\<value\>**               | **判断集合\<key\>是否为含有该\<value\>值，有1，没有0**       |
+| **scard\<key\>**                             | **返回该集合的元素个数。**                                   |
+| **srem \<key\>\<value1\>\<value2\> ....**    | **删除集合中的某个元素。**                                   |
+| **spop \<key\>**                             | **随机从该集合中`吐出一个值`**                               |
+| **spop \<key\>\<N\>**                        | **随机从该集合中`吐出N个值`。**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-36.jpg) |
+| **srandmember \<key\>\<n\>**                 | **随机从该集合中取出n个值。不会从集合中删除 。**             |
+| **smove \<source\>\<destination\>\<value\>** | **把集合中一个值从一个集合移动到另一个集合**                 |
+| **sinter \<key1\>\<key2\>**                  | **返回两个集合的`交集元素`。**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-33.jpg) |
+| **sunion \<key1\>\<key2\>**                  | **返回两个集合的`并集元素`。**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-34.jpg) |
+| **sdiff \<key1\>\<key2\>**                   | **返回两个集合的**差集**元素(`key1中的，不包含key2中的`)**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-35.jpg) |
 
 ### 4.2 数据结构
 
-Set数据结构是dict字典，字典是用哈希表实现的。Java中HashSet的内部实现使用的是HashMap，只不过所有的value都指向同一个对象。Redis的set结构也是一样，它内部也使用hash结构，所有value都指向同一个内部值。
+::: tip
 
+**Set数据结构是`dict字典`，字典是`用哈希表实现的`。Java中HashSet的内部实现`使用的是HashMap`，只不过所有的value都指向`同一个对象`。Redis的set结构也是一样，它内部也使用hash结构，`所有value都指向同一个内部值`。**
 
+:::
 
 
 
@@ -202,40 +212,52 @@ Set数据结构是dict字典，字典是用哈希表实现的。Java中HashSet�
 
 ### 5.1 简介
 
-Redis hash 是一个键值对集合。Redis hash是一个string类型的field和value的映射表，hash特别适合用于存储对象。类似Java里面的Map\<String,Object\>用户ID为查找的key，存储的value用户对象包含姓名，年龄，生日等信息
+![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-39.jpg)
 
-- 方式1  单key+序列化 .问题:每次修改用户的某个属性需要，先反序列化改好后再序列化回去。开销较大。
+::: tip
+
+**Redis hash 是`一个键值对集合`。Redis hash是`一个string类型的field和value的映射表`，hash特别`适合用于存储对象`。类似Java里面的Map\<String,Object\>用户ID为查找的key，存储的`value用户对象`包含`姓名，年龄，生日等信息`**
+
+![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-50.jpg)
+
+- **方式1  单key+序列化 .问题:每次修改用户的某个属性需要，先反序列化改好后再序列化回去。开销较大。**
 
   ![image-20230706110321231](./image/image-20230706110321231.png)
 
-- 方式2 多key-value .问题:用户ID数据冗余 &#x20;
+- **方式2 多key-value .问题:用户ID数据冗余 &#x20;**
 
   ![image-20230706110341117](./image/image-20230706110341117.png)
 
-- 方式3 单key + 多(field+value)
+- **方式3 单key + 多(field+value)**
 
 ![image-20230706110256007](./image/image-20230706110256007.png)
 
 * **通过 key(用户ID) + field(属性标签) 就可以操作对应属性数据了，既不需要重复存储数据，也不会带来序列化和并发修改控制的问题**&#x20;
 
+:::
+
+
+
 ### 5.2 常用命令
 
-| 语法                                                      | 功能                                                         |
-| --------------------------------------------------------- | ------------------------------------------------------------ |
-| hset \<key\>\<field\>\<value\>\<field\>\<value\>          | 给\<key\>集合中的 \<field\>键赋值\<value\>                   |
-| hget \<key1\>\<field\>                                    | 从\<key1\>集合\<field\>取出 value                            |
-| hmset \<key1\>\<field1\>\<value1\>\<field2\>\<value2\>... | 批量设置hash的值                                             |
-| hexists\<key1\>\<field\>                                  | 查看哈希表 key 中，给定域 field 是否存在。                   |
-| hkeys \<key\>                                             | 列出该hash集合的所有field                                    |
-| hvals \<key\>                                             | 列出该hash集合的所有value                                    |
-| hincrby \<key\>\<field\>\<increment\>                     | 为哈希表 key 中的域 field 的值加上增量 1 -1                  |
-| hsetnx \<key\>\<field\>\<value\>                          | 将哈希表 key 中的域 field 的值设置为 value ，当且仅当域 field 不存在 . |
+| 语法                                                         | 功能                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| **hset \<key\>\<field\>\<value\>\<field\>\<value\>**         | **给\<key\>集合中的 \<field\>键赋值\<value\>**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-51.jpg) |
+| **hget \<key1\>\<field\>**                                   | **从\<key1\>集合\<field\>取出 value**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-52.jpg) |
+| **hmset \<key1\>\<field1\>\<value1\>\<field2\>\<value2\>...** | **批量设置hash的值**                                         |
+| **hexists\<key1\>\<field\>**                                 | **查看哈希表 key 中，给定域 field 是否存在。**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-53.jpg) |
+| **hkeys \<key\>**                                            | **列出该hash集合的所有field**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-54.jpg) |
+| **hvals \<key\>**                                            | **列出该hash集合的所有value**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-55.jpg) |
+| **hincrby \<key\>\<field\>\<increment\>**                    | **为哈希表 key 中的域 field 的值加上增量 1 -1**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-56.jpg) |
+| **hsetnx \<key\>\<field\>\<value\>**                         | **将哈希表 key 中的域 field 的值设置为 value ，当且仅当域 field 不存在 .**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-57.jpg) |
 
 ### 5.3 数据结构
 
-Hash类型对应的数据结构是两种：ziplist（压缩列表），hashtable（哈希表）。当field-value长度较短且个数较少时，使用ziplist，否则使用hashtable。
+::: tip
 
+**Hash类型对应的数据结构是两种：`ziplist（压缩列表）`，`hashtable（哈希表）`。当field-value`长度较短且个数较少`时，`使用ziplist`，否则`使用hashtable`。**
 
+:::
 
 
 
@@ -243,21 +265,29 @@ Hash类型对应的数据结构是两种：ziplist（压缩列表），hashtable
 
 ### 6.1 简介
 
-Redis有序集合zset与普通集合set非常相似，是一个没有重复元素的字符串集合。不同之处是有序集合的每个成员都关联了一个评分（score）,这个评分（score）被用来按照从最低分到最高分的方式排序集合中的成员。集合的成员是唯一的，但是评分可以是重复了 。因为元素是有序的, 所以你也可以很快的根据评分（score）或者次序（position）来获取一个范围的元素。访问有序集合的中间元素也是非常快的,因此你能够使用有序集合作为一个没有重复成员的智能列表。
+![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-41.jpg)
+
+::: tip
+
+**Redis有序集合zset与普通集合set非常相似，是一个没有重复元素的字符串集合。不同之处是有序集合的每个成员都关联了一个评分（score）,这个评分（score）被用来按照从最低分到最高分的方式排序集合中的成员。集合的成员是唯一的，但是评分可以是重复了 。因为元素是有序的, 所以你也可以很快的根据评分（score）或者次序（position）来获取一个范围的元素。访问有序集合的中间元素也是非常快的,因此你能够使用有序集合作为一个没有重复成员的智能列表。**
+
+:::
+
+
 
 ### 6.2 常用命令
 
 | 语法                                                         | 功能                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| zadd \<key\>\<score1\>\<value1\>\<score2\>\<value2\>…        | 将一个或多个 member 元素及其 score 值加入到有序集 key 当中。 |
-| zrange\<key\>\<start\>\<stop\>  \[WITHSCORES]                | 升序返回有序集 key 中，下标在\<start\>\<stop\>之间的元素,0代表第一个元素索引,-1代表最后一个元素索引.带WITHSCORES，可以让分数一起和值返回到结果集。 |
-| zrevrange \<key\>\<start\>\<stop\> \[WITHSCORES]             | 降序返回有序集 key 中，下标在\<start\>\<stop\>之间的元素,0代表第一个元素索引,-1代表最后一个元素索引.带WITHSCORES，可以让分数一起和值返回到结果集 |
-| zrangebyscore \<key\> \<min\> \<max\> \[withscores] \[limit offset count] | 返回有序集 key 中，所有 score 值介于 min 和 max 之间(包括等于 min 或 max )的成员。有序集成员按 score 值递增(从小到大)次序排列。 |
-| zrevrangebyscore \<key\> \<max\> \<min\> \[withscores] \[limit offset count] | 同上，改为从大到小排列。                                     |
-| zincrby \<key\>\<increment\>\<value\>                        | 为元素的score加上增量                                        |
-| zrem \<key\>\<value\>                                        | 删除该集合下，指定值的元素                                   |
-| zcount \<key\>\<min\>\<max\>                                 | 统计该集合，分数区间内的元素个数                             |
-| zrank \<key\>\<value\> \| zrevrank                           | 返回该值在集合中的排名，从0开始。                            |
+| **zadd \<key\>\<score1\>\<value1\>\<score2\>\<value2\>…**    | **将一个或多个 member 元素及其 score 值加入到有序集 key 当中。**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-42.jpg) |
+| **zrange\<key\>\<start\>\<stop\>  \[WITHSCORES]**            | **`升序返回`有序集 key 中，下标在\<start\>\<stop\>之间的元素,`0代表第一个元素索引,-1代表最后一个元素索引`.带WITHSCORES，可以让分数一起和值返回到结果集。**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-43.jpg) |
+| **zrevrange \<key\>\<start\>\<stop\> \[WITHSCORES]**         | **`降序返回`有序集 key 中，下标在\<start\>\<stop\>之间的元素,`0代表第一个元素索引,-1代表最后一个元素索引`.带WITHSCORES，可以让分数一起和值返回到结果集**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-44.jpg) |
+| **zrangebyscore \<key\> \<min\> \<max\> \[withscores] \[limit offset count]** | **返回有序集 key 中，所有 score 值`介于 min 和 max 之间(包括等于 min 或 max )的成员`。有序集成员按 score 值递增`(从小到大)次序排列`。**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-45.jpg) |
+| **zrevrangebyscore \<key\> \<max\> \<min\> \[withscores] \[limit offset count]** | **同上，改为`从大到小排列`。**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-46.jpg) |
+| **zincrby \<key\>\<increment\>\<value\>**                    | **为元素的`score加上增量`**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-47.jpg) |
+| **zrem \<key\>\<value\>**                                    | **删除该集合下，指定值的元素**                               |
+| **zcount \<key\>\<min\>\<max\>**                             | **统计该集合，`分数区间内的元素个数`**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-48.jpg) |
+| **zrank \<key\>\<value\> \| zrevrank**                       | **返回该值在`集合中的排名`，`从0开始`。**![Redis常用数据类型和命令](./Redis常用数据类型和命令/img-49.jpg) |
 
 案例：如何利用zset实现一个文章访问量的排行榜？
 
@@ -265,7 +295,11 @@ Redis有序集合zset与普通集合set非常相似，是一个没有重复元�
 
 ### 6.3 数据结构
 
-SortedSet(zset)是Redis提供的一个非常特别的数据结构，一方面它等价于Java的数据结构Map\<String, Double\>，可以给每一个元素value赋予一个权重score，另一方面它又类似于TreeSet，内部的元素会按照权重score进行排序，可以得到每个元素的名次，还可以通过score的范围来获取元素的列表。
+::: tip
+
+**SortedSet(zset)是Redis提供的一个非常特别的数据结构，一方面它等价于Java的数据结构Map\<String, Double\>，可以给每一个元素value赋予一个权重score，另一方面它又类似于TreeSet，内部的元素会按照权重score进行排序，可以得到每个元素的名次，还可以通过score的范围来获取元素的列表。**
+
+:::
 
 
 
@@ -275,42 +309,55 @@ SortedSet(zset)是Redis提供的一个非常特别的数据结构，一方面它
 
 1. 例如，假设用户ID为1，用户名为Alice，电子邮件为alice@example.com，注册时间为2023-09-12 10:00:00!
 
-   ``` 
-   方案1： key  user:1:id 1  user:1:name alice
-   方案2： hash user:1 id 1 name alice 
-   方案3： json user:1 {id:1,name:alice...}
+   ``` shell
+   方案1：string key处理 
+   	user:1:id 1  user:1:name alice user:1:email xxx ...
+   方案2：hash 
+   	user:1 id 1 name alice ...
+   方案3：json(string 序列化)
+   	user:1 {id:1,name:alice...}
    ```
 
 2. 例如，假设商品ID为1，名称为iPhone 12，描述为一款先进的智能手机，价格为999美元，库存为100，上架时间为2023-09-12 12:00:00
 
-   ``` 
-   
+   ``` shell
+   方案1：string key处理 
+   	user:1:id 1  user:1:name alice user:1:email xxx ...
+   方案2：hash 
+   	user:1 id 1 name alice ...
+   方案3：json(string 序列化)
+   	user:1 {id:1,name:alice...}
    ```
 
 3. 正在开发一个实时消息系统，需要保存每个用户的最近聊天记录，最多保留最近的 10 条消息。请问如何使用 Redis 的xx类型保存每个用户的聊天记录，并限制列表长度为 10？[list]
 
-   ``` 
+   ``` shell
    lpush chat:1 在吗 在吗 在吗 说句话啊 你男朋友也在啊 那你俩吃不吃早餐啊  我是不是要订两份啊 。。。
    
-   ltrim key 0 9 [list左边10条]
+   lrange chat:1 0 9 [最新数据] # 列出最新的10条聊天记录
+   
+   ltrim key(chat:1) 0 9 [list左边10条] # 删除最新的10条聊天记录
    ```
 
 4. 正在构建一个社交网络应用，需要保存每个用户的好友列表。请问如何使用 Redis 的xx类型存储每个用户的好友列表，并支持添加、删除好友，以及判断是否是好友的操作？[set]
 
    例如，假设用户ID为1，好友ID为2、3、4，您可以使用以下命令将好友添加到用户对应的集合中
 
-   ``` 
-   sadd user:1 2 3 4 
-   sadd user:1 5 
-   sismember user:1 3
-   srem user:1 3
+   ``` shell
+   sadd fds:1 2 3 4 # 用户1增加好友2 3 4
+   sadd fds:2 3 4 5 # 用户2增加好友3 4 5
+   sinter fds:1 fds:2 # 用户1和用户2的交集
+   
+   sismember fds:1 3 # 判断用户1是否存在好友3
+   sadd fds:1 5 # 用户1增加好友5
+   srem fds:1 4 # 移除用户1的好友4
    ```
 
 5. 正在开发一个在线竞赛平台，需要保存每个参赛选手的成绩(zset)，并根据成绩进行排名。请问如何使用 Redis 的xx类型存储每个选手的成绩，并实现按成绩排序的功能？
 
    例如，假设选手ID为1，成绩为90，选手ID为2，成绩为80..
 
-   ``` 
+   ``` shell
    zadd ranks 90 1 80 2 ....
    ```
 
@@ -318,6 +365,11 @@ SortedSet(zset)是Redis提供的一个非常特别的数据结构，一方面它
 
    例如，假设用户ID为1，在线时长为3600秒，登录次数为10次!
 
-   ``` 
-   方案 1 2 3 
+   ``` shell
+   方案1：string key处理 
+   	user:1:id 1  user:1:name alice user:1:email xxx ...
+   方案2：hash 
+   	user:1 id 1 name alice ...
+   方案3：json(string 序列化)
+   	user:1 {id:1,name:alice...}
    ```
