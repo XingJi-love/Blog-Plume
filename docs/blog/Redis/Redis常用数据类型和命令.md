@@ -309,7 +309,7 @@ String的数据结构为简单动态字符串(Simple Dynamic String,缩写SDS)�
 
 1. 例如，假设用户ID为1，用户名为Alice，电子邮件为alice@example.com，注册时间为2023-09-12 10:00:00!
 
-   ``` shell
+   ``` bash
    方案1：string key处理 
    	user:1:id 1  user:1:name alice user:1:email xxx ...
    方案2：hash 
@@ -320,7 +320,7 @@ String的数据结构为简单动态字符串(Simple Dynamic String,缩写SDS)�
 
 2. 例如，假设商品ID为1，名称为iPhone 12，描述为一款先进的智能手机，价格为999美元，库存为100，上架时间为2023-09-12 12:00:00
 
-   ``` shell
+   ``` bash
    方案1：string key处理 
    	user:1:id 1  user:1:name alice user:1:email xxx ...
    方案2：hash 
@@ -331,7 +331,7 @@ String的数据结构为简单动态字符串(Simple Dynamic String,缩写SDS)�
 
 3. 正在开发一个实时消息系统，需要保存每个用户的最近聊天记录，最多保留最近的 10 条消息。请问如何使用 Redis 的xx类型保存每个用户的聊天记录，并限制列表长度为 10？[list]
 
-   ``` shell
+   ``` bash
    lpush chat:1 在吗 在吗 在吗 说句话啊 你男朋友也在啊 那你俩吃不吃早餐啊  我是不是要订两份啊 。。。
    
    lrange chat:1 0 9 [最新数据] # 列出最新的10条聊天记录
@@ -343,7 +343,7 @@ String的数据结构为简单动态字符串(Simple Dynamic String,缩写SDS)�
 
    例如，假设用户ID为1，好友ID为2、3、4，您可以使用以下命令将好友添加到用户对应的集合中
 
-   ``` shell
+   ``` bash
    sadd fds:1 2 3 4 # 用户1增加好友2 3 4
    sadd fds:2 3 4 5 # 用户2增加好友3 4 5
    sinter fds:1 fds:2 # 用户1和用户2的交集
@@ -357,7 +357,7 @@ String的数据结构为简单动态字符串(Simple Dynamic String,缩写SDS)�
 
    例如，假设选手ID为1，成绩为90，选手ID为2，成绩为80..
 
-   ``` shell
+   ``` bash
    zadd ranks 90 1 80 2 ....
    ```
 
@@ -365,7 +365,7 @@ String的数据结构为简单动态字符串(Simple Dynamic String,缩写SDS)�
 
    例如，假设用户ID为1，在线时长为3600秒，登录次数为10次!
 
-   ``` shell
+   ``` bash
    方案1：string key处理 
    	user:1:id 1  user:1:name alice user:1:email xxx ...
    方案2：hash 
@@ -373,3 +373,158 @@ String的数据结构为简单动态字符串(Simple Dynamic String,缩写SDS)�
    方案3：json(string 序列化)
    	user:1 {id:1,name:alice...}
    ```
+
+
+
+## 练习题
+
+### 1. 用户会话管理 （hash, 长key, json）
+> **场景**：需要`存储用户的会话信息`，包括`会话ID、用户ID、创建时间和过期时间`。  
+>
+> **问题**：请问如何使用Redis的xx类型存储会话信息，并支持根据会话ID快速查找？
+
+**方案一：Hash 类型**
+```bash
+# 使用哈希存储会话的各个字段
+hset session:1 id 1 user 1 createtime 2020 timeout 2022
+# hset 会话key 字段名 字段值 ...  一次性设置多个字段
+# 快速查找某字段：hget session:1 user   -> 返回 "1"
+```
+
+**方案二：长 key（String 类型分散存储）**
+
+```bash
+# 每个字段单独使用一个String key
+set session:1:id 1          # 存储会话ID
+set session:1:user 1        # 存储用户ID
+set session:1:createtime 2020  # 存储创建时间
+set session:1:timeout 2022  # 存储过期时间
+# 查找时直接 get session:1:user
+```
+
+**方案三：JSON 字符串**
+```bash
+# 将对象序列化为JSON字符串后存入一个String key
+set session:1 '{"id":1,"user":1,"createtime":2020,"timeout":2022}'
+# 读取时获取整个JSON，然后在应用层解析
+```
+
+
+
+### 2. 商品库存管理 (hash, 长key)
+
+> **场景**：需要`存储商品的库存信息`，包括`商品ID、名称、库存数量`。  
+>
+> **问题**：请问如何使用Redis的xx类型存储商品库存信息，并支持库存数量的增减操作？
+
+**方案一：Hash 类型**
+```bash
+# 初始化商品信息
+hset product:1 id 1 name 可比克 stock 10
+# hset 商品哈希 key 字段 值 ...
+
+# 库存增加或减少（原子操作）
+hincrby product:1 stock 10   # 库存 +10
+hincrby product:1 stock -3   # 库存 -3
+# 查看库存：hget product:1 stock
+```
+
+**方案二：长 key（String 类型）**
+```bash
+# 各字段单独存储为String
+set product:1:id 1
+set product:1:name 可比克
+set product:1:stock 10
+
+# 库存增减操作（原子操作）
+incrby product:1:stock 10    # 库存 +10
+decrby product:1:stock 3     # 库存 -3
+```
+
+
+
+### 3. 用户点赞统计 (set)
+
+> **场景**：需要`记录某篇文章被哪些用户进行了点赞`，也需要`统计某篇文章的点赞总数`。  
+>
+> **问题**：请问如何使用Redis的xx类型存储点赞信息，并支持快速统计点赞总数，以及查询某个用户是否点赞？
+
+**Set 类型实现**
+```bash
+# 用户点赞：将用户ID加入文章对应的Set
+sadd blog:1 1 2 3 4 5 6 7   # 文章1被用户1-7点赞
+# sadd 文章点赞集合 用户ID [用户ID ...]
+
+# 统计点赞总数
+scard blog:1                 # 返回集合元素个数，即点赞总数 -> 7
+
+# 查询某个用户是否点赞
+sismember blog:1 3           # 判断用户3是否在集合中，返回1表示存在，0不存在
+```
+
+
+
+### 4. 热门文章排行榜 (zset)
+
+> **场景**：需要`根据文章的阅读量生成一个热门文章（文章id和阅读量）排行榜`。  
+>
+> **问题**：请问如何使用Redis的xx类型存储文章阅读量，获取阅读量最高的前10篇文章？
+
+**Sorted Set 类型实现**
+
+```bash
+# 记录或更新文章阅读量（分数）
+zadd ranks 100 1 200 2 60 3 70 4
+# zadd 排行榜key 分数1 成员1 分数2 成员2 ...
+# 1号文章阅读量100，2号200，3号60，4号70
+
+# 获取阅读量最高的前10篇文章（从高到低）
+zrevrange ranks 0 9 withscores
+# zrevrange 按分数从大到小返回，0 9 表示索引范围（第1到第10），withscores 同时返回分数
+
+# 查询某篇文章的排名（从高到低，0表示第1名）
+zrevrank ranks 3            # 查询文章3的排名，返回3（即第4名）
+```
+
+
+
+### 5. 用户消息队列 (list)
+
+> **场景**：需要`实现一个简单的消息队列`，支持`消息的入队和出队操作`。  
+>
+> **问题**：请问如何使用Redis的xx类型实现消息队列？
+
+**List 类型实现（FIFO 队列）**
+
+```bash
+# 生产者：将消息放入队列（左侧入队）
+lpush messages 1 2 3 4 5 6
+# lpush 队列key 消息...   列表从左到右依次变为 [6,5,4,3,2,1]
+
+# 消费者：从队列右侧取出消息（右侧出队，实现先进先出）
+rpop messages               # 返回 "1"，队列变为 [6,5,4,3,2]
+# 重复 rpop 即可依次取出 2,3,4,5,6
+```
+
+
+
+### 6. 用户黑名单管理 (set)
+
+> **场景**：需要`存储用户的黑名单列表`，并支持`快速判断某个用户是否在黑名单中`。  
+>
+> **问题**：请问如何使用Redis的xx类型存储用户黑名单？
+
+**Set 类型实现**
+```bash
+# 将用户ID加入黑名单集合
+sadd blacks 1 2 3 4         # sadd 黑名单集合key 用户ID...
+
+# 判断某用户是否在黑名单中
+sismember blacks 1          # 返回1表示存在，0表示不存在
+
+# 查看黑名单总人数
+scard blacks                # 返回集合基数
+
+# 从黑名单中移除某用户
+srem blacks 1               # srem 集合key 用户ID，返回1表示移除成功
+```
