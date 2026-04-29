@@ -4,7 +4,7 @@
     <div class="head-social">
 
       <a href="https://github.com/XingJi-love" target="_blank" class="head-social-btn"> <icon name="mdi:github"/> </a>
-      <router-link to="/blog/" class="head-social-avatar"><img src="https://i.p-i.vip/47/20241024-67192acae3bb8.png" alt="avatar"></router-link>
+      <router-link to="/blog/" class="head-social-avatar"><img src="https://image.dooo.ng/t/2026/04/29/69f1d9ef0f613.webp" alt="avatar"></router-link>
       <a href="mailto:3968523679@qq.com" target="_blank" class="head-social-btn"><icon class="head-social-btn" name="ic:baseline-email"></icon></a>
 
     </div>

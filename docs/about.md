@@ -11,81 +11,80 @@ prev: false
 next: false
 ---
 
-<center>
-  <a href="https://home.xingji.fun/">
-    <img src="/bg-3.jpg" alt="Hello">
-  </a>
-</center>
-
 <p align="center">
-<img src="https://readme-typing-svg.demolab.com?font=Orbitron&size=25&pause=1000&center=true&vCenter=true&random=false&width=600&lines=Welcome+to+my+GitHub+profile+page!;I+am+XINGJI+obsessed+with+programming!" />
+<img src="https://readme-typing-svg.demolab.com?font=Orbitron&size=22&pause=1000&center=true&vCenter=true&random=false&width=500&lines=Welcome+to+my+GitHub+page!;I+am+XINGJI+obsessed+with+programming!" />
 </p>
 
-<center>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/XingJi-love/XingJi-love//output/github-contribution-grid-snake-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/XingJi-love/XingJi-love/output/github-contribution-grid-snake.svg">
-    <img alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/XingJi-love/XingJi-love/output/github-contribution-grid-snake.svg">
-  </picture>
-</center>
+<div class="about-page">
+  <section class="hero">
+    <img class="avatar" src="https://image.dooo.ng/t/2026/04/29/69f1d9ef0f613.webp" alt="XINGJI avatar" width="120" height="120">
+    <h1>XINGJI</h1>
+    <p class="subtitle">Java 后端开发者 · 成都 · 持续构建中</p>
+    <p class="badges">
+      <img src="https://img.shields.io/badge/Focus-Java%20Backend-0A7EA4?style=flat-square" alt="focus">
+      <img src="https://img.shields.io/badge/Status-Project%20Driven-2B8A3E?style=flat-square" alt="status">
+      <img src="https://img.shields.io/badge/Now-Engineering%20Practice-E8590C?style=flat-square" alt="now">
+    </p>
+  </section>
 
+  <section class="block">
+    <h2>关于我</h2>
+    <p class="desc">目前已系统学习并覆盖 Java 后端大部分核心技术栈，现阶段重点放在项目实战、工程落地和性能优化。</p>
+    <table>
+      <tbody>
+        <tr><th>当前阶段</th><td>已完成 Java 后端大部分技术栈学习，聚焦项目实战与工程落地</td></tr>
+        <tr><th>技术方向</th><td>Java 后端工程化、数据库设计、接口开发、系统优化</td></tr>
+        <tr><th>学习方法</th><td>打基础、做项目、复盘输出</td></tr>
+        <tr><th>联系邮箱</th><td><a href="mailto:3968523679@qq.com">3968523679@qq.com</a></td></tr>
+        <tr><th>GitHub</th><td><a href="https://github.com/XingJi-love">github.com/XingJi-love</a></td></tr>
+        <tr><th>个人主页</th><td><a href="https://home.xingji.fun/">home.xingji.fun</a></td></tr>
+      </tbody>
+    </table>
+  </section>
 
-## 👨‍💻 关于我
+  <section class="block">
+    <h2>技术栈</h2>
+    <p class="desc">技术栈完成体系化学习后，持续通过真实场景验证和沉淀。</p>
+    <p class="tech-badges">
+      <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java">
+      <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white" alt="Spring">
+      <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
+      <img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white" alt="Redis">
+      <img src="https://img.shields.io/badge/Kafka-231F20?style=for-the-badge&logo=apachekafka&logoColor=white" alt="Kafka">
+      <img src="https://img.shields.io/badge/RabbitMQ-FF6600?style=for-the-badge&logo=rabbitmq&logoColor=white" alt="RabbitMQ">
+      <img src="https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white" alt="Nginx">
+      <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
+      <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux">
+      <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git">
+    </p>
+    <table>
+      <tbody>
+        <tr><th>语言与基础</th><td>Java 8/17、SQL、Git</td></tr>
+        <tr><th>服务开发</th><td>Spring Boot、Spring MVC、Spring Security</td></tr>
+        <tr><th>数据持久化</th><td>MySQL、MyBatis-Plus、JPA</td></tr>
+        <tr><th>性能与解耦</th><td>Redis、RabbitMQ、Kafka</td></tr>
+        <tr><th>部署与运维</th><td>Nginx、Docker、Linux</td></tr>
+        <tr><th>工具协作</th><td>IntelliJ IDEA、Postman、Navicat</td></tr>
+      </tbody>
+    </table>
+  </section>
 
-<p align="center"><img width="450px" src="https://github.com/abhisheknaiidu/abhisheknaiidu/raw/master/code.gif?raw=true"></p>
+  <section class="block">
+    <h2>站点导航</h2>
+    <p class="desc">常用站点入口，按用途分组。</p>
+    <div class="site-nav-grid">
+      <a href="https://v.xingji.fun/" target="_blank" class="site-nav-card">
+        <span class="site-nav-tag tag-blog">博客</span>
+        <span class="site-nav-name">Vue 博客</span>
+        <span class="site-nav-domain">v.xingji.fun</span>
+      </a>
+      <a href="https://vite.xingji.fun/" target="_blank" class="site-nav-card">
+        <span class="site-nav-tag tag-blog">博客</span>
+        <span class="site-nav-name">Vite 博客</span>
+        <span class="site-nav-domain">vite.xingji.fun</span>
+      </a>
+    </div>
+  </section>
 
-大家好，我是 **XINGJI**，一名 00 后 Java 后端初学者，正在成都边学边做。  
-坚信「**打好基础、多做项目、持续输出**」是成长最快的路径。
-
-- 🌱 **学习阶段**：Java、Mysql、JDBC
-- 📫 **联系方式**：  
-  - 邮箱：3968523679@qq.com  
-  - GitHub：[XingJi-love](https://github.com/XingJi-love)  
-- 🏠 **个人主页**：[https://home.xingji.fun](https://home.xingji.fun)
-
-欢迎大佬们指点，也欢迎同路人一起结伴学习！
-
-
-## ☕ Java 后端技术栈
-
-<p align="center">
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=java,html,css,ts,js,vue,spring,gradle,maven,hibernate,redis,nginx,kafka,rabbitmq,linux,kali,mysql,postgresql,mongodb,postman,idea,webstorm,vscode,sublime,git,github" />
-  </a>
-</p>
-
-### Java 后端技术栈
-
-| 类别             | 技术/工具                                                                                                  |
-|------------------|------------------------------------------------------------------------------------------------------------|
-| **编程语言**     | Java 8/**17**/**21** Groovy                                                                           |
-| **核心框架**     | Spring Boot, Spring Framework (Core/MVC/AOP), Spring Cloud, Spring Security, Spring Data                   |
-| **ORM/数据库访问** | Spring Data JPA, MyBatis-Plus, Hibernate                                                                   |
-| **数据库**       | MySQL, PostgreSQL, TiDB (HTAP), Oracle, MongoDB (NoSQL)                                                    |
-| **缓存**         | Redis (分布式), Caffeine (本地), Memcached                                                                 |
-| **消息队列**     | RabbitMQ (AMQP), Apache Kafka (高吞吐), RocketMQ (金融级)                                                  |
-| **搜索引擎**     | Elasticsearch, OpenSearch (ES分支)                                                                         |
-| **API 网关**     | Spring Cloud Gateway, Nginx (LB/静态资源), Traefik                                                         |
-| **容器化**       | Docker, Docker-Compose                                                                                     |
-| **容器编排**     | Kubernetes, Helm                                                                                           |
-| **构建工具**     | Maven, Gradle                                                                                              |
-| **测试工具**     | JUnit 5 (单元测试), Mockito (模拟), Testcontainers (集成测试), Postman (API测试), JMeter (压测)            |
-| **监控告警**     | Prometheus (指标), Grafana (可视化), ELK/EFK (日志), Zipkin/SkyWalking (链路追踪)                          |
-| **CI/CD**        | Jenkins, GitHub Actions, GitLab CI/CD, Argo CD (GitOps)                                                    |
-| **云平台**       | AWS, 阿里云, 腾讯云, 华为云                                                                               |
-| **开发工具**     | IntelliJ IDEA (IDE), Postman (API调试), Navicat (DB管理), iTerm2 (终端)                                    |
-
-
-## 🌐 网站运营
-| Icon         | 名称       | 链接                                                               |
-| ------------ | ---------- | ------------------------------------------------------------------ |
-| 🏠 Home       | 个人主页   | [https://home.xingji.fun/](https://home.xingji.fun/)               |
-| 🪄 Blog       | 个人博客   | [https://love.xingji.fun/](https://love.xingji.fun/)               |
-| 🪄 Blog       | 技术博客   | [https://blog.xingji.fun/](https://blog.xingji.fun/)               |
-| 🪄 Blog       | Vite博客   | [https://vite.xingji.fun/](https://vite.xingji.fun/)               |
-| 🪄 Blog       | Vue博客    | [https://v.xingji.fun/](https://v.xingji.fun/)                 |
-| 📊 Statistics | 访客统计   | [https://umami.xingji.fun/](https://umami.xingji.fun/)             |
-| 🎨 Design     | 封面设计   | [https://cover.xingji.fun/](https://cover.xingji.fun/)             |
-| 🖥️ Detection  | 站点检测   | [https://status.xingji.fun/](https://status.xingji.fun/)           |
-| 🤖 GPT        | 自建GPT    | [https://chat.xingji.fun/](https://chat.xingji.fun/)               |
-| ☁️ Tencent    | 腾讯开发者 | [https://cloud.tencent.com/](https://cloud.tencent.com/)           |
+  <p class="footer-tip">欢迎交流，也欢迎一起结伴学习和做项目。</p>
+</div>

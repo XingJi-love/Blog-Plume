@@ -23,7 +23,7 @@ export default defineUserConfig({
     // 配置站点图标
     ['link', 
       { 
-        rel: 'icon', type: 'image/png', href: 'https://i.p-i.vip/47/20241024-67192acae3bb8.png' 
+        rel: 'icon', type: 'image/png', href: 'https://image.dooo.ng/t/2026/04/29/69f1d9ef0f613.webp' 
       }
     ],
     // 配置网监控器

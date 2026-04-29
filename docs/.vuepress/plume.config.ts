@@ -18,7 +18,7 @@ import collections from './collections'
  * @see https://theme-plume.vuejs.press/config/theme/
  */
 export default defineThemeConfig({
-  logo: 'https://i.p-i.vip/47/20241024-67192acae3bb8.png',
+  logo: 'https://image.dooo.ng/t/2026/04/29/69f1d9ef0f613.webp',
 
   appearance: true,  // 配置 深色模式
 
@@ -59,7 +59,7 @@ export default defineThemeConfig({
   profile: {
     name: 'XINGJI',
     description: '迄今所有人生都大写着失败，但不妨碍我继续向前✨',
-    avatar: 'https://i.p-i.vip/47/20241024-67192acae3bb8.png',
+    avatar: 'https://image.dooo.ng/t/2026/04/29/69f1d9ef0f613.webp',
     location: 'YunNan, China',
     circle: true, // 是否为圆形头像
     layout: 'right', // 个人信息在左侧还是右侧，'left' | 'right'

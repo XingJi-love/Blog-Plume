@@ -313,15 +313,19 @@ public class RedisTest {
    
    ```
 
+   ::: tip
+
    `JdkSerializationRedisSerializer` 是 Spring Data Redis 提供的一种 Redis 数据序列化器，它的主要作用是将 Java 对象序列化为字节流，以便将其存储在 Redis 中，或者从 Redis 中读取字节流并反序列化为 Java 对象。
 
 2. 常见序列化器
 
-   |             序列化器名             |                  作用                  |      备注       |
-   | :--------------------------------: | :------------------------------------: | :-------------: |
-   |  JdkSerializationRedisSerializer   |        将数据转化字节流进行存储        |      默认       |
-   | GenericJackson2JsonRedisSerializer | jackson序列化器,数据进行json方式序列化 | 导入依赖jackson |
-   |       StringRedisSerializer        |       字符串形式存储,一般用于key       |  注意utf-8格式  |
+   |               序列化器名               |                    作用                    |        备注         |
+   | :------------------------------------: | :----------------------------------------: | :-----------------: |
+   |  **JdkSerializationRedisSerializer**   |        **将数据转化字节流进行存储**        |      **默认**       |
+   | **GenericJackson2JsonRedisSerializer** | **jackson序列化器,数据进行json方式序列化** | **导入依赖jackson** |
+   |       **StringRedisSerializer**        |       **字符串形式存储,一般用于key**       |  **注意utf-8格式**  |
+
+:::
 
 
 

@@ -2,13 +2,13 @@
     {
       "name": "XINGJI",
       "link": "https://vite.xingji.fun/",
-      "avatar": "https://i.p-i.vip/47/20240920-66ed7b168c38c.jpg",
+      "avatar": "https://image.dooo.ng/t/2026/04/29/69f1cb57557c0.webp",
       "desc": "迄今所有人生都大写着失败，但不妨碍我继续向前✨"
     },
     {
       "name": "XINGJI",
       "link": "https://v.xingji.fun/",
-      "avatar": "https://i.p-i.vip/47/20240920-66ed7b168c38c.jpg",
+      "avatar": "https://image.dooo.ng/t/2026/04/29/69f1cb57557c0.webp",
       "desc": "迄今所有人生都大写着失败，但不妨碍我继续向前✨"
     },
     {
@@ -36,9 +36,15 @@
       "desc": "顺其自然，持之以恒"
     },
     {
-      "name": "程序员飞鱼",
-      "link": "https://jinguoguang.github.io/",
-      "avatar": "https://i.p-i.vip/47/20250509-681dee78a9d5c.png",
-      "desc": "不驰于空想，不骛于虚声"
+      "name": "June's Blog",
+      "link": "https://blog.june-pj.cn/",
+      "avatar": "https://gitlab.com/June_PJ/PicGo-PJ/raw/main/img/avatar.webp",
+      "desc": "遇事不决，可问春风"
+    },
+    {
+      "name": "梦爱吃鱼",
+      "link": "https://blog.bsgun.cn/",
+      "avatar": "https://oss-cdn.bsgun.cn/logo/avatar.256.png",
+      "desc": "不负心灵，不负今生"
     }
 ]
