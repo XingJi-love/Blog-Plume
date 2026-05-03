@@ -23,7 +23,7 @@ copyright: false
 网站地址: https://v.xingji.fun
 描述: 迄今所有人生都大写着失败，但不妨碍我继续向前✨
 头像: https://image.dooo.ng/t/2026/04/29/69f1d9ef0f613.webp
-站点图片: https://i.p-i.vip/47/20250407-67f3f1eca1983.png
+站点图片: https://image.dooo.ng/t/2026/05/02/69f4cfb85b715.webp
 ```
 
 ### _友情链接申请_
