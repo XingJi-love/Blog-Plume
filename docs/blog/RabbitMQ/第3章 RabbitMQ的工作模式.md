@@ -18,7 +18,6 @@ cover: ./RabbitMQ.jpg
 官网对应模式介绍：https://www.rabbitmq.com/getstarted.html 
 
 
-
 ## 1.Work queues工作队列模式
 
 ### 1.1 模式说明
@@ -73,7 +72,6 @@ public void testSendMessageWork() {
      }
 }
 ```
-
 
 
 * **发送消息效果**
