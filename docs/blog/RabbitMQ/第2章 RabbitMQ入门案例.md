@@ -12,10 +12,12 @@ cover: ./RabbitMQ.jpg
 ## 一、目标
 
 > **生产者`发送消息`，消费者`接收消息`，用最简单的方式实现**
+>
+> ![image-20240806084908636](./assets/image-20240806084908636.png)
 
-![image-20240806084908636](./assets/image-20240806084908636.png)
+![RabbitMQ入门案例](./第2章-RabbitMQ入门案例/img-3.jpg)
 
-![RabbitMQ入门案例](./第2章 RabbitMQ入门案例/img-3.jpg)
+![RabbitMQ入门案例](./第2章-RabbitMQ入门案例/img-10.jpg)
 
 
 
@@ -25,11 +27,11 @@ cover: ./RabbitMQ.jpg
 
 
 
-队列名称：xingji.queue.simple
+> **队列名称：xingji.queue.simple**
 
-![RabbitMQ入门案例](./第2章 RabbitMQ入门案例/img-1.jpg)
+![RabbitMQ入门案例](./第2章-RabbitMQ入门案例/img-1.jpg)
 
-![RabbitMQ入门案例](./第2章 RabbitMQ入门案例/img-2.jpg)
+![RabbitMQ入门案例](./第2章-RabbitMQ入门案例/img-2.jpg)
 
 
 
@@ -39,7 +41,7 @@ cover: ./RabbitMQ.jpg
 
 #### ①创建module
 
-![images](./assets/img75.png)
+![RabbitMQ入门案例](./第2章-RabbitMQ入门案例/img-11.jpg)
 
 
 
@@ -101,9 +103,9 @@ public class RabbitMQProducerMainType {
 
 #### ⑤测试程序
 
-![RabbitMQ入门案例](./第2章 RabbitMQ入门案例/img-4.jpg)
+![RabbitMQ入门案例](./第2章-RabbitMQ入门案例/img-4.jpg)
 
-![RabbitMQ入门案例](./第2章 RabbitMQ入门案例/img-6.jpg)
+![RabbitMQ入门案例](./第2章-RabbitMQ入门案例/img-6.jpg)
 
 ```java
 package fun.xingji.mq.test;
@@ -139,7 +141,7 @@ public class RabbbitMQTest {
 }
 ```
 
-![RabbitMQ入门案例](./第2章 RabbitMQ入门案例/img-5.jpg)
+![RabbitMQ入门案例](./第2章-RabbitMQ入门案例/img-5.jpg)
 
 
 
@@ -147,7 +149,7 @@ public class RabbbitMQTest {
 
 > **消息`发送到了队列`中：**
 
-![RabbitMQ入门案例](./第2章 RabbitMQ入门案例/img-7.jpg)
+![RabbitMQ入门案例](./第2章-RabbitMQ入门案例/img-7.jpg)
 
 
 
@@ -157,7 +159,7 @@ public class RabbbitMQTest {
 
 #### ①创建module
 
-![images](./assets/img76.png)
+![RabbitMQ入门案例](./第2章-RabbitMQ入门案例/img-12.jpg)
 
 
 
@@ -217,8 +219,12 @@ public class RabbitMQConsumerMainType {
 
 #### ⑤监听器
 
-- 使用 @RabbitListener 注解设定要监听的队列名称
-- 消息数据使用和发送端一样的数据类型接收
+::: tip
+
+- **使用`@RabbitListener注解`设定要`监听的队列名称`**
+- **消息数据使用和发送端一样的`数据类型接收`**
+
+:::
 
 ```java
 package fun.xingji.mq.listener;
@@ -244,7 +250,7 @@ public class MyMessageListener {
 }
 ```
 
-![RabbitMQ入门案例](./第2章 RabbitMQ入门案例/img-8.jpg)
+![RabbitMQ入门案例](./第2章-RabbitMQ入门案例/img-8.jpg)
 
 
 
@@ -252,4 +258,4 @@ public class MyMessageListener {
 
 监听方法不能直接运行，请大家通过主启动类运行微服务。消费端取走消息之后，队列中就没有消息了：
 
-![RabbitMQ入门案例](./第2章 RabbitMQ入门案例/img-9.jpg)
+![RabbitMQ入门案例](./第2章-RabbitMQ入门案例/img-9.jpg)

@@ -156,7 +156,7 @@ MQ是消息通信的模型；实现MQ的大致有两种主流方式：**AMQP、J
 
 AMQP是一种**高级消息队列协议（Advanced Message Queuing Protocol），更准确的说是一种binary wire-level protocol（**链接协议）。这是其和JMS的本质差别，AMQP不从API层进行限定，而是直接定义网络交换的数据格式。
 
- :::
+:::
 
 
 
@@ -280,13 +280,13 @@ rabbitmq:3.12.0-management
 docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 -v rabbitmq-plugin:/plugins -e RABBITMQ_DEFAULT_USER=guest -e RABBITMQ_DEFAULT_PASS=123456 rabbitmq:3.12.0-management
 ```
 
-![RabbitMQ概述和安装](./第1章 RabbitMQ概述和安装/img-1.jpg)
+![RabbitMQ概述和安装](./第1章-RabbitMQ概述和安装/img-1.jpg)
 
 
 
 ### 2.验证
 
-访问后台管理界面：http://localhost:15672
+> 访问后台管理界面：http://localhost:15672
 
 ![image-20231102194452610](./assets/image-20231102194452610.png)
 
@@ -295,7 +295,6 @@ docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 -v rabbitmq-plugin:/pl
 使用上面创建Docker容器时指定的默认用户名、密码登录：
 
 ![image-20231102194633997](./assets/image-20231102194633997.png)
-
 
 
 ![image-20231102194746743](./assets/image-20231102194746743.png)
@@ -355,7 +354,6 @@ yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker
 ```
 
 
-
 如果这一步看到提示：没有可用软件包 docker-ce，那就添加Docker的yum源：
 
 ```shell
@@ -407,7 +405,14 @@ vim /etc/docker/daemon.json
 
 ```properties
 {
-  "registry-mirrors": ["https://registry.dockermirror.com"]
+  "registry-mirrors": [
+    "https://docker.1panel.live",
+    "https://docker.hlmirror.com",
+    "https://docker.apiba.cn",
+    "https://docker.1ms.run",
+    "https://5pox5fr3.mirror.aliyuncs.com",
+	"https://registry.dockermirror.com"
+  ]
 }
 ```
 
