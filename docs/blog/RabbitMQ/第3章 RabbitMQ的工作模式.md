@@ -13,7 +13,7 @@ cover: ./RabbitMQ.jpg
 
 * RabbitMQ提供了**多种工作模式**：简单模式，work模式 ，Publish/Subscribe发布与订阅模式，Routing路由模式，Topics主题模式等
 
-![image-20240806102313708](assets/image-20240806102313708.png)
+![image-20240806102313708](./assets/image-20240806102313708.png)
 
 官网对应模式介绍：https://www.rabbitmq.com/getstarted.html 
 
@@ -25,7 +25,7 @@ cover: ./RabbitMQ.jpg
 
 ![RabbitMQ的工作模式](./第3章-RabbitMQ的工作模式/img-1.jpg)
 
-![image-20240806084946234](assets/image-20240806084946234.png)
+![image-20240806084946234](./assets/image-20240806084946234.png)
 
 ```mermaid
 flowchart LR
@@ -224,7 +224,7 @@ flowchart LR
 
 ## 2.订阅模式类型
 
-> **订阅模式示例图：**![image-20240806085107277](assets/image-20240806085107277.png) 
+> **订阅模式示例图：**![image-20240806085107277](./assets/image-20240806085107277.png) 
 
 前面2个案例中，只有3个角色：
 
@@ -268,7 +268,7 @@ flowchart LR
 
 ![RabbitMQ的工作模式](./第3章-RabbitMQ的工作模式/img-2.jpg)
 
-![image-20240806085123819](assets/image-20240806085123819.png) 
+![image-20240806085123819](./assets/image-20240806085123819.png) 
 
 发布订阅模式：
 1、每个消费者监听自己的队列。
@@ -421,7 +421,7 @@ public class MyMessageListener {
 
 ![RabbitMQ的工作模式](./第3章-RabbitMQ的工作模式/img-3.jpg)
 
-![image-20240806085148987](assets/image-20240806085148987.png) 
+![image-20240806085148987](./assets/image-20240806085148987.png) 
 
 图解：
 
@@ -519,9 +519,9 @@ item.*：只能匹配item.insert
 
 ![RabbitMQ的工作模式](./第3章-RabbitMQ的工作模式/img-4.jpg)
 
-![image-20240806085214905](assets/image-20240806085214905.png) 
+![image-20240806085214905](./assets/image-20240806085214905.png) 
 
-![img](assets/wps14.jpg) 
+![img](./assets/wps14.jpg) 
 
 图解：
 
@@ -619,7 +619,7 @@ public class MyMessageListener {
 
 一个生产者、一个消费者，不需要设置交换机（使用默认的交换机）
 
-![image-20240806085244893](assets/image-20240806085244893.png) 
+![image-20240806085244893](./assets/image-20240806085244893.png) 
 
 
 
@@ -627,7 +627,7 @@ public class MyMessageListener {
 
 一个生产者、多个消费者（竞争关系），不需要设置交换机（使用默认的交换机）
 
-![image-20240806085305207](assets/image-20240806085305207.png) 
+![image-20240806085305207](./assets/image-20240806085305207.png) 
 
 
 
@@ -635,7 +635,7 @@ public class MyMessageListener {
 
 需要设置类型为fanout的交换机，并且交换机和队列进行绑定，当发送消息到交换机后，交换机会将消息发送到绑定的队列
 
-![image-20240806085325073](assets/image-20240806085325073.png) 
+![image-20240806085325073](./assets/image-20240806085325073.png) 
 
 
 
@@ -643,7 +643,7 @@ public class MyMessageListener {
 
 需要设置类型为direct的交换机，交换机和队列进行绑定，并且指定routing key，当发送消息到交换机后，交换机会根据routing key将消息发送到对应的队列
 
- ![image-20240806085354471](assets/image-20240806085354471.png)
+ ![image-20240806085354471](./assets/image-20240806085354471.png)
 
 
 
@@ -651,4 +651,4 @@ public class MyMessageListener {
 
 需要设置类型为topic的交换机，交换机和队列进行绑定，并且指定通配符方式的routing key，当发送消息到交换机后，交换机会根据routing key将消息发送到对应的队列
 
- ![image-20240806085413115](assets/image-20240806085413115.png)
+ ![image-20240806085413115](./assets/image-20240806085413115.png)
