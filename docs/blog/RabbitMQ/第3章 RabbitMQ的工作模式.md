@@ -453,22 +453,26 @@ public class MyMessageListener {
 
 #### 2 绑定
 
-![image-20240725214547261](./assets/image-20240725214547261.png)
+![RabbitMQ的工作模式](./第3章-RabbitMQ的工作模式/img-14.jpg)
 
-![image-20240725214608820](./assets/image-20240725214608820.png)
+![RabbitMQ的工作模式](./第3章-RabbitMQ的工作模式/img-15.jpg)
 
 
 
 #### 3 生产者代码
 
 ```java
-public static final String EXCHANGE_DIRECT = "atguigu.exchange.direct";
+// ==========================Routing路由模式=================================
+public static final String EXCHANGE_DIRECT3 = "xingji.exchange.direct"; // 指定交换机名称
 
-public static final String ROUTING_KEY_GOOD = "atguigu.routing.key.good";
+public static final String ROUTING_KEY_GOOD = "xingji.routing.key.good"; // 指定路由键key名称
 
 @Test
 public void testSendMessageRouting() {
-    rabbitTemplate.convertAndSend(EXCHANGE_DIRECT, ROUTING_KEY_GOOD, "Hello routing ~");
+     rabbitTemplate.convertAndSend(
+             EXCHANGE_DIRECT3, // 指定交换机名称
+             ROUTING_KEY_GOOD, // 指定路由键key名称
+             "Hello routing ~"); // 消息内容
 }
 ```
 
@@ -477,9 +481,25 @@ public void testSendMessageRouting() {
 #### 4 消费者代码
 
 ```java
-@RabbitListener(queues = {"atguigu.queue.direct"})
-public void processMessageRouting(String messageContent, Message message, Channel channel) {
-    System.out.println("Message Content:" + messageContent);
+package fun.xingji.mq.listener;
+
+import com.rabbitmq.client.Channel;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.messaging.Message;
+import org.springframework.stereotype.Component;
+
+@Component
+public class MyMessageListener {
+// =============================Routing路由模式==============================
+    @RabbitListener(queues = {"xingji.queue.direct"})
+    public void processMessageRouting(
+            String messageContent, // 消息内容
+            Message message, // 消息对象
+            Channel channel // 信道对象
+    ) {
+        // 处理消息
+        System.out.println("Routing messageContent = " + messageContent);
+    }
 }
 ```
 
@@ -487,7 +507,7 @@ public void processMessageRouting(String messageContent, Message message, Channe
 
 #### 5 运行结果
 
-![image-20240725215245500](./assets/image-20240725215245500.png)
+![RabbitMQ的工作模式](./第3章-RabbitMQ的工作模式/img-16.jpg)
 
 
 
@@ -499,33 +519,39 @@ public void processMessageRouting(String messageContent, Message message, Channe
 
 ### 5.1. 模式说明
 
+::: tip
+
 Topic类型与Direct相比，都是可以根据RoutingKey把消息路由到不同的队列。只不过Topic类型Exchange可以让队列在绑定Routing key 的时候**使用通配符**！
+
+::: note 
 
 Routingkey 一般都是有一个或多个单词组成，多个单词之间以”.”分割，例如： item.insert
 
 通配符规则：
 
-\#：匹配零个或多个词
+**\#：匹配`零个或多个词`**
 
-*：匹配不多不少恰好1个词
+***：匹配`不多不少恰好1个词`**
 
 举例：
 
-item.#：能够匹配item.insert.abc 或者 item.insert
+**`item.#`：能够匹配`item.insert.abc`或者`item.insert`**
 
-item.*：只能匹配item.insert
+**`item.*`：只能匹配`item.insert`**
 
 ![RabbitMQ的工作模式](./第3章-RabbitMQ的工作模式/img-4.jpg)
 
-![image-20240806085214905](./assets/image-20240806085214905.png) 
+![image-20240806085214905](./assets/image-20240806085214905.png):::
 
 ![img](./assets/wps14.jpg) 
 
 图解：
 
-· 红色Queue：绑定的是usa.# ，因此凡是以 usa.开头的routing key 都会被匹配到
++ **`红色Queue`：绑定的是`usa.# `，因此凡是`以 sa.开头的routing key `会被匹配到**
 
-· 黄色Queue：绑定的是#.news ，因此凡是以 .news结尾的 routing key 都会被匹配
++ **`黄色Queue`：绑定的是`#.news` ，因此凡是`以.news结尾的 routing key`都会被匹配**
+
+:::
 
 
 
@@ -535,42 +561,43 @@ item.*：只能匹配item.insert
 
 * 组件清单
 
-| 组件   | 组件名称                                       |
-| ------ | ---------------------------------------------- |
-| 交换机 | atguigu.exchange.topic                         |
-| 路由键 | #.error<br />order.*<br />\*.\*                |
-| 队列   | atguigu.queue.message<br />atguigu.queue.order |
+| 组件   | 组件名称                                     |
+| ------ | -------------------------------------------- |
+| 交换机 | xingji.exchange.topic                        |
+| 路由键 | #.error<br />order.*<br />\*.\*              |
+| 队列   | xingji.queue.message<br />xingji.queue.order |
 
 
 
 #### 2 创建交换机
 
-![image-20240725220957833](./assets/image-20240725220957833.png)
+![RabbitMQ的工作模式](./第3章-RabbitMQ的工作模式/img-18.jpg)
 
 
 
 #### 3 绑定关系
 
-![image-20240725222339828](./assets/image-20240725222339828.png)
+![RabbitMQ的工作模式](./第3章-RabbitMQ的工作模式/img-17.jpg)
 
-![image-20240725222805072](./assets/image-20240725222805072.png)
+![RabbitMQ的工作模式](./第3章-RabbitMQ的工作模式/img-19.jpg)
 
 
 
 #### 4 生产者代码
 
 ```java
-public static final String EXCHANGE_TOPIC = "atguigu.exchange.topic";
-public static final String ROUTING_KEY_ERROR = "#.error";
-public static final String ROUTING_KEY_ORDER = "order.*";
-public static final String ROUTING_KEY_ALL = "*.*";
+//============================Topic主题模式==================================
+public static final String EXCHANGE_TOPIC = "xingji.exchange.topic"; // 指定交换机名称
+/*public static final String ROUTING_KEY_ERROR = "#.error"; // 指定路由键key名称
+public static final String ROUTING_KEY_ORDER = "order.*"; // 指定路由键key名称
+public static final String ROUTING_KEY_ALL = "*.*"; // 指定路由键key名称*/
 
 @Test
 public void testSendMessageTopic() {
-    rabbitTemplate.convertAndSend(EXCHANGE_TOPIC, "order.info", "message order info ...");
-    rabbitTemplate.convertAndSend(EXCHANGE_TOPIC, "goods.info", "message goods info ...");
-    rabbitTemplate.convertAndSend(EXCHANGE_TOPIC, "goods.error", "message goods error ...");
-}
+	rabbitTemplate.convertAndSend(EXCHANGE_TOPIC, "order.info", "message order info ..."); // 走order队列和message队列
+	rabbitTemplate.convertAndSend(EXCHANGE_TOPIC, "goods.info", "message goods info ..."); // 走message队列
+	rabbitTemplate.convertAndSend(EXCHANGE_TOPIC, "goods.error", "message goods error ..."); // 走message队列
+    }
 ```
 
 
@@ -578,26 +605,35 @@ public void testSendMessageTopic() {
 #### 5 消费者代码
 
 ```java
-package com.atguigu.mq.listener;
+package fun.xingji.mq.listener;
 
 import com.rabbitmq.client.Channel;
-import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MyMessageListener {
-
-    @RabbitListener(queues = {"atguigu.queue.message"})
-    public void processMessage01(String messageContent, Message message, Channel channel) {
-        System.out.println("Queue Message:" + messageContent);
+// =============================Topic主题模式================================
+    @RabbitListener(queues = {"xingji.queue.message"})
+    public void processMessageTopic01(
+            String messageContent, // 消息内容
+            Message message, // 消息对象
+            Channel channel // 信道对象
+    ) {
+        // 处理消息
+        System.out.println("message messageContent = " + messageContent);
     }
 
-    @RabbitListener(queues = {"atguigu.queue.order"})
-    public void processMessage02(String messageContent, Message message, Channel channel) {
-        System.out.println("Queue Order:" + messageContent);
+    @RabbitListener(queues = {"xingji.queue.order"})
+    public void processMessageTopic02(
+            String messageContent, // 消息内容
+            Message message, // 消息对象
+            Channel channel // 信道对象
+    ) {
+        // 处理消息
+        System.out.println("order messageContent = " + messageContent);
     }
-
 }
 ```
 
@@ -605,7 +641,9 @@ public class MyMessageListener {
 
 #### 6 运行效果
 
-![image-20240725223737173](./assets/image-20240725223737173.png)
+![RabbitMQ的工作模式](./第3章-RabbitMQ的工作模式/img-21.jpg)
+
+![RabbitMQ的工作模式](./第3章-RabbitMQ的工作模式/img-20.jpg)
 
 
 
@@ -625,7 +663,9 @@ public class MyMessageListener {
 
 一个生产者、多个消费者（竞争关系），不需要设置交换机（使用默认的交换机）
 
-![image-20240806085305207](./assets/image-20240806085305207.png) 
+![image-20240806085305207](./assets/image-20240806085305207.png)
+
+![RabbitMQ的工作模式](./第3章-RabbitMQ的工作模式/img-1.jpg) 
 
 
 
@@ -633,7 +673,9 @@ public class MyMessageListener {
 
 需要设置类型为fanout的交换机，并且交换机和队列进行绑定，当发送消息到交换机后，交换机会将消息发送到绑定的队列
 
-![image-20240806085325073](./assets/image-20240806085325073.png) 
+![image-20240806085325073](./assets/image-20240806085325073.png)
+
+![RabbitMQ的工作模式](./第3章-RabbitMQ的工作模式/img-2.jpg) 
 
 
 
@@ -643,6 +685,8 @@ public class MyMessageListener {
 
  ![image-20240806085354471](./assets/image-20240806085354471.png)
 
+![RabbitMQ的工作模式](./第3章-RabbitMQ的工作模式/img-3.jpg)
+
 
 
 ### **5、通配符模式 Topic**
@@ -650,3 +694,5 @@ public class MyMessageListener {
 需要设置类型为topic的交换机，交换机和队列进行绑定，并且指定通配符方式的routing key，当发送消息到交换机后，交换机会根据routing key将消息发送到对应的队列
 
  ![image-20240806085413115](./assets/image-20240806085413115.png)
+
+![RabbitMQ的工作模式](./第3章-RabbitMQ的工作模式/img-4.jpg)
