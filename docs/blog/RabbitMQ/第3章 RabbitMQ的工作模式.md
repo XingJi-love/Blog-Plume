@@ -651,6 +651,8 @@ public class MyMessageListener {
 
 ## 6.模式总结
 
+![RabbitMQ的工作模式](./第3章-RabbitMQ的工作模式/img-22.jpg)
+
 ### **1、简单模式 HelloWorld**
 
 一个生产者、一个消费者，不需要设置交换机（使用默认的交换机）
