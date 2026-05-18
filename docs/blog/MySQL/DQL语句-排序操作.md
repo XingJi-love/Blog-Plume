@@ -7,7 +7,7 @@ permalink: /blog/n0pzs5pz/
 cover: /MySQL.jpg
 ---
 
-![MySQL安装教程](./MySQL安装教程/MySQL.jpg)
+![MySQL安装教程](./MySQL.jpg)
 
 ---
 

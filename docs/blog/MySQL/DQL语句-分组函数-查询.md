@@ -7,7 +7,7 @@ permalink: /blog/7vapacku/
 cover: /MySQL.jpg
 ---
 
-![MySQL安装教程](./MySQL安装教程/MySQL.jpg)
+![MySQL安装教程](./MySQL.jpg)
 
 ---
 
