@@ -8,7 +8,7 @@ permalink: /blog/ax2pv4e5/
 cover: /MySQL.jpg
 ---
 
-![Navicat安装教程](./Navicat安装教程/MySQL.jpg)
+![Navicat安装教程](./MySQL.jpg)
 
 ---
 
