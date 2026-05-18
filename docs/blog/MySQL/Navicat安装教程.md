@@ -5,10 +5,10 @@ tags:
   - Navicat
 createTime: 2025/08/04 21:00:00
 permalink: /blog/ax2pv4e5/
-cover: /MySQL.png
+cover: /MySQL.jpg
 ---
 
-![Navicat安装教程](./Navicat安装教程/MySQL.png)
+![Navicat安装教程](./Navicat安装教程/MySQL.jpg)
 
 ---
 

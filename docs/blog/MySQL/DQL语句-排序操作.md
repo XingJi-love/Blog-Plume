@@ -4,10 +4,10 @@ tags:
   - MySQL
 createTime: 2025/08/06 20:00:00
 permalink: /blog/n0pzs5pz/
-cover: /MySQL.png
+cover: /MySQL.jpg
 ---
 
-![MySQL安装教程](./MySQL安装教程/MySQL.png)
+![MySQL安装教程](./MySQL安装教程/MySQL.jpg)
 
 ---
 
