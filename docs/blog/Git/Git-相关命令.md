@@ -8,7 +8,7 @@ permalink: /blog/v411hvof/
 cover: /Git.jpg
 ---
 
-![Git.webp](./Git-学习笔记/Git.webp)
+![Git.webp](./Git.jpg)
 
 ::: info 相关资料
 

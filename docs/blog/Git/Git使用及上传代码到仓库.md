@@ -15,7 +15,7 @@ copyright:
     url: https://github.com/Yiov
 ---
 
-![Git.webp](./Git使用及上传代码到仓库/Git.webp)
+![Git.webp](./Git.jpg)
 
 ## 简介
 

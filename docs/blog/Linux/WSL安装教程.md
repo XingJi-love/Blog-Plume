@@ -5,10 +5,10 @@ tags:
   - WSL
 createTime: 2025/04/01 22:45:58
 permalink: /blog/8gwjgg4y/
-cover: /Linux.png
+cover: /Linux.jpg
 ---
 
-![WSL安装教程](./Linux.png)
+![WSL安装教程](./Linux.jpg)
 
 ## 开启 WSL 的两个前提
 

@@ -8,7 +8,7 @@ permalink: /blog/3jywe2ge/
 cover: /Git.jpg
 ---
 
-![Git.webp](./Git-学习笔记/Git.webp)
+![Git.webp](./Git.jpg)
 
 ## 如何选择开源许可证？
 
