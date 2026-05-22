@@ -181,10 +181,6 @@ netplan apply
 systemctl restart systemd-networkd
 ```
 
-
-
-
-
 注意：这是一个权限警告，不是错误。说明你的配置文件权限过于宽松，有安全风险。让我们修复它：
 
 ![](./VMware虚拟机固定IP配置/img-14.jpg)
