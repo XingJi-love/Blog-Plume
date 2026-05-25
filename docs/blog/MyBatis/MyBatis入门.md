@@ -4,10 +4,10 @@ tags:
     - MyBatis
 createTime: 2026/03/10 22:40:02
 permalink: /blog/v25x29xw/
-cover: ./MyBatis.jpg
+cover: ./SSM.jpg
 ---
 
-![MyBatis入门](./MyBatis.jpg)
+![MyBatis入门](./SSM.jpg)
 
 ## 介绍
 

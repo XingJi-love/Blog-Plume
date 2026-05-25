@@ -4,10 +4,10 @@ tags:
     - SpringMVC
 createTime: 2026/03/29 22:16:44
 permalink: /blog/31j6m0s5/
-cover: ./SpringMVC.jpg
+cover: ./SSM.jpg
 ---
 
-![SpringMVC响应处理](./SpringMVC.jpg)
+![SpringMVC响应处理](./SSM.jpg)
 
 
 

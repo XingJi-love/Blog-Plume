@@ -4,10 +4,10 @@ tags:
     - MyBatis
 createTime: 2026/01/20 15:40:34
 permalink: /blog/ehbjvkl/
-cover: ./MyBatis.jpg
+cover: ./SSM.jpg
 ---
 
-![完成CRUD](./MyBatis.jpg)
+![完成CRUD](./SSM.jpg)
 
 ## 什么是CRUD
 

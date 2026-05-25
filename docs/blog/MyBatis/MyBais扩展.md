@@ -4,10 +4,10 @@ tags:
     - MyBatis
 createTime: 2026/03/16 17:24:39
 permalink: /blog/v8ufeif3/
-cover: ./MyBatis.jpg
+cover: ./SSM.jpg
 ---
 
-![MyBais扩展](./MyBatis.jpg)
+![MyBais扩展](./SSM.jpg)
 
 ## 缓存机制
 

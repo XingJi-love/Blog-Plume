@@ -4,10 +4,10 @@ tags:
     - MyBatis
 createTime: 2026/03/11 19:27:26
 permalink: /blog/57sb082m/
-cover: ./MyBatis.jpg
+cover: ./SSM.jpg
 ---
 
-![MyBatis参数传递](./MyBatis.jpg)
+![MyBatis参数传递](./SSM.jpg)
 
 ## \#{}与${}
 

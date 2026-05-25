@@ -4,10 +4,10 @@ tags:
     - MyBatis
 createTime: 2026/01/04 15:40:34
 permalink: /blog/ehbjvsro/
-cover: ./MyBatis.jpg
+cover: ./SSM.jpg
 ---
 
-![MyBatis概述与入门](./MyBatis.jpg)
+![MyBatis概述与入门](./SSM.jpg)
 
 ## MyBatis概述与入门
 
