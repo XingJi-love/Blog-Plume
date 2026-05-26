@@ -1,5 +1,5 @@
 ---
-title: Linux | WSL 安装教程
+title: WSL2 安装教程
 tags:
   - Linux
   - WSL
