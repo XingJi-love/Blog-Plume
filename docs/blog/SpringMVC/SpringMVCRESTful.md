@@ -4,10 +4,10 @@ tags:
     - SpringMVC
 createTime: 2026/03/31 14:27:58
 permalink: /blog/xveyh32i/
-cover: ./SSM.jpg
+cover: ./SpringMVC.jpg
 ---
 
-![RESTful](./SSM.jpg)
+![RESTful](./SpringMVC.jpg)
 
 ## RESTful 介绍
 

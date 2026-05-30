@@ -4,10 +4,10 @@ tags:
     - MyBatis
 createTime: 2026/03/14 18:17:36
 permalink: /blog/i91bu9qc/
-cover: ./SSM.jpg
+cover: ./MyBatis.jpg
 ---
 
-![MyBatis动态SQL](./SSM.jpg)
+![MyBatis动态SQL](./MyBatis.jpg)
 
 ## 简介
 
