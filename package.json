@@ -14,14 +14,14 @@
     "vp-update": "pnpm dlx vp-update"
   },
   "devDependencies": {
-    "@vuepress/bundler-vite": "2.0.0-rc.28",
+    "@vuepress/bundler-vite": "2.0.0-rc.30",
     "cross-env": "^10.1.0",
     "http-server": "^14.1.1",
-    "twikoo": "^1.7.9",
+    "twikoo": "^1.7.11",
     "typescript": "^5.9.3",
-    "vue": "^3.5.34",
-    "vuepress": "2.0.0-rc.28",
-    "vuepress-theme-plume": "1.0.0-rc.200"
+    "vue": "^3.5.35",
+    "vuepress": "2.0.0-rc.30",
+    "vuepress-theme-plume": "1.0.0-rc.202"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
@@ -33,13 +33,13 @@
     "node": "^20.19.0 || >=22.0.0"
   },
   "dependencies": {
-    "@iconify/json": "^2.2.471",
+    "@iconify/json": "^2.2.483",
     "@mathjax/src": "^4.1.2",
     "artplayer": "^5.4.0",
     "chart.js": "^4.5.1",
-    "echarts": "^6.0.0",
+    "echarts": "^6.1.0",
     "flowchart.ts": "^3.0.1",
-    "mermaid": "^11.14.0",
-    "swiper": "^12.1.4"
+    "mermaid": "^11.15.0",
+    "swiper": "^12.2.0"
   }
 }
