@@ -18,6 +18,8 @@ import Homepage from './theme/components/Homepage.vue' // 首页组件
 
 import AllFriendContent from './theme/components/AllFriendContent.vue' // 友链组件
 
+import FootMap from "./theme/components/FootMap.vue"; // 引入 FootMap 组件
+
 export default defineClientConfig({
   enhance({ app }) {
     // built-in components
@@ -31,6 +33,8 @@ export default defineClientConfig({
     app.component('Homepage', Homepage) // 首页组件
 
     app.component('AllFriendContent', AllFriendContent) // 友链组件
+
+    app.component('FootMap', FootMap) // 注册 FootMap 组件
   },
 
   layouts: {

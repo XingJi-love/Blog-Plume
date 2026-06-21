@@ -12,6 +12,7 @@ export default defineNavbarConfig([
   { text: '标签', link: '/blog/tags/', icon: 'icon-park:tag' },
   { text: '归档', link: '/blog/archives/', icon: 'lucide:archive' },
   { text: '友链', link: '/friends/', icon: 'solar:accessibility-bold-duotone' },
+  /*{ text: '足迹', link: '/foot/', icon: 'material-symbols:barefoot'},*/
   { text: '关于', link: '/about/', icon: 'fa:child' },
   {
     text: '笔记',

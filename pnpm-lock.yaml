@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@amap/amap-jsapi-loader':
+        specifier: ^1.0.1
+        version: 1.0.1
       '@iconify/json':
         specifier: ^2.2.483
         version: 2.2.483
@@ -59,6 +62,9 @@ importers:
         version: 1.0.0-rc.202(@iconify/json@2.2.483)(@mathjax/mathjax-newcm-font@4.1.2)(@mathjax/src@4.1.2)(@types/markdown-it@14.1.2)(@vue/compiler-sfc@3.5.35)(@vuepress/bundler-vite@2.0.0-rc.30(@types/node@25.9.1)(@vue/compiler-sfc@3.5.35)(esbuild@0.28.0)(typescript@5.9.3)(yaml@2.9.0))(artplayer@5.4.0)(chart.js@4.5.1)(echarts@6.1.0)(flowchart.ts@3.0.1)(markdown-it@14.2.0)(mermaid@11.15.0)(qrcode@1.5.4)(swiper@12.2.0)(twikoo@1.7.11)(typescript@5.9.3)(vite@8.0.16(@types/node@25.9.1)(esbuild@0.28.0)(yaml@2.9.0))(vuepress@2.0.0-rc.30(@vue/compiler-sfc@3.5.35)(@vuepress/bundler-vite@2.0.0-rc.30(@types/node@25.9.1)(@vue/compiler-sfc@3.5.35)(esbuild@0.28.0)(typescript@5.9.3)(yaml@2.9.0))(typescript@5.9.3)(vite@8.0.16(@types/node@25.9.1)(esbuild@0.28.0)(yaml@2.9.0))(vue@3.5.35(typescript@5.9.3)))
 
 packages:
+
+  '@amap/amap-jsapi-loader@1.0.1':
+    resolution: {integrity: sha512-nPyLKt7Ow/ThHLkSvn2etQlUzqxmTVgK7bIgwdBRTg2HK5668oN7xVxkaiRe3YZEzGzfV2XgH5Jmu2T73ljejw==}
 
   '@antfu/install-pkg@1.1.0':
     resolution: {integrity: sha512-MGQsmw10ZyI+EJo45CdSER4zEb+p31LpDAFp2Z3gkSd1yqVZGi0Ebx++YTEMonJy4oChEMLsxZ64j8FH6sSqtQ==}
@@ -3011,6 +3017,8 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
 snapshots:
+
+  '@amap/amap-jsapi-loader@1.0.1': {}
 
   '@antfu/install-pkg@1.1.0':
     dependencies:

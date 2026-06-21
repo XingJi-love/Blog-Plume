@@ -33,6 +33,7 @@
     "node": "^20.19.0 || >=22.0.0"
   },
   "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
     "@iconify/json": "^2.2.483",
     "@mathjax/src": "^4.1.2",
     "artplayer": "^5.4.0",
