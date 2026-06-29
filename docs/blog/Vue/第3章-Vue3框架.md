@@ -451,9 +451,33 @@ export default defineConfig({
 </template>
 ```
 
+> **示例:**
+
+```html
+<script setup>
+//模型属性
+let message = 'hello'
+let age = 18
+let add = (a, b) => a + b
+</script>
+
+<template>
+  <div>
+    {{ message }}
+    {{ age + 1 }}
+    {{ add(1, 2) }}
+    <h1>你成年了吗：{{ age >= 18 ? "已成年" : "未成年" }}</h1>
+  </div>
+</template>
+
+<style scoped></style>
+```
+
+![Vue3框架](./第3章-Vue3框架/img-4.jpg)
+
 > 为了渲染双标中的文本，我们也可以选择使用`v-text`和`v-html`命令：
 
-+ v-*** 这种写法的方式使用的是vue的命令；
++ v-***这种写法的方式使用的是vue的命令；
 + v-***的命令必须依赖元素，并且要写在元素的开始标签中；
 + v-***指令支持ES6中的模板字符串；
 + 插值表达式中支持javascript的运算表达式；
@@ -477,6 +501,31 @@ export default defineConfig({
     <div v-html="msg"></div>
 </template>
 ```
+
+> **示例:**
+
+```html
+<script setup>
+//模型属性
+let message = '<h2>hello</h2>'
+let age = 18
+let add = (a, b) => a + b 
+</script>
+
+<template>
+    <div>
+        <!-- <span>{{ message }}</span> -->
+        <span v-text="message"></span> <br> <!--字符串中有html标签原样输出-->
+        <span v-html="message"></span> <br> <!--字符串中有html标签会被浏览器解析-->
+    </div>
+</template>
+
+<style scoped></style>
+```
+
+![Vue3框架](./第3章-Vue3框架/img-5.jpg)
+
+
 
 #### 2、Attribute属性渲染
 
@@ -508,9 +557,46 @@ export default defineConfig({
 </template>
 ```
 
+> **示例:**
+
+```html
+<script setup>
+//模型属性
+let message = '<h2>hello</h2>'
+let age = 18
+let id = 1
+let link = "http://v.xingji.fun"
+</script>
+
+<template>
+    <div>
+        <!--只有表单元素标签有value属性。-->
+        年龄：<input v-bind:id="id" name="age" v-bind:value="age + 1" />
+        年龄：<input :id="id" name="age" v-bind:value="age + 1" />
+        年龄：<input :id name="age" v-bind:value="age + 1" />
+        年龄2：<input name="age" :value="age + 2" />
+
+        <!-- 与 :id="id" 相同 -->
+        <div id="1"></div>
+        <div :id></div>
+        <div v-bind:id></div>
+        <div v-bind:id="id"></div>
+
+
+        <a v-bind:href="link">链接</a>
+    </div>
+</template>
+
+<style scoped></style>
+```
+
+![Vue3框架](./第3章-Vue3框架/img-6.jpg)
+
+
+
 #### 3、事件的绑定
 
-> 我们可以使用 `v-on` 来监听 DOM 事件，并在事件触发时执行对应的 Vue的JavaScript代码。
+> **我们可以使用 `v-on` 来监听 DOM 事件，并在事件触发时执行对应的 Vue的JavaScript代码。**
 
 + 用法：`v-on:click="handler"` 或简写为 `@click="handler"`；
 + vue中的事件名=原生事件名去掉`on` 前缀   如:`onClick --> click`；
@@ -565,11 +651,83 @@ export default defineConfig({
 </template>
 ```
 
+> **示例:**
+
+```html
+<script setup>
+
+import { ref } from 'vue'
+
+//模型属性
+let count = ref(0)      //响应式变量
+let increment = () => {
+    count.value++
+}
+
+let data = '请输入您的姓名'
+// 输入框内容改变
+let mychange = () => {
+    console.log('change事件触发了...')
+}
+
+// 鼠标点击
+let myfocus = () => {
+    console.log('focus事件触发了...')
+}
+
+// 鼠标离开
+let myBlur = () => {
+    console.log('Blur事件触发了...')
+}
+
+// 阻止事件（取消默认行为）
+let stopDef = (event) => {
+    event.preventDefault(); //阻止事件产生
+
+}
+
+// 阻止事件（取消默认行为）
+let clickblog = () => {
+    console.log("点击我的博客")
+
+}
+
+</script>
+
+<template>
+    <div>
+
+        {{ count }}
+        <!--  v-on: 可以用 @ 代替-->
+        <button v-on:click="increment">变变变</button>
+        <button v-on:click.once="increment">只能变一次</button>
+
+        <button @click="increment">变变变2</button>
+        姓名：<input v-on:change="mychange" v-on:focus="myfocus" v-on:blur="myBlur" :value="data"></input>
+        姓名2：<input @change="mychange" @focus="myfocus" @blur="myBlur" :value="data"></input>
+
+        <br>
+        <!-- 事件修饰符 -->
+
+        <!-- 阻止事件（取消默认行为） -->
+        <a href="http://v.xingji.fun" target="_blank" @click="clickblog">去我的博客页面</a><br>
+
+        <a href="http://v.xingji.fun" target="_blank" @click.prevent="clickblog">去我的博客页面</a><br>
+        <!-- 使用原生JS代码阻止事件（取消默认行为） -->
+        <a href="http://v.xingji.fun" target="_blank" @click="stopDef($event)">去我的博客页面2</a>
+    </div>
+</template>
+
+<style scoped></style>
+```
+
+![Vue3框架](./第3章-Vue3框架/img-7.jpg)
+
 
 
 ### 3.2 响应式基础
 
->  此处的响应式是指  ： 数据模型（自定义的变量、对象）发生变化时，自动更新DOM树内容，页面上显示的内容会进行同步变化。vue3的数据模型不是自动响应式的，需要我们做一些特殊的处理。
+>  **此处的响应式是指  ： 数据模型（自定义的变量、对象）发生变化时，自动更新DOM树内容，页面上显示的内容会进行同步变化。vue3的数据模型不是自动响应式的，需要我们做一些特殊的处理。**
 
 #### 1、如何实现响应式
 
@@ -643,11 +801,88 @@ let changeObj2Attr = ()=>{
 </template>
 ```
 
+> **示例:**
+
+```html
+<script setup>
+import { ref, reactive } from 'vue'
+
+//let count = 0 //变量不是响应式的，数据变了，页面不跟着变。
+
+//响应式：数据模型变更，页面自动更新
+//可以使用ref或reactive来声明响应式变量。
+
+//ref声明响应式变量，在脚本中需要使用.value引用。在模板中不需要使用.value引用。
+//reactive声明响应式变量，在脚本中和模板中都不需要使用.value引用。
+
+//ref一般用于声明简单类型的响应式变量。也可以声明对象类型响应式变量。对象是响应式的，对象属性也是响应式的。
+//reactive主要声明对象类型响应式变量。对象地址不能更改,对象不是响应式，对象属性是响应式的。
+
+let count = ref(0)
+let counter = reactive(0) //不推荐。
+
+let change = () => {
+    // count++;
+    // console.log(count)
+    count.value++
+    console.log(count.value)
+
+    counter++
+    console.log(counter)
+}
+
+
+
+let person = reactive({name:'zhangsan',age:22})
+
+// 对象不是响应式的，对象属性是响应式的
+let change2 = () => {
+    //person = {name:'lisi',age:23}
+    person.name = 'lisi'
+}
+
+let person3 = ref({name:'zhangsan',age:22})
+
+// 对象是响应式的，对象属性也是响应式的
+let change3 = () => {
+    //person3.value = {name:'lisi',age:23}
+    person3.value.name = 'lisi'
+}
+
+
+</script>
+
+<template>
+    <div>
+        <p v-text="count"></p> ||
+        <p v-text="counter"></p>
+        <button @click="change">修改模型数据</button>
+        <hr />
+        {{ person.name }} | {{ person.age }}
+        <button @click="change2">修改模型数据2</button>
+
+        <hr />
+        {{ person3.name }} | {{ person3.age }}
+        <button @click="change3">修改模型数据3</button>
+     </div>
+</template>
+
+<style scoped></style>
+```
+
+![Vue3框架](./第3章-Vue3框架/img-8.jpg)
+
+
+
 #### 2、ref与reactive的区别
+
+:::: steps  
 
 1. ref函数可以包装基本类型（字符串、数字）和引入类型（数组、对象）；reactive只能包装引用类型
 2. 使用ref包装的数据在JS中修改或获取的时候需要加.value，在DOM中不用添加.value；用reactive包装的数据在JS和DOM中都不需要添加.value
 3. 使用ref包装的对象，对象和对象的属性都是响应式的；使用reactive包装的对象，对象不是响应式的，对象的属性是响应式的
+
+::::
 
 
 
@@ -655,7 +890,7 @@ let changeObj2Attr = ()=>{
 
 #### 1、条件渲染
 
-> `v-if` 条件渲染：
+> **`v-if` 条件渲染：**
 
 + `v-if='表达式' `只会在指令的表达式返回真值时才被渲染
 
@@ -675,7 +910,7 @@ let age = 16
 </template>
 ```
 
-> `v-show`条件渲染扩展：
+> **`v-show`条件渲染扩展：**
 
 + 另一个可以用来按条件显示一个元素的指令是 `v-show`。其用法基本一样；
 
@@ -709,6 +944,31 @@ let age = 16
 
 + 总的来说，`v-if` 有更高的切换开销，而 `v-show` 有更高的初始渲染开销。因此，如果需要频繁切换，则使用 `v-show` 较好；如果在运行时绑定条件很少改变，则 `v-if` 会更合适；
 
+> **示例:**
+
+```html
+<script setup>
+let age = 16
+</script>
+
+<template>
+    <div>
+        <div v-if="age >= 18">年龄大于等于18岁 - 成年人</div>
+        <div v-else>年龄小于18岁 - 未成年人</div>
+
+        <!-- 通过display: none; 隐藏标签。-->
+        <div v-show="age >= 18">成年人</div>
+        <div v-show="age < 18">儿童</div>
+    </div>
+</template>
+
+<style scoped></style>
+```
+
+![Vue3框架](./第3章-Vue3框架/img-9.jpg)
+
+
+
 #### 2、列表渲染
 
 > 我们可以使用 `v-for` 指令基于一个数组来渲染一个列表：
@@ -723,54 +983,59 @@ let age = 16
 let userArray = []
 
 let userArray2 = [
-  {id:1,name:"迪丽热巴",age:30},
-  {id:2,name:"古力娜扎",age:28},
-
-  {id:4,name:"马蓉",age:40},
-  {id:5,name:"李小璐",age:33},
-  {id:6,name:"杨颖",age:34}
+    { id: 1, name: "迪丽热巴", age: 30 },
+    { id: 2, name: "古力娜扎", age: 28 },
+    { id: 4, name: "马蓉", age: 40 },
+    { id: 5, name: "李小璐", age: 33 },
+    { id: 6, name: "杨颖", age: 34 }
 ]
 </script>
 
 <template>
-  <div v-if="userArray2.length==0">
-    <h1>没有任何用户</h1>
-  </div>
-  <div v-else>
-    <h1>用户列表</h1>
-    <table border="1" cellpadding="20" cellspacing="0" >
-      <tr>
-        <th>序号</th>
-        <th>编号</th>
-        <th>姓名</th>
-        <th>年龄</th>
-        <th colspan="2">操作</th>
-      </tr>
-      <tr v-for="(user,index) in userArray2">
-         <td>{{ index }}</td> 
-         <td v-text="user.id"></td>
-         <td>{{ user.name }}</td>
-         <td>{{ user.age }}</td>
-         <td>
-          <a href="#">编辑</a>
-         </td>
-         <td>
-          <a href="#">删除</a>
-         </td>
-      </tr>
-    </table>
-  </div>
+    <div v-if="userArray2.length == 0">
+        <h1>没有任何用户</h1>
+    </div>
+    <div v-else>
+        <h1>用户列表</h1>
+        <table border="1" cellpadding="20" cellspacing="0">
+            <!-- 表头放在 thead 中 -->
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>编号</th>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th colspan="2">操作</th>
+                </tr>
+            </thead>
+            <!-- 数据行放在 tbody 中 -->
+            <tbody>
+                <tr v-for="(item, index) in userArray2" :key="item.id">
+                    <td>{{ index + 1 }}</td>
+                    <td v-text="item.id"></td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.age }}</td>
+                    <td><a href="#">编辑</a></td>
+                    <td><a href="#">删除</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
+
+<style scoped></style>
 ```
+
+![Vue3框架](./第3章-Vue3框架/img-10.jpg)
 
 
 
 ### 3.4 双向绑定
 
-> 单项绑定和双向绑定：
+> **单项绑定和双向绑定：**
 
-+ 单向绑定：响应式数据的变化会更新dom树，但是dom树上用户的操作造成的数据改变`不会同步更新到响应式数据`；
-+ 双向绑定：响应式数据的变化会更新dom树，但是dom树上用户的操作造成的数据改变`会同步更新到响应式数据`；
++ **单向绑定：响应式数据的变化会更新dom树，但是dom树上用户的操作造成的数据改变`不会同步更新到响应式数据`；**
++ **双向绑定：响应式数据的变化会更新dom树，但是dom树上用户的操作造成的数据改变`会同步更新到响应式数据`；**
   + 用户通过表单标签才能够输入数据，所以双向绑定都是应用到表单标签上的，其他标签不行；
   + v-model专门用于双向绑定表单标签的value属性，语法为 `v-model:value=''`，可以简写为 `v-model=''`；
   + v-model还可以用于各种不同类型的输入，`<textarea>`、`<select>` 元素；
@@ -796,6 +1061,8 @@ let changeData = ()=>{
 </template>
 ```
 
+![Vue3框架](./第3章-Vue3框架/img-11.jpg)
+
 
 
 ### 3.5 Vue生命周期
@@ -816,51 +1083,61 @@ let changeData = ()=>{
   + onBeforeUpdate()      注册一个钩子，在组件即将因为响应式状态变更而更新其 DOM 树之前调用； 
   + onBeforeUnmount()  注册一个钩子，在组件实例被卸载之前调用； 
 
+
+
 #### 2、生命周期案例
 
 ```html
 <script setup>
-    import {ref,onUpdated,onMounted,onBeforeUpdate} from 'vue'
-    let message =ref('hello')   
-    // 挂载完毕生命周期
-    onMounted(()=>{
-      console.log('-----------onMounted---------')
-      let span1 =document.getElementById("span1")
-      console.log(span1.innerText)
-    })
-    // 更新前生命周期
-    onBeforeUpdate(()=>{
-      console.log('-----------onBeforeUpdate---------')
-      console.log(message.value)
-      let span1 =document.getElementById("span1")
-      console.log(span1.innerText)
-    })
-    // 更新完成生命周期
-    onUpdated(()=>{
-      console.log('-----------onUpdated---------')
-      let span1 =document.getElementById("span1")
-      console.log(span1.innerText)
-    })
+import { ref, onUpdated, onMounted, onBeforeUpdate } from 'vue'
+let message = ref('hello')
+
+// 挂载完毕生命周期
+onMounted(() => {
+    console.log('-----------onMounted---------')
+    let span1 = document.getElementById("span1")
+    console.log(span1.innerText)
+})
+
+// 更新前生命周期
+onBeforeUpdate(() => {
+    console.log('-----------onBeforeUpdate---------')
+    console.log(message.value)
+    let span1 = document.getElementById("span1")
+    console.log(span1.innerText)
+})
+
+// 更新完成生命周期
+onUpdated(() => {
+    console.log('-----------onUpdated---------')
+    let span1 = document.getElementById("span1")
+    console.log(span1.innerText)
+})
 </script>
+
 <template>
-  <div>
-    <span id="span1" v-text="message"></span> <br>
-    <input type="text" v-model="message">
-  </div>
+    <div>
+        <span id="span1" v-text="message"></span> <br>
+        <input type="text" v-model="message">
+    </div>
 </template>
-<style scoped>
-</style>
+
+<style scoped></style>
 ```
+
+![Vue3框架](./第3章-Vue3框架/img-12.jpg)
+
+
 
 
 
 ### 3.6 Vue组件基础
 
-> 组件允许我们将 UI 划分为独立的、可重用的部分，并且可以对每个部分进行单独的思考。组件就是实现应用中局部功能代码和资源的集合！在实际应用中，组件常常被组织成层层嵌套的树状结构：
+> **组件允许我们将 UI 划分为独立的、可重用的部分，并且可以对每个部分进行单独的思考。组件就是实现应用中局部功能代码和资源的集合！在实际应用中，组件常常被组织成层层嵌套的树状结构：**
 
 <img src="./images/17.png" style="zoom:50%;" />
 
-+ 这和我们嵌套 HTML 元素的方式类似，Vue 实现了自己的组件模型，使我们可以在每个组件内封装自定义内容与逻辑。
++ **这和我们嵌套 HTML 元素的方式类似，Vue 实现了自己的组件模型，使我们可以在每个组件内封装自定义内容与逻辑。**
 
 > 传统方式编写应用：
 
@@ -877,15 +1154,19 @@ let changeData = ()=>{
 
 
 
+
+
 ### 3.7 Vue组件之间传递数据（了解）
 
 #### 1、父传子
 
-> Vue3 中父组件向子组件传值可以通过 props 进行，具体操作如下：
+> **Vue3 中父组件向子组件传值可以通过 props 进行，具体操作如下：**
+
+:::: steps
 
 1. 需要在子组件定义要接收的数据和参数
 
-   ```  
+   ```  vue
    # 语法1: 数组方案声明
    defineProps(['foo'])
    
@@ -914,9 +1195,11 @@ let changeData = ()=>{
      方案3：let {foo} = defineProps(['foo'])｜let {title} =  defineProps({title: String}) 直接使用声明属性名即可 {{foo | title}}
    ```
 
+   
+
 2. 父组件使用子组件时进行赋值即可
 
-   ``` 
+   ``` vue
    静态传参：
    	声明接收
    	defineProps({
@@ -933,61 +1216,76 @@ let changeData = ()=>{
      <BlogPost :title="post.title + ' by ' + post.author.name" />
    ```
 
+::::
+
 + 父组件代码：App.vue
 
-```html
+```vue
 <script setup>
-  import Son from './components/Son.vue'
-  import {ref,reactive,toRefs} from 'vue'
-  let message = ref('parent data!')
-  let title = ref(42)
-  function changeMessage(){
-    message.value = '修改数据！'
-    title.value++
-  }
+import { ref } from 'vue'
+import Son from '../父传子/son.vue'
+let message = ref('hello')
+
+// 在父组件中更新模型属性
+let change = () => {
+    message.value = 'world'
+}
 </script>
+
 <template>
-  <div>
-    <h2>{{ message }}</h2>
-    <hr>
-    <!-- 使用子组件，并且传递数据！ -->
-    <Son :message="message" :title="title"></Son>
-    <hr>
-    <button @click="changeMessage">点击更新</button>
-  </div>
+    <div>
+        <hr>
+        在父组件上的内容如下：{{ message }} 
+        <br>
+        <button @click="change">在父组件中更新模型属性</button>
+        <hr>
+
+        <Son :msg="message" number="123"></Son>
+    </div>
 </template>
-<style scoped>
-</style>
+
+<style scoped></style>
 ```
+
+
 
 + 子组件代码：Son.vue
 
-```html
-<script setup type="module">
-    import {ref,isRef,defineProps} from 'vue'
-    //声明父组件传递属性值
-    defineProps({
-        message:String ,
-        title:Number
-    })
+```vue
+<script setup>
+import { ref, defineProps } from 'vue'
+
+//子组件定义模型属性用于接收父组件传输过来的数据。
+defineProps({
+    msg: String,
+    number: Number
+})
 </script>
+
 <template>
     <div>
-    <div>{{ message }}</div>
-    <div>{{ title }}</div>
+        <hr />
+        子组件回显内容：{{ msg }} - {{ number }}
+        <hr />
     </div>
 </template>
-<style>
-</style>
+
+<style scoped></style>
 ```
+
+![Vue3框架](./第3章-Vue3框架/img-13.jpg)
+
+
 
 #### 2、子传父
 
->  Vue3 中子组件向父组件传值可以通过 defineEmits 进行，具体操作如下：
+>  **Vue3 中子组件向父组件传值可以通过 defineEmits 进行，具体操作如下：**
+
+:::: steps
 
 1. **在子组件中定义事件**：使用 `defineEmits` 定义事件。
 
-   ``` 
+   ``` vue
    import {ref,defineEmits} from 'vue'
    //1.定义要发送给父组件的方法，可以1或者多个
    let emites = defineEmits(['add','sub']);
@@ -995,7 +1293,7 @@ let changeData = ()=>{
 
 2. **触发事件并传递参数**：在子组件适当的事件处理程序中调用 emit 函数以发射事件。
 
-   ```    
+   ```    vue
    //2.触发父组件对应的方法，调用defineEmites对应的属性
    emites('add','add data!'+data.value)
    emites('sub','sub data!'+data.value)
@@ -1003,61 +1301,84 @@ let changeData = ()=>{
 
 3. **在父组件中监听事件**：使用 `v-on` 或简写 `@` 语法在父组件中监听子组件的事件。
 
-   ``` 
+   ``` vue
    <!-- 声明@事件名应该等于子模块对应事件名！调用方法可以是当前自定义！-->
    <Son @add="padd" @sub="psub"></Son>
    ```
 
+::::
+
 + 父组件： App.vue
 
-```html
+```vue
 <script setup>
-    import Son from './components/Son.vue'
-    import {ref} from 'vue'
-    let pdata = ref('')
-    const padd = (data) => {
-        console.log('2222');
-        pdata.value =data;
-    }
-    //自定义接收，子组件传递数据方法！ 参数为数据！
-    const psub = (data) => {
-        console.log('11111');
-        pdata.value = data;
-    }
+import { ref } from 'vue'
+import Son from '../子传父/son.vue'
+let message1 = ref('aaa')
+let message2 = ref('bbb')
+
+// 1.定义一个方法，接收子组件传递过来的数据
+let padd = (data) => {
+    message1.value = data
+}
+
+// 2.定义一个方法，接收子组件传递过来的数据
+let psub = (data) => {
+    message2.value = data
+}
 </script>
+
 <template>
     <div>
-        <!-- 声明@事件名应该等于子模块对应事件名！调用方法可以是当前自定义！-->
-        <Son @add="padd" @sub="psub"></Son>
         <hr>
-        {{ pdata }}
+        在父组件上的内容如下：{{ message1 }} | {{ message2 }}
+        <hr>
+
+        <Son @add="padd" @sub="psub"></Son>
     </div>
 </template>
-<style>
-</style>
+
+<style scoped></style>
 ```
+
+
 
 + 子组件：Son.vue
 
-```html
+```vue
 <script setup>
-    import {ref,defineEmits} from 'vue'
-    //1.定义要发送给父组件的方法，可以1或者多个
-    let emites = defineEmits(['add','sub']);
-    let data = ref(1);
-    function sendMsgToParent(){
-        //2.触发父组件对应的方法，调用defineEmites对应的属性
-        emites('add','add data!'+data.value)
-        emites('sub','sub data!'+data.value)
-        data.value ++;
-    }
+import { ref, defineEmits } from 'vue'
+
+//1.定义要发送给父组件的方法，可以1或者多个
+let emaits = defineEmits(['add','sub'])
+
+let data = ref(0)
+
+// 2.定义一个方法，给父组件发送数据
+let sendMsgToParent = ()=>{
+
+    //在子中触发事件，调用定义函数给父传递数据。
+    emaits('add','addSontodata:'+data.value)
+    emaits('sub','subSontodata:'+data.value)
+
+    // 3.给data自增
+    data.value ++
+}
+
 </script>
+
 <template>
     <div>
-      <button @click="sendMsgToParent">发送消息给父组件</button>
+        <hr />
+        <button @click="sendMsgToParent">发送消息给父组件</button>
+        <hr />
     </div>
 </template>
+
+<style scoped></style>
 ```
+
+![Vue3框架](./第3章-Vue3框架/img-14.jpg)
 
 
 
@@ -1067,7 +1388,7 @@ let changeData = ()=>{
 
 + Navigator.vue: 发送数据到App.vue
 
-```html
+```vue
 <script setup type="module">
     import {defineEmits} from 'vue'
     const emits = defineEmits(['sendMenu']);
@@ -1092,9 +1413,11 @@ let changeData = ()=>{
 </style>
 ```
 
+
+
 + App.vue: 发送数据到Content.vue
 
-```html
+```vue
 <script setup>
   import Header  from './components/Header.vue'
   import Navigator  from './components/Navigator.vue'
@@ -1139,9 +1462,11 @@ let changeData = ()=>{
 </style>
 ```
 
+
+
 + Content.vue
 
-```html
+```vue
 <script setup type="module">
     defineProps({
         message:String
@@ -1157,3 +1482,5 @@ let changeData = ()=>{
 <style>
 </style>
 ```
+
+![Vue3框架](./第3章-Vue3框架/img-15.jpg)
