@@ -14,12 +14,12 @@ cover: ./Router.jpg
 
 ### 1.1 路由简介
 
-> 1 什么是路由？
+> **1.什么是路由？**
 
 -   定义：路由就是根据不同的 URL 地址展示不同的内容或页面；
 -   通俗理解：路由就像是一个地图，我们要去不同的地方，需要通过不同的路线进行导航；
 
-> 2 路由的作用：
+> **2.路由的作用：**
 
 -   单页应用程序（SPA）中，路由可以实现不同视图之间的无刷新切换，提升用户体验；
 -   路由还可以实现页面的认证和权限控制，保护用户的隐私和安全；
@@ -29,20 +29,26 @@ cover: ./Router.jpg
 
 ### 1.2 路由入门案例
 
-> 1 案例需求分析：
+:::: steps
+
+1. **案例需求分析：**
 
 <img src="./images/20.png" style="zoom: 33%;" />
 
-> 2 创建项目和导入路由依赖：
+
+
+2. **创建项目和导入路由依赖：**
 
 
 ```shell
-npm create vite //创建项目cd 项目文件夹 //进入项目文件夹
-npm install //安装项目需求依赖
-npm install vue-router@4 --save //安装全局的vue-router 4版本， --save表示添加依赖到package.json,默认可省略。--save-dev表示增加开发依赖配置。
+pnpm create vite //创建项目cd 项目文件夹 //进入项目文件夹
+pnpm install //安装项目需求依赖
+pnpm install vue-router@4 --save //安装全局的vue-router 4版本， --save表示添加依赖到package.json,默认可省略。--save-dev表示增加开发依赖配置。
 ```
 
-> 3 准备页面和组件    ：
+
+
+3. **准备页面和组件：**
 
 + components/Home.vue
 
@@ -58,6 +64,8 @@ npm install vue-router@4 --save //安装全局的vue-router 4版本， --save表
 </style>
 ```
 
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-1.jpg)
+
 + components/List.vue
 
 ``` html
@@ -71,6 +79,8 @@ npm install vue-router@4 --save //安装全局的vue-router 4版本， --save表
 <style scoped>
 </style>
 ```
+
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-2.jpg)
 
 + components/Add.vue
 
@@ -86,6 +96,8 @@ npm install vue-router@4 --save //安装全局的vue-router 4版本， --save表
 </style>
 ```
 
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-3.jpg)
+
 + components/Update.vue
 
 ``` html
@@ -100,34 +112,38 @@ npm install vue-router@4 --save //安装全局的vue-router 4版本， --save表
 </style>
 ```
 
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-4.jpg)
+
 + App.vue
 
 ``` html
 <script setup>
 </script>
 <template>
-    <div>
-      <h1>App页面</h1>
-      <hr/>
-        <!-- 路由的连接 -->
-        <router-link to="/">home页</router-link> <br>
-        <router-link to="/list">list页</router-link> <br>
-        <router-link to="/add">add页</router-link> <br>
-        <router-link to="/update">update页</router-link> <br>
-      <hr/>
-      <!-- 路由连接对应视图的展示位置 -->
-      <hr> 默认展示位置:<router-view></router-view>
-      <hr> Home视图展示:<router-view name="homeView"></router-view>
-      <hr> List视图展示:<router-view name="listView"></router-view>
-      <hr> Add视图展示:<router-view name="addView"></router-view>
-      <hr> Update视图展示:<router-view name="updateView"></router-view>
-    </div>
+  <div>
+    <h1>App页面</h1>
+    <hr />
+    <!-- 路由的连接,用于切换路由(切换到不同组件) -->
+    <router-link to="/">home页</router-link> <br>
+    <router-link to="/list">list页</router-link> <br>
+    <router-link to="/add">add页</router-link> <br>
+    <router-link to="/update">update页</router-link> <br>
+    <hr />
+    <!-- 路由连接对应视图的展示位置 -->
+    <hr> 默认展示位置:<router-view></router-view>
+    <hr> Home视图展示:<router-view name="homeView"></router-view>
+    <hr> List视图展示:<router-view name="listView"></router-view>
+    <hr> Add视图展示:<router-view name="addView"></router-view>
+    <hr> Update视图展示:<router-view name="updateView"></router-view>
+  </div>
 </template>
 <style scoped>
 </style>
 ```
 
-> 4 准备路由配置：
+
+
+4. **准备路由配置：**
 
 + src/routers/router.js
 
@@ -188,7 +204,9 @@ const router = createRouter({
 export default router;
 ```
 
-> 5 main.js引入Router配置：
+
+
+5. **main.js引入Router配置：**
 
 + 修改文件：main.js (入口文件)
 
@@ -196,24 +214,29 @@ export default router;
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
-//导入router模块
+
+// 导入Reouter模块
 import router from './routers/router.js'
-let app = createApp(App)
-//绑定路由对象
-app.use(router)
-//挂载视图
-app.mount("#app")
+
+// 绑定路由对象到Vue实例上
+createApp(App).use(router).mount('#app')
+// 也可以分开写
+// const app = createApp(App) // 创建Vue实例
+// app.use(router) // 绑定路由对象到Vue实例上
+// app.mount('#app') // 挂载Vue实例到页面上
 ```
 
-> 6 启动测试：
+
+
+6. **启动测试：**
 
 ``` shell
-npm run dev
+pnpm dev
 ```
 
 > 内容解释： https://router.vuejs.org/zh/guide/
 
-``` 
+``` vue
 1. RouterLink 用来渲染一个链接的组件，该链接在被点击时会触发导航。 
     <router-link to="/list">list页</router-link> <br> to属性指的是触发路径跳转到对应组件
 2. RouterView RouterView 组件可以使 Vue Router 知道你想要在哪里渲染当前 URL 路径对应的路由组件。它不一定要在 App.vue 中，你可以把它放在任何地方！
@@ -243,11 +266,13 @@ npm run dev
 	  触发路由器解析初始路由。
 ```
 
+::::
+
 
 
 ### 1.3 路由重定向
 
-> 重定向的作用：将一个路由重定向到另一个路由上。
+> **重定向的作用：将一个路由重定向到另一个路由上。**
 
 + 修改案例：访问/list和/showAll都定向到List.vue.
 + router.js
@@ -287,6 +312,8 @@ npm run dev
 <style scoped>
 </style>
 ```
+
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-5.jpg)
 
 
 
@@ -363,6 +390,8 @@ npm run dev
 <style scoped>
 </style>
 ```
+
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-6.jpg)
 
 
 
@@ -460,68 +489,74 @@ export default router;
 
 ``` html
 <script setup type="module">
-    import {useRoute} from 'vue-router'
-    import { onMounted,ref } from 'vue';
-    // 获取当前的route对象
-    let route =useRoute()
-    let languageId = ref(0)
-    let languageName = ref('')
-    //  借助更新时生命周期,将数据更新进入响应式对象
-    onMounted (()=>{
-        // 获取对象中的参数
-        languageId.value=route.params.id
-        languageName.value=route.params.language
-        console.log(languageId.value)
-        console.log(languageName.value)
-    })    
+import { useRoute } from 'vue-router'
+import { onMounted, ref } from 'vue';
+
+// 获取当前的route对象
+let route = useRoute()
+let languageId = ref(0)
+let languageName = ref('')
+
+//  借助更新时生命周期,将数据更新进入响应式对象
+onMounted(() => {
+    // 获取对象中的参数
+    languageId.value = route.params.id
+    languageName.value = route.params.language
+    console.log(languageId.value)
+    console.log(languageName.value)
+})    
 </script>
 <template>
     <div>
         <h1>ShowDetail页面</h1>
-        <h3>编号{{route.params.id}}:{{route.params.language}}是世界上最好的语言</h3>
-        <h3>编号{{languageId}}:{{languageName}}是世界上最好的语言</h3>
+        <h3>编号{{ route.params.id }}:{{ route.params.language }}是世界上最好的语言</h3>
+        <h3>编号{{ languageId }}:{{ languageName }}是世界上最好的语言</h3>
     </div>
 </template>
-<style scoped>
-</style>
+<style scoped></style>
 ```
+
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-7.jpg)
 
 -   ShowDetail2.vue通过useRoute获取键值对参数
 
 ```html
 <script setup type="module">
-    import{useRoute} from 'vue-router'
-    import { onMounted,ref } from 'vue';
-    // 获取当前的route对象
-    let route =useRoute()
-    let languageId = ref(0)
-    let languageName = ref('')
-    //  借助更新时生命周期,将数据更新进入响应式对象
-    onMounted (()=>{
-        // 获取对象中的参数(通过query获取参数,此时参数是key-value形式的)
-        console.log(route.query)
-        console.log(languageId.value)
-        console.log(languageName.value)
-        languageId.value=route.query.id
-        languageName.value=route.query.language       
-    })    
+import { useRoute } from 'vue-router'
+import { onMounted, ref } from 'vue';
+
+// 获取当前的route对象
+let route = useRoute()
+let languageId = ref(0)
+let languageName = ref('')
+
+//  借助更新时生命周期,将数据更新进入响应式对象
+onMounted(() => {
+    // 获取对象中的参数(通过query获取参数,此时参数是key-value形式的)
+    console.log(route.query)
+    console.log(languageId.value)
+    console.log(languageName.value)
+    languageId.value = route.query.id
+    languageName.value = route.query.language
+})    
 </script>
 <template>
     <div>
         <h1>ShowDetail2页面</h1>
-        <h3>编号{{route.query.id}}:{{route.query.language}}是世界上最好的语言</h3>
-        <h3>编号{{languageId}}:{{languageName}}是世界上最好的语言</h3>
+        <h3>编号{{ route.query.id }}:{{ route.query.language }}是世界上最好的语言</h3>
+        <h3>编号{{ languageId }}:{{ languageName }}是世界上最好的语言</h3>
     </div>
 </template>
-<style scoped>
-</style>
+<style scoped></style>
 ```
+
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-8.jpg)
 
 
 
 ### 1.6 路由守卫
 
-> 在 Vue 3 中，路由守卫是用于在路由切换期间进行一些特定任务的回调函数。路由守卫可以用于许多任务，例如验证用户是否已登录、在路由切换前提供确认提示、请求数据等。Vue 3 为路由守卫提供了全面的支持，并提供了以下几种类型的路由守卫：
+> **在 Vue 3 中，路由守卫是用于在路由切换期间进行一些特定任务的回调函数。路由守卫可以用于许多任务，例如验证用户是否已登录、在路由切换前提供确认提示、请求数据等。Vue 3 为路由守卫提供了全面的支持，并提供了以下几种类型的路由守卫：**
 
 1.  **全局前置守卫**：在路由切换前被调用，可以用于验证用户是否已登录、中断导航、请求数据等；
 2.  **全局后置守卫**：在路由切换之后被调用，可以用于处理数据、操作 DOM 、记录日志等；
@@ -552,70 +587,98 @@ router.afterEach((to, from) => {
 
 + 定义Login.vue
 
-```html
+```vue
 <script setup>
-    import {ref} from 'vue'
-    import {useRouter} from 'vue-router'
-    let username =ref('')
-    let password =ref('')
-    let router = useRouter();
-    let login = () =>{
-        console.log(username.value,password.value)
-        if(username.value == 'root' & password.value == '123456'){
-            router.push({path:'/home',query:{'username':username.value}})
-            //登录成功利用前端存储机制，存储账号！
-            localStorage.setItem('username',username.value)
-            //sessionStorage.setItem('username',username)
-        }else{
-            alert('登录失败，账号或者密码错误！');
-        }
-    }
+// 导入动态路由跳转的相关方法
+import { ref } from 'vue'
+
+// 导入路由对象
+import { useRouter, useRoute } from 'vue-router'
+
+// 获取路由对象和路由信息
+let router = useRouter('') // 用于跳转路由，传参
+let route = useRoute('') // 用于获取路由信息，例如: 路径、参数
+
+// 登录页面的用户名和密码
+let username = ref('admin')
+let password = ref('123456')
+
+let login = () => {
+  if (username.value === 'admin' && password.value === '123456') {
+
+    // 登录成功,将登录状态存储到localStorage中
+    window.localStorage.setItem('username', username.value) // 全局有效 支持持久化 给成功页面显示欢迎信息使用
+
+    // 登录成功,跳转到首页
+    router.push('/home')
+  } else {
+    alert('用户名称或密码错误,请重新登录!')
+  }
+}
 
 </script>
-<template>   
-    <div>
-        账号： <input type="text" v-model="username" placeholder="请输入账号！"><br>
-        密码： <input type="password" v-model="password" placeholder="请输入密码！"><br>
-        <button @click="login()">登录</button>
-    </div>
+
+<template>
+  <div>
+
+    <h1>登录页面</h1>
+    用户名称：<input type="text" v-model="username" placeholder="请输入用户名称"/>
+    <br />
+    密码：<input type="password" v-model="password" placeholder="请输入密码"/>
+    <br />  
+
+    <button @click="login">登录</button>
+
+  </div>
 </template>
-<style scoped>
-</style>
+
+<style scoped></style>
 ```
 
 + 定义Home.vue
 
-```html
+```vue
 <script setup>
- import {ref} from 'vue'
- import {useRoute,useRouter} from 'vue-router'
- let route =useRoute()
- let router = useRouter()
- //  并不是每次进入home页时,都有用户名参数传入
- //let username = route.query.username
- let username =window.localStorage.getItem('username'); 
- let logout= ()=>{
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+let router = useRouter('') // 用于跳转路由，传参
+
+let username = ref('') // 用于显示欢迎信息
+
+// 获取登录状态,用于显示欢迎信息
+onMounted(() => {
+    username.value = window.localStorage.getItem('username') // 获取登录状态,用于显示欢迎信息
+})
+
+// 退出登录
+let logout = () => {
     // 清除localStorge中的username
-    //window.sessionStorage.removeItem('username')
-    window.localStorage.removeItem('username')
-    // 动态路由到登录页
-    router.push("/login")
- }
+    window.localStorage.removeItem('username') // 清除登录状态
+
+    // 动态路由跳转到登录页面
+    router.push('/login')
+}
+
 </script>
+
 <template>
     <div>
-        <h1>Home页面</h1>
-        <h3>欢迎{{username}}登录</h3>
+        <h1>首页</h1>
+        <h3>
+            欢迎您: {{ username }} 登录
+        </h3>
+
         <button @click="logout">退出登录</button>
     </div>
 </template>
-<style scoped>
-</style>
+
+<style scoped></style>
 ```
 
 + App.vue
 
-```html
+```vue
 <script setup type="module">
 </script>
 <template>
@@ -630,57 +693,63 @@ router.afterEach((to, from) => {
 + 定义routers.js
 
 ``` javascript
-import {createRouter,createWebHashHistory} from 'vue-router'
+// 导入路由创建的相关方法
+import { createRouter, createWebHistory } from 'vue-router'
+
+// 导入vue组件
 import Home from '../components/Home.vue'
-import Login from '../components/login.vue'
+import Login from '../components/Login.vue'
+
+// 创建路由对象,声明路由规则
 const router = createRouter({
-    history: createWebHashHistory(),
-    routes:[
+    history: createWebHistory(), // 记录历史路由跳转
+    // 配置路由规则
+    routes: [
         {
-            path:'/home',
-            component:Home
+            path: '/home',
+            component: Home
         },
         {
-            path:'/',
-            redirect:"/home"
+            path: '/',
+            redirect: '/home' // 重定向到home页面
         },
         {
-            path:'/login',
-            component:Login
+            path: '/login',
+            component: Login
         },
     ]
 })
+
 // 设置路由的全局前置守卫
-router.beforeEach((to,from,next)=>{
-    /* 
-    to 要去那
-    from 从哪里来
-    next 放行路由时需要调用的方法,不调用则不放行
-    */
-    console.log(`从哪里来:${from.path},到哪里去:${to.path}`)
-    if(to.path == '/login'){
-        //放行路由  注意放行不要形成循环  
-        next()
-    }else{
-        //let username =window.sessionStorage.getItem('username'); 
-        let username =window.localStorage.getItem('username'); 
-        if(null != username){
-            next()
-        }else{
-            next('/login')
+router.beforeEach((to, from, next) => {
+    if (to.path == '/login') {
+        next() // 放行
+    } else {
+        let username = window.localStorage.getItem('username') // 获取localStorage中的username
+        if (username != null) {
+            next() // 放行
+        } else {
+            next('/login') // 登录信息失效了，请重新登录
         }
     }
 })
+
 // 设置路由的全局后置守卫
-router.afterEach((to,from)=>{
-    console.log(`从哪里来:${from.path},到哪里去:${to.path}`)
+router.afterEach((to, from) => {
+    console.log('从${from.path}来,到${to.path}去')
 })
+
+
 // 对外暴露路由对象
-export default router;
+export default router
 ```
 
 + 启动测试
 
 ```shell
-npm run dev
+pnpm dev
 ```
+
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-9.jpg)
+
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-10.jpg)
