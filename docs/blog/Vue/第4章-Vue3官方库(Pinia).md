@@ -37,21 +37,27 @@ cover: ./Pinia.jpg
 
 ### 1.2 Pinia基本用法
 
->  1 准备Vite项目：
+:::: steps
+
+1. 准备Vite项目：
 
 ```javascript
-npm create vite
-npm install 
-npm install vue-router@4 --save
+pnpm create vite
+pnpm install 
+pnpm install vue-router@4 --save
 ```
 
->  2 安装Pinia：
+
+
+2. 安装Pinia：
 
 ```javascript
-npm install pinia
+pnpm install pinia
 ```
 
-> 3 定义pinia store对象 src/store/store.js （推荐这么命名不是强制）：
+
+
+3. 定义pinia store对象 src/store/store.js （推荐这么命名不是强制）：
 
 ```javascript
 import {defineStore } from 'pinia'
@@ -87,7 +93,9 @@ export const definedPerson = defineStore('personPinia',//必须唯一
 )
 ```
 
->  4 在main.js配置Pinia组件到Vue中 ：
+
+
+4. 在main.js配置Pinia组件到Vue中 ：
 
 ```javascript
 import { createApp } from 'vue'
@@ -104,7 +112,9 @@ app.use(pinia)
 app.mount('#app')
 ```
 
-> 5 Operate.vue 中操作Pinia数据：
+
+
+5. Operate.vue 中操作Pinia数据：
 
 ```html
 <script setup type="module">
@@ -136,7 +146,9 @@ app.mount('#app')
 </style>
 ```
 
-> 6 List.vue中展示Pinia数据：
+
+
+6. List.vue中展示Pinia数据：
 
 ``` html
 <script setup type="module">
@@ -162,7 +174,9 @@ app.mount('#app')
 </style>
 ```
 
-> 7 定义组件路由router.js：
+
+
+7. 定义组件路由router.js：
 
 ``` javascript
 // 导入路由创建的相关方法
@@ -189,7 +203,9 @@ const router = createRouter({
 export default router;
 ```
 
-> 8 App.vue中通过路由切换组件：
+
+
+8. App.vue中通过路由切换组件：
 
 ``` html
 <script setup type="module">
@@ -207,7 +223,9 @@ export default router;
 </style>
 ```
 
->  9 启动测试：
+
+
+9. 启动测试：
 
 ```javascript
 npm run dev
@@ -216,3 +234,5 @@ npm run dev
 ![1740920109115](./assets/1740920109115.png)
 
 ![1740920162887](./assets/1740920162887.png)
+
+::::

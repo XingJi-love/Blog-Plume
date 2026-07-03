@@ -50,7 +50,7 @@ pnpm install vue-router@4 --save //安装全局的vue-router 4版本， --save�
 
 3. **准备页面和组件：**
 
-+ components/Home.vue
+> **components/Home.vue**
 
 ``` html
 <script setup>
@@ -64,9 +64,9 @@ pnpm install vue-router@4 --save //安装全局的vue-router 4版本， --save�
 </style>
 ```
 
-![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-1.jpg)
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(VueRouter)/img-1.jpg)
 
-+ components/List.vue
+> **components/List.vue**
 
 ``` html
 <script setup>
@@ -80,9 +80,9 @@ pnpm install vue-router@4 --save //安装全局的vue-router 4版本， --save�
 </style>
 ```
 
-![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-2.jpg)
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(VueRouter)/img-2.jpg)
 
-+ components/Add.vue
+> **components/Add.vue**
 
 ``` html
 <script setup>
@@ -96,9 +96,9 @@ pnpm install vue-router@4 --save //安装全局的vue-router 4版本， --save�
 </style>
 ```
 
-![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-3.jpg)
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(VueRouter)/img-3.jpg)
 
-+ components/Update.vue
+> **components/Update.vue**
 
 ``` html
 <script setup>
@@ -112,9 +112,9 @@ pnpm install vue-router@4 --save //安装全局的vue-router 4版本， --save�
 </style>
 ```
 
-![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-4.jpg)
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(VueRouter)/img-4.jpg)
 
-+ App.vue
+> **App.vue**
 
 ``` html
 <script setup>
@@ -145,7 +145,7 @@ pnpm install vue-router@4 --save //安装全局的vue-router 4版本， --save�
 
 4. **准备路由配置：**
 
-+ src/routers/router.js
+> **src/routers/router.js**
 
 ```javascript
 // 导入路由创建的相关方法
@@ -208,7 +208,7 @@ export default router;
 
 5. **main.js引入Router配置：**
 
-+ 修改文件：main.js (入口文件)
+> **修改文件：main.js (入口文件)**
 
 ```javascript
 import { createApp } from 'vue'
@@ -313,7 +313,7 @@ pnpm dev
 </style>
 ```
 
-![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-5.jpg)
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(VueRouter)/img-5.jpg)
 
 
 
@@ -391,7 +391,7 @@ pnpm dev
 </style>
 ```
 
-![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-6.jpg)
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(VueRouter)/img-6.jpg)
 
 
 
@@ -516,7 +516,7 @@ onMounted(() => {
 <style scoped></style>
 ```
 
-![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-7.jpg)
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(VueRouter)/img-7.jpg)
 
 -   ShowDetail2.vue通过useRoute获取键值对参数
 
@@ -550,7 +550,7 @@ onMounted(() => {
 <style scoped></style>
 ```
 
-![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-8.jpg)
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(VueRouter)/img-8.jpg)
 
 
 
@@ -750,6 +750,6 @@ export default router
 pnpm dev
 ```
 
-![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-9.jpg)
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(VueRouter)/img-9.jpg)
 
-![Vue3官方库(Vue Router)](./第4章-Vue3官方库(Vue Router)/img-10.jpg)
+![Vue3官方库(Vue Router)](./第4章-Vue3官方库(VueRouter)/img-10.jpg)
