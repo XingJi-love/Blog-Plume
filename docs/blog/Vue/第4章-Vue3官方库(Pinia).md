@@ -8,7 +8,7 @@ permalink: /blog/u1vzyi8n/
 cover: ./Pinia.jpg
 ---
 
-![Vue3官方库(Vue Router)](./Pinia.jpg)
+![Vue3官方库(Pinia)](./Pinia.jpg)
 
 ## 1. 状态管理Pinia
 
@@ -99,17 +99,17 @@ export const definedPerson = defineStore('personPinia',//必须唯一
 
 ```javascript
 import { createApp } from 'vue'
+import './style.css'
 import App from './App.vue'
+
+// 引入路由对象
 import router from './routers/router.js'
-// 导pinia
+
+// 引入pinia
 import { createPinia } from 'pinia'
-// 创建pinia对象
-let pinia= createPinia()
-let app =createApp(App)
-app.use(router)
-// app中使用pinia功能
-app.use(pinia) 
-app.mount('#app')
+let pinia = createPinia()
+
+createApp(App).use(pinia).use(router).mount('#app') // 将pinia和路由对象挂载到vue实例上
 ```
 
 
@@ -228,11 +228,29 @@ export default router;
 9. 启动测试：
 
 ```javascript
-npm run dev
+pnpm dev
 ```
 
-![1740920109115](./assets/1740920109115.png)
+![Vue3官方库(Pinia)](./第4章-Vue3官方库(Pinia)/img-1.jpg)
 
-![1740920162887](./assets/1740920162887.png)
+> **年龄加倍**
+
+![Vue3官方库(Pinia)](./第4章-Vue3官方库(Pinia)/img-1.jpg)
+
+![Vue3官方库(Pinia)](./第4章-Vue3官方库(Pinia)/img-2.jpg)
+
+![Vue3官方库(Pinia)](./第4章-Vue3官方库(Pinia)/img-3.jpg)
+
+> **变身奥特曼**
+
+![Vue3官方库(Pinia)](./第4章-Vue3官方库(Pinia)/img-4.jpg)
+
+![Vue3官方库(Pinia)](./第4章-Vue3官方库(Pinia)/img-5.jpg)
+
+> **恢复默认值**
+
+![Vue3官方库(Pinia)](./第4章-Vue3官方库(Pinia)/img-6.jpg)
+
+![Vue3官方库(Pinia)](./第4章-Vue3官方库(Pinia)/img-7.jpg)
 
 ::::

@@ -1,12 +1,6 @@
 [
     {
       "name": "XINGJI",
-      "link": "https://vite.xingji.fun/",
-      "avatar": "https://image.dooo.ng/t/2026/04/29/69f1cb57557c0.webp",
-      "desc": "迄今所有人生都大写着失败，但不妨碍我继续向前✨"
-    },
-    {
-      "name": "XINGJI",
       "link": "https://v.xingji.fun/",
       "avatar": "https://image.dooo.ng/t/2026/04/29/69f1cb57557c0.webp",
       "desc": "迄今所有人生都大写着失败，但不妨碍我继续向前✨"
@@ -40,5 +34,11 @@
       "link": "https://blog.bsgun.cn/",
       "avatar": "https://oss-cdn.bsgun.cn/logo/avatar.256.png",
       "desc": "不负心灵，不负今生"
+    },
+    {
+      "name": "宇阳",
+      "link": "https://liuyuyang.net",
+      "avatar": "https://q1.qlogo.cn/g?b=qq&nk=3311118881&s=640",
+      "desc": "记录所学知识，缩短和大神的差距！"
     }
 ]

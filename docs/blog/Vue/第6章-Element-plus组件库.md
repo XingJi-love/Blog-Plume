@@ -37,15 +37,15 @@ cover: ./Element Plus.jpg
 >  1 准备vite项目
 
 ```shell
-npm create vite
+pnpm create vite
 进入项目
-npm install 
+pnpm install 
 ```
 
 >  2 安装element-plus
 
 ```shell
-npm install element-plus
+pnpm install element-plus
 ```
 
 > 3 完整引入element-plus
@@ -54,29 +54,38 @@ npm install element-plus
 
 ```javascript
 import { createApp } from 'vue'
-//导入element-plus相关内容
+import './style.css'
+import App from './App.vue'
+
+// 导入element-plus相关内容
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
-import App from './App.vue'
-
-const app = createApp(App)
-
-app.use(ElementPlus)
-app.mount('#app')
+createApp(App).use(ElementPlus).mount('#app') // 这里的use(ElementPlus)是将element-plus注册到vue中
 ```
 
 
 
 ## 3. Element-plus常用组件
 
-> 结合官网演示以下组件 
+> **结合官网演示以下组件:**
 >
 > https://element-plus.org/zh-CN
->
-> https://element-plus-docs.bklab.cn/zh-CN/
 
-- Button组件和Card组件
-- Table组件和Pagination组件
-- Form组件和表单数据校验
-- Message、Message Box及Popconfirm弹框组件
+:::: steps
+
+1. Button组件和Card组件
+
+
+
+2. Table组件和Pagination组件
+
+
+
+3. Form组件和表单数据校验
+
+
+
+4. Message、Message Box及Popconfirm弹框组件
+
+::::
