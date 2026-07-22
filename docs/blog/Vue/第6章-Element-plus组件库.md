@@ -146,7 +146,7 @@ import {
 </script>
 ```
 
-![Element Plus组件库](./第6章-Element Plus组件库/img-1.jpg)
+![Element Plus组件库](./第6章-Element-Plus组件库/img-1.jpg)
 
 
 
@@ -286,7 +286,7 @@ const handleCurrentChange = (val: number) => {
 </style>
 ```
 
-![Element Plus组件库](./第6章-Element Plus组件库/img-3.jpg)
+![Element Plus组件库](./第6章-Element-Plus组件库/img-3.jpg)
 
 
 
@@ -510,6 +510,6 @@ const options = Array.from({ length: 10000 }).map((_, idx) => ({
 </script>
 ```
 
-![Element Plus组件库](./第6章-Element Plus组件库/img-2.jpg)
+![Element Plus组件库](./第6章-Element-Plus组件库/img-2.jpg)
 
 ::::
