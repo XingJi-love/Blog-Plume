@@ -70,22 +70,446 @@ createApp(App).use(ElementPlus).mount('#app') // 这里的use(ElementPlus)是将
 
 > **结合官网演示以下组件:**
 >
-> https://element-plus.org/zh-CN
+> [Element Plus官网](https://element-plus.org/zh-CN)
 
 :::: steps
 
 1. Button组件和Card组件
 
+> **main.js**
+
+```js
+import { createApp } from 'vue'
+import './style.css'
+import App from './App.vue'
+
+// 导入element-plus相关内容
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+
+createApp(App).use(ElementPlus).mount('#app') // 这里的use(ElementPlus)是将element-plus注册到vue中
+```
+
+> **App.vue**
+
+```vue
+<script setup>
+import HelloWorld from './components/HelloWorld.vue'
+</script>
+
+<template>
+  <HelloWorld />
+</template>
+```
+
+> **HelloWorld.vue**
+
+```vue
+<script setup>
+</script>
+
+<template>
+  <!-- 按钮行容器，使用 flex 布局横向排列 -->
+  <div class="button-row">
+    <!-- 默认样式的按钮（无 type 属性） -->
+    <el-button>Default</el-button>
+
+    <!-- 主要按钮：type="primary"，并添加搜索图标 -->
+    <el-button type="primary" :icon="Search">Primary</el-button>
+
+    <!-- 成功按钮：type="success"，并添加对勾图标 -->
+    <el-button type="success" :icon="Check">Success</el-button>
+
+    <!-- 信息按钮：type="info"，无图标 -->
+    <el-button type="info">Info</el-button>
+
+    <!-- 警告按钮：type="warning"，无图标 -->
+    <el-button type="warning">Warning</el-button>
+
+    <!-- 危险按钮：type="danger"，无图标 -->
+    <el-button type="danger">Danger</el-button>
+  </div>
+</template>
+
+<!-- TypeScript 脚本块（使用 setup 语法糖） -->
+<script lang="ts" setup>
+// 从 Element Plus 图标库中导入所需的图标组件
+// 这些图标将绑定到按钮的 :icon 属性上
+import {
+  Check,   // 对勾图标（用于 Success 按钮）
+  Delete,  // 删除图标（当前未使用，但保留以备后续扩展）
+  Edit,    // 编辑图标（当前未使用）
+  Message, // 消息图标（当前未使用）
+  Search,  // 搜索图标（用于 Primary 按钮）
+  Star,    // 星星图标（当前未使用）
+} from '@element-plus/icons-vue'
+</script>
+```
+
+![Element Plus组件库](./第6章-Element Plus组件库/img-1.jpg)
+
 
 
 2. Table组件和Pagination组件
+
+> **HelloWorld.vue**
+
+```vue
+<template>
+  <!-- Table 表格 -->
+  <el-table :data="tableData" style="width: 100%">
+    <!-- @vue-generic {User} -->
+    <el-table-column label="Date" width="180">
+      <template #default="scope">
+        <div style="display: flex; align-items: center">
+          <el-icon>
+            <timer />
+          </el-icon>
+          <span style="margin-left: 10px">{{ scope.row.date }}</span>
+        </div>
+      </template>
+    </el-table-column>
+    <!-- @vue-generic {User} -->
+    <el-table-column label="Name" width="180">
+      <template #default="scope">
+        <el-popover effect="light" trigger="hover" placement="top" width="auto">
+          <template #default>
+            <div>name: {{ scope.row.name }}</div>
+            <div>address: {{ scope.row.address }}</div>
+          </template>
+          <template #reference>
+            <el-tag>{{ scope.row.name }}</el-tag>
+          </template>
+        </el-popover>
+      </template>
+    </el-table-column>
+    <!-- @vue-generic {User} -->
+    <el-table-column label="Operations">
+      <template #default="scope">
+        <el-button size="small" @click="handleEdit(scope.$index, scope.row)">
+          Edit
+        </el-button>
+        <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">
+          Delete
+        </el-button>
+      </template>
+    </el-table-column>
+  </el-table>
+
+
+  <!--分页-->
+  <el-pagination
+      v-model:current-page="currentPage4"
+      v-model:page-size="pageSize4"
+      :page-sizes="[100, 200, 300, 400]"
+      :size="size"
+      :disabled="disabled"
+      :background="background"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="400"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    />
+</template>
+
+<script lang="ts" setup>
+// Table 表格
+import { Timer } from '@element-plus/icons-vue'
+
+interface User {
+  date: string
+  name: string
+  address: string
+}
+
+const handleEdit = (index: number, row: User) => {
+  console.log(index, row)
+}
+const handleDelete = (index: number, row: User) => {
+  console.log(index, row)
+}
+
+const tableData: User[] = [
+  {
+    date: '2016-05-03',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-02',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-04',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-01',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+]
+    
+    
+// 分页
+const currentPage1 = ref(5)
+const currentPage2 = ref(5)
+const currentPage3 = ref(5)
+const currentPage4 = ref(4)
+const pageSize2 = ref(100)
+const pageSize3 = ref(100)
+const pageSize4 = ref(100)
+const size = ref<ComponentSize>('default')
+const background = ref(false)
+const disabled = ref(false)
+
+const handleSizeChange = (val: number) => {
+  console.log(`${val} items per page`)
+}
+const handleCurrentChange = (val: number) => {
+  console.log(`current page: ${val}`)
+}
+</script>
+
+
+<style>
+/*分页*/
+.demo-pagination-block+.demo-pagination-block {
+  margin-top: 10px;
+}
+
+.demo-pagination-block .demonstration {
+  margin-bottom: 16px;
+}
+</style>
+```
+
+![Element Plus组件库](./第6章-Element Plus组件库/img-3.jpg)
 
 
 
 3. Form组件和表单数据校验
 
+> **HelloWorld.vue**
 
+```vue
+<script setup>
 
-4. Message、Message Box及Popconfirm弹框组件
+</script>
+
+<template>
+  <!-- Form组件和表单数据校验 -->
+  <el-form
+    ref="ruleFormRef"
+    style="max-width: 600px"
+    :model="ruleForm"
+    :rules="rules"
+    label-width="auto"
+  >
+    <el-form-item label="Activity name" prop="name">
+      <el-input v-model="ruleForm.name" />
+    </el-form-item>
+    <el-form-item label="Activity zone" prop="region">
+      <el-select v-model="ruleForm.region" placeholder="Activity zone">
+        <el-option label="Zone one" value="shanghai" />
+        <el-option label="Zone two" value="beijing" />
+      </el-select>
+    </el-form-item>
+    <el-form-item label="Activity count" prop="count">
+      <el-select-v2
+        v-model="ruleForm.count"
+        placeholder="Activity count"
+        :options="options"
+      />
+    </el-form-item>
+    <el-form-item label="Activity time" required>
+      <el-col :span="11">
+        <el-form-item prop="date1">
+          <el-date-picker
+            v-model="ruleForm.date1"
+            type="date"
+            aria-label="Pick a date"
+            placeholder="Pick a date"
+            style="width: 100%"
+          />
+        </el-form-item>
+      </el-col>
+      <el-col class="text-center" :span="2">
+        <span class="text-gray-500">-</span>
+      </el-col>
+      <el-col :span="11">
+        <el-form-item prop="date2">
+          <el-time-picker
+            v-model="ruleForm.date2"
+            aria-label="Pick a time"
+            placeholder="Pick a time"
+            style="width: 100%"
+          />
+        </el-form-item>
+      </el-col>
+    </el-form-item>
+    <el-form-item label="Instant delivery" prop="delivery">
+      <el-switch v-model="ruleForm.delivery" />
+    </el-form-item>
+    <el-form-item label="Activity location" prop="location">
+      <el-segmented v-model="ruleForm.location" :options="locationOptions" />
+    </el-form-item>
+    <el-form-item label="Activity type" prop="type">
+      <el-checkbox-group v-model="ruleForm.type">
+        <el-checkbox value="Online activities" name="type">
+          Online activities
+        </el-checkbox>
+        <el-checkbox value="Promotion activities" name="type">
+          Promotion activities
+        </el-checkbox>
+        <el-checkbox value="Offline activities" name="type">
+          Offline activities
+        </el-checkbox>
+        <el-checkbox value="Simple brand exposure" name="type">
+          Simple brand exposure
+        </el-checkbox>
+      </el-checkbox-group>
+    </el-form-item>
+    <el-form-item label="Resources" prop="resource">
+      <el-radio-group v-model="ruleForm.resource">
+        <el-radio value="Sponsorship">Sponsorship</el-radio>
+        <el-radio value="Venue">Venue</el-radio>
+      </el-radio-group>
+    </el-form-item>
+    <el-form-item label="Activity form" prop="desc">
+      <el-input v-model="ruleForm.desc" type="textarea" />
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="submitForm(ruleFormRef)">
+        Create
+      </el-button>
+      <el-button @click="resetForm(ruleFormRef)">Reset</el-button>
+    </el-form-item>
+  </el-form>
+</template>
+
+<script lang="ts" setup>
+
+import { reactive, ref } from 'vue'
+
+import type { FormInstance, FormRules } from 'element-plus'
+
+interface RuleForm {
+  name: string
+  region: string
+  count: string
+  date1: string
+  date2: string
+  delivery: boolean
+  location: string
+  type: string[]
+  resource: string
+  desc: string
+}
+
+const ruleFormRef = ref<FormInstance>()
+const ruleForm = reactive<RuleForm>({
+  name: 'Hello',
+  region: '',
+  count: '',
+  date1: '',
+  date2: '',
+  delivery: false,
+  location: '',
+  type: [],
+  resource: '',
+  desc: '',
+})
+
+const locationOptions = ['Home', 'Company', 'School']
+
+const rules = reactive<FormRules<RuleForm>>({
+  name: [
+    { required: true, message: 'Please input Activity name', trigger: 'blur' },
+    { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' },
+  ],
+  region: [
+    {
+      required: true,
+      message: 'Please select Activity zone',
+      trigger: 'change',
+    },
+  ],
+  count: [
+    {
+      required: true,
+      message: 'Please select Activity count',
+      trigger: 'change',
+    },
+  ],
+  date1: [
+    {
+      type: 'date',
+      required: true,
+      message: 'Please pick a date',
+      trigger: 'change',
+    },
+  ],
+  date2: [
+    {
+      type: 'date',
+      required: true,
+      message: 'Please pick a time',
+      trigger: 'change',
+    },
+  ],
+  location: [
+    {
+      required: true,
+      message: 'Please select a location',
+      trigger: 'change',
+    },
+  ],
+  type: [
+    {
+      type: 'array',
+      required: true,
+      message: 'Please select at least one activity type',
+      trigger: 'change',
+    },
+  ],
+  resource: [
+    {
+      required: true,
+      message: 'Please select activity resource',
+      trigger: 'change',
+    },
+  ],
+  desc: [
+    { required: true, message: 'Please input activity form', trigger: 'blur' },
+  ],
+})
+
+const submitForm = async (formEl: FormInstance | undefined) => {
+  if (!formEl) return
+  await formEl.validate((valid, fields) => {
+    if (valid) {
+      console.log('submit!')
+    } else {
+      console.log('error submit!', fields)
+    }
+  })
+}
+
+const resetForm = (formEl: FormInstance | undefined) => {
+  if (!formEl) return
+  formEl.resetFields()
+}
+
+const options = Array.from({ length: 10000 }).map((_, idx) => ({
+  value: `${idx + 1}`,
+  label: `${idx + 1}`,
+}))
+</script>
+```
+
+![Element Plus组件库](./第6章-Element Plus组件库/img-2.jpg)
 
 ::::

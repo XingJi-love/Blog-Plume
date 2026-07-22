@@ -445,12 +445,3 @@ interface Person{
 
 type Persons = Person[];
 ```
-
-
-
-
-
-
-
-
-
