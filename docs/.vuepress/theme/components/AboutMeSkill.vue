@@ -28,42 +28,139 @@
 <script setup>
 import { ref } from 'vue';
 
-// 技能
 const technology = ref([
-  { type: 'ROS', icon: 'skill-icons:ros-light' },
-  { type: 'Vue', icon: 'logos:vue' },
-  { type: 'Spring', icon: 'devicon:spring' },
-  { type: 'MySQL', icon: 'devicon:mysql' },
-  { type: 'HTML5', icon: 'logos:html-5' },
-  { type: 'CSS3', icon: 'logos:css-3' },
-  { type: 'JavaScript', icon: 'vscode-icons:file-type-js' },
-  { type: 'TypeScript', icon: 'vscode-icons:file-type-typescriptdef' },
-  { type: 'Python', icon: 'logos:python' },
-  { type: 'C++', icon: 'devicon:cplusplus' },
+  // ========== 原有：Java 后端 ==========
+  // ----- 核心语言 & 框架（后端） -----
   { type: 'Java', icon: 'devicon:java' },
-  { type: 'Shell', icon: 'catppuccin:powershell' },
-  { type: 'GraphQL', icon: 'logos:graphql' },
+  { type: 'Spring Boot', icon: 'devicon:spring' },
+  { type: 'Spring MVC', icon: 'devicon:spring' },
+  { type: 'Spring Cloud', icon: 'devicon:spring' },
+  { type: 'Spring Security', icon: 'devicon:spring' },
+  { type: 'Hibernate', icon: 'devicon:hibernate' },
+
+  // ----- 数据库 & 缓存 -----
+  { type: 'MySQL', icon: 'devicon:mysql' },
+  { type: 'PostgreSQL', icon: 'devicon:postgresql' },
+  { type: 'Oracle', icon: 'devicon:oracle' },
   { type: 'Redis', icon: 'devicon:redis' },
   { type: 'MongoDB', icon: 'devicon:mongodb' },
-  { type: 'Elasticsearch', icon: 'devicon:elasticsearch' },
-  { type: 'RabbitMQ', icon: 'devicon:rabbitmq' }
+
+  // ----- 消息队列 & 流处理 -----
+  { type: 'RabbitMQ', icon: 'devicon:rabbitmq' },
+  { type: 'Apache Kafka', icon: 'devicon:apachekafka' },
+
+  // ----- 容器 & 编排 -----
+  { type: 'Docker', icon: 'devicon:docker' },
+  { type: 'Kubernetes', icon: 'devicon:kubernetes' },
+
+  // ----- 监控 & 日志 -----
+  { type: 'Prometheus', icon: 'devicon:prometheus' },
+  { type: 'Grafana', icon: 'devicon:grafana' },
+  { type: 'ELK Stack', icon: 'devicon:elasticsearch' },
+
+  // ----- API 文档 & 测试（后端） -----
+  { type: 'Swagger', icon: 'devicon:swagger' },
+  { type: 'OpenAPI', icon: 'simple-icons:openapiinitiative' },
+  { type: 'JUnit', icon: 'devicon:junit' },
+
+  // ========== 原有：前端工程化 ==========
+  // ----- 前端框架 & 语言 -----
+  { type: 'React', icon: 'logos:react' },
+  { type: 'Vue.js', icon: 'logos:vue' },
+  { type: 'TypeScript', icon: 'devicon:typescript' },
+
+  // ----- 构建工具 & 打包 -----
+  { type: 'Vite', icon: 'devicon:vitejs' },
+  { type: 'Webpack', icon: 'devicon:webpack' },
+  { type: 'Babel', icon: 'devicon:babel' },
+
+  // ----- CSS 预处理 / 框架 -----
+  { type: 'Tailwind CSS', icon: 'devicon:tailwindcss' },
+  { type: 'Sass', icon: 'devicon:sass' },
+
+  // ----- 代码质量 & 规范（工程化） -----
+  { type: 'ESLint', icon: 'devicon:eslint' },
+  { type: 'Stylelint', icon: 'simple-icons:stylelint' },
+
+  // ========== AI 应用开发 ==========
+  // 1. 编程语言
+  { type: 'Python', icon: 'logos:python' },
+
+  // 2. AI 模型与框架
+  { type: 'PyTorch', icon: 'logos:pytorch' },
+  { type: 'TensorFlow', icon: 'logos:tensorflow' },
+  { type: 'Transformers', icon: 'simple-icons:huggingface' },
+  { type: 'Hugging Face', icon: 'simple-icons:huggingface' },
+
+  // 3. 应用开发框架
+  { type: 'LangChain', icon: 'simple-icons:langchain' },
+  { type: 'LlamaIndex', icon: 'simple-icons:llamaindex' },
+  { type: 'Semantic Kernel', icon: 'simple-icons:microsoft' }, // 可用微软图标代表
+
+  // 4. 数据与知识处理（向量数据库）
+  { type: 'Pinecone', icon: 'simple-icons:pinecone' },
+  { type: 'Weaviate', icon: 'simple-icons:weaviate' },
+
+  // 5. 后端与 API 开发（AI 相关）
+  { type: 'FastAPI', icon: 'devicon:fastapi' },
+  { type: 'Django', icon: 'devicon:django' },
+
+  // 6. 前端开发（AI 应用界面，补充 Next.js）
+  { type: 'Next.js', icon: 'logos:nextjs' },
 ]);
 
-// 工具
 const tools = ref([
-  { type: 'WebStorm', icon: 'devicon:webstorm' },
-  { type: 'VSCode', icon: 'vscode-icons:file-type-vscode' },
-  { type: 'Android Studio', icon: 'devicon:androidstudio' },
-  { type: 'pnpm', icon: 'vscode-icons:file-type-light-pnpm' },
-  { type: 'npm', icon: 'logos:npm' },
-  { type: 'Vite', icon: 'devicon:vitejs' },
-  { type: 'IDEA', icon: 'logos:intellij-idea' },
+  // ========== 原有工具 ==========
+  // ----- IDE & 编辑器 -----
+  { type: 'IntelliJ IDEA', icon: 'logos:intellij-idea' },
+  { type: 'VS Code', icon: 'devicon:vscode' },
+  { type: 'Eclipse', icon: 'devicon:eclipse' },
+
+  // ----- 构建工具（后端） -----
+  { type: 'Maven', icon: 'devicon:maven' },
+  { type: 'Gradle', icon: 'devicon:gradle' },
+
+  // ----- 版本控制 -----
   { type: 'Git', icon: 'devicon:git' },
   { type: 'GitHub', icon: 'devicon:github' },
   { type: 'GitLab', icon: 'devicon:gitlab' },
-  { type: 'Docker', icon: 'devicon:docker' },
+
+  // ----- 包管理（前端与后端通用） -----
+  { type: 'npm', icon: 'logos:npm' },
+  { type: 'yarn', icon: 'logos:yarn' },
+  { type: 'pnpm', icon: 'vscode-icons:file-type-light-pnpm' },
+
+  // ----- CI/CD & 自动化 -----
+  { type: 'Jenkins', icon: 'devicon:jenkins' },
+  { type: 'GitHub Actions', icon: 'devicon:githubactions' },
+  { type: 'GitLab CI', icon: 'devicon:gitlab' },
+
+  // ----- 容器 & 编排辅助 -----
+  { type: 'Helm', icon: 'devicon:helm' },
+  { type: 'Rancher', icon: 'devicon:rancher' },
+
+  // ----- 测试 & 质量（后端） -----
+  { type: 'SonarQube', icon: 'devicon:sonarqube' },
+
+  // ----- 接口调试 & 协作 -----
   { type: 'Postman', icon: 'devicon:postman' },
-  { type: 'Netlify', icon: 'devicon:netlify' },
+  { type: 'Swagger UI', icon: 'devicon:swagger' },
+  { type: 'Figma', icon: 'logos:figma' },
+  { type: 'Slack', icon: 'logos:slack' },
+
+  // ----- 服务器 & 部署 -----
+  { type: 'Tomcat', icon: 'devicon:tomcat' },
+  { type: 'Nginx', icon: 'devicon:nginx' },
+  { type: 'AWS', icon: 'logos:aws' },
+  { type: 'Azure', icon: 'logos:microsoft-azure' },
+
+  // ========== 🆕 新增：AI 开发辅助工具 ==========
+  // Python 包管理 & IDE
+  { type: 'pip', icon: 'logos:pip' },
+  { type: 'PyCharm', icon: 'devicon:pycharm' },
+
+  // 云平台（补充 GCP）
+  { type: 'GCP', icon: 'logos:google-cloud' },
 ]);
 </script>
 
