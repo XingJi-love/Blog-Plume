@@ -64,33 +64,36 @@ cover: ./Axios.jpg
 
 
 ```html
-    <script>
-       /*  
-        1.实例化promise对象,并且执行(类似Java创建线程对象,并且start)
-        参数: resolve,reject随意命名,但是一般这么叫!
-        参数: resolve,reject分别处理成功和失败的两个函数! 成功resolve(结果)  失败reject(结果)
-        参数: 在function中调用这里两个方法,那么promise会处于两个不同的状态
-        状态: promise有三个状态
-                pending   正在运行
-                resolved  内部调用了resolve方法
-                rejected  内部调用了reject方法
-        参数: 在第二步回调函数中就可以获取对应的结果 
-        */
-        let promise =new Promise(function(resolve,reject){
-            console.log("promise do some code ... ...") 100s
-            //resolve("promise success")
-            reject("promise fail")
-        })
-        console.log('other code1111 invoked')
-        //2.获取回调函数结果  then在这里会等待promise中的运行结果,但是不会阻塞代码继续运行
-        promise.then(
-            function(value){console.log(`promise中执行了resolve:${value}`)},
-            function(error){console.log(`promise中执行了reject:${error}`)}
-        )
-        // 3 其他代码执行   
-        console.log('other code2222 invoked')
-    </script>
+<script setup>
+// 创建一个新的 Promise 实例，用于处理异步操作
+let promise = new Promise(function (resolve, reject) {
+  // 如果异步操作成功，调用 resolve 并传入结果值
+  // resolve('成功结果')
+
+  // 如果异步操作失败，调用 reject 并传入错误信息
+  reject('失败结果')   // 当前演示失败场景，所以会触发 then 的第二个回调
+})
+
+// then 方法用于注册 Promise 状态变更后的回调函数
+// 第一个参数是成功（fulfilled）时的回调，接收 resolve 传入的值
+// 第二个参数是失败（rejected）时的回调，接收 reject 传入的错误信息
+promise.then(function (result) {
+  // 成功时输出结果
+  console.log('ok=' + result)
+}, function (error) {
+  // 失败时输出错误信息
+  console.log('fail=' + error)
+})
+</script>
+
+<template>
+  <div>
+    hello页面
+  </div>
+</template>
 ```
+
+![Axios](./第5章-Axios/img-1.jpg)
 
 
 
@@ -201,6 +204,40 @@ cover: ./Axios.jpg
         )
 </script>
 ```
+
+```html
+<script setup>
+
+//async关键字修改函数，表示这个函数返回一个Promise对象。
+async function fun1() {
+    //return Promise.resolve('成功结果状态')
+    //return Promise.reject('失败结果状态')
+    //return 10  // 返回常量数据，相当返回成功状态Promise对象
+    //return 'hello'
+    //return { name: 'zhangsan', age: 22 }
+    throw new Error('操作失败')
+}
+
+let promise = fun1()
+promise.then((result) => {
+    //console.log('ok=' + result)
+    console.log('ok=' + result.name)
+}).catch((error)=>{
+    console.log('fail=' + error)
+})
+
+</script>
+
+<template>
+    <div>
+
+    </div>
+</template>
+
+<style scoped></style>
+```
+
+![Axios](./第5章-Axios/img-2.jpg)
 
 > await：
 
@@ -331,14 +368,14 @@ GET/POST
 > 2 准备项目：
 
 ```javascript
-npm create vite
-npm install 
+pnpm create vite
+pnpm install 
 ```
 
 >  3 安装Axios：
 
 ```shell
-npm install axios
+pnpm install axios
 ```
 
 > 4 设计页面（App.Vue）：
@@ -383,7 +420,7 @@ npm install axios
 >  5 启动测试：
 
 ```shell
-npm run dev
+pnpm run dev
 ```
 
 > 异步响应的数据结构：
