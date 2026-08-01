@@ -13,6 +13,8 @@ Git是一个免费的、开源的 [[分布式  版本控制   系统]]，可以�
 
 Git易于学习，占地面积小，性能极快。 它具有廉价的本地库，方便的暂存区域和多个工作流分支等特性。其性能优于Subversion(svn)、Control Version System、Perforce和ClearCase等版本控制工具。
 
+
+
 ## 1.何为版本控制
 
 版本控制是一种记录文件内容变化，以便将来查阅特定版本修订情况的系统。
@@ -22,11 +24,13 @@ Git易于学习，占地面积小，性能极快。 它具有廉价的本地库�
 ![Git](./image/wps1.jpg)
 
 
+
 ## 2.为什么需要版本控制
 
 个人开发过渡到团队协作。
 
 ![Git](./image/wps2.jpg)
+
 
 
 ## 3.版本控制工具
@@ -58,17 +62,23 @@ Git、Mercurial、Bazaar、Darcs……
 ![Git](./image/wps4.png)
 
 
+
 ## 4.Git简史
 
 ![Git](./image/wps5.jpg)
 
 
-## 5 Git工作机制
+
+## 5.Git工作机制
 
 ![Git](./image/wps6.jpg)
 
+![Git](./第1章-Git概述/img-1.jpg)
 
-## 6 Git和代码托管中心
+
+
+
+## 6.Git和代码托管中心
 
 代码托管中心是基于网络服务器的远程代码仓库，一般我们简单称为远程库。
 

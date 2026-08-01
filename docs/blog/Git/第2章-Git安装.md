@@ -17,8 +17,6 @@ cover: /Git.jpg
 推荐安装 Git 2.40.0 版本
 :::
 
----
-
 ## 安装步骤
 
 1. **查看GNU协议**，直接点击下一步。
@@ -77,7 +75,7 @@ cover: /Git.jpg
 
     ![Git](./image/wps20.jpg)
 
----
+
 
 ## 安装完成
 
@@ -87,8 +85,8 @@ cover: /Git.jpg
 
 16. 右键任意位置，在菜单里选择 **Git Bash Here** 即可打开命令行终端。
 
-    ![Git](./image/wps22.jpg)
+    ![Git](./第2章-Git安装/img-1.jpg)
 
 17. 在Git Bash终端输入 `git --version` 查看版本，如图所示，说明安装成功。
 
-    ![Git](./image/image-20230627170844640.png)
+    ![Git](./第2章-Git安装/img-2.jpg)
