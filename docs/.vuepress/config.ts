@@ -233,6 +233,11 @@ export default defineUserConfig({
     //  global: true,
     //  admin: ['123456'],
     //}
+    encrypt: {
+      rules: {
+        '/blog/hmdp-plus': '666666',
+      }
+    },
 
     /**
      * 启用 llmstxt 插件，用于为大语言模型提供更友好的内容
