@@ -233,6 +233,7 @@ export default defineUserConfig({
     //  global: true,
     //  admin: ['123456'],
     //}
+    
     encrypt: {
       rules: {
         '/blog/hmdp-plus': '666666',
