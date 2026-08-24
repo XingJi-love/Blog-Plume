@@ -75,6 +75,18 @@ const demoDoc = defineCollection({
  * (demoDoc 为参考示例，如果不需要它，请删除)
  */
 export default defineCollections([
+  /*
+  {
+    type: "doc",
+    dir: "计算机网络",
+    title: "计算机网络",
+    sidebar: [
+    { text: 'OSI七层模型', prefix: '/ComputerNetwork/OSI七层模型/', items: 'auto' },
+    { text: 'TCP-IP四层协议', prefix: '/ComputerNetwork/TCP-IP四层协议/', items: 'auto' },
+    { text: '五层协议', prefix: '/ComputerNetwork/五层协议/', items: 'auto' },
+    ],
+  },
+  */
   {
     type: "doc",
     dir: "JVM",

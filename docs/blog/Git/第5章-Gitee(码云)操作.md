@@ -76,9 +76,9 @@ l 推送到远程仓库
 
 ![Git](./image/wps33.jpg)
 
-![Git](./image/image-20230627163438184.png)
+![Git](./第5章-Gitee(码云)操作/img-1.jpg)
 
-![Git](./image/image-20230627163519780.png)
+![Git](./第5章-Gitee(码云)操作/img-2.jpg)
 
 
 
@@ -102,13 +102,13 @@ l 推送到远程仓库
 
 #### （2）案例实操
 
-![Git](./image/image-20230627163625061.png)
+![Git](./第5章-Gitee(码云)操作/img-3.jpg)
 
-**https://gitee.com/boncda/git-demo1.git**
+**git@gitee.com:giteehzb/git-test.git**
 
 **\*\*这个地址在创建完远程仓库后生成的连接，如图所示红框中\*\***
 
-![Git](./image/image-20230627163710074.png)
+![Git](./第5章-Gitee(码云)操作/img-4.jpg)
 
 ### 5.2 推送本地分支到远程仓库
 
@@ -118,13 +118,13 @@ l 推送到远程仓库
 
 #### （2）案例实操
 
-![Git](./image/image-20230627163829931.png)
+![Git](./第5章-Gitee(码云)操作/img-5.jpg)
 
-第一次需要输入**码云的用户名和密码**
+此时发现已将我们lisi分支上的内容推送到Gitee创建的远程仓库。
 
-此时发现已将我们master分支上的内容推送到Gitee创建的远程仓库。
+![Git](./第5章-Gitee(码云)操作/img-6.jpg)
 
-![Git](./image/image-20230627163920349.png)
+
 
 ### 5.3 克隆远程仓库到本地
 
@@ -134,19 +134,25 @@ l 推送到远程仓库
 
 #### （2）案例实操
 
+![Git](./第5章-Gitee(码云)操作/img-7.jpg)
+
+![Git](./第5章-Gitee(码云)操作/img-8.jpg)
+
 **创建新文件夹，执行**
 
-![Git](./image/image-20230627164105896.png)
+![Git](./第5章-Gitee(码云)操作/img-9.jpg)
 
 这个地址为远程仓库地址，克隆结果：初始化本地仓库
 
-![Git](./image/image-20230627164135658.png)
+![Git](./第5章-Gitee(码云)操作/img-10.jpg)
 
-进入git-demo1执行
+进入git-test6执行
 
-![Git](./image/image-20230627164353109.png)
+![Git](./第5章-Gitee(码云)操作/img-11.jpg)
 
 小结：clone会做如下操作。1、拉取代码。2、初始化本地仓库。3、创建别名
+
+
 
 ### 5.4 邀请加入团队
 
@@ -191,6 +197,8 @@ l 推送到远程仓库
 第三 使用另外用户登录，发现文件已经更新
 
 ![Git](./image/wps51.jpg)
+
+
 
 ### 5.5 拉取远程库内容
 

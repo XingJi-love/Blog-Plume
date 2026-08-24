@@ -19,17 +19,20 @@ export default defineNavbarConfig([
     icon: 'mdi:learn-outline',
     items: [
       {
+        text: '八股文',
+        icon: 'ic:twotone-cloud',
+        items: [
+          /*
+          { text: '计算机网络', link: '/ComputerNetwork/计算机网络体系结构/', icon: 'devicon-plain:java' },
+           */
+          { text: 'JVM', link: '/JVM/初识JVM/', icon: 'devicon-plain:java' },
+        ],
+      },
+      {
         text: '算法',
         icon: 'fa7-brands:leetcode',
         items: [
           { text: 'Leetcode', link: '/Leetcode/算法入门/', icon: 'fa7-brands:leetcode' },
-        ],
-      },
-      {
-        text: '八股文',
-        icon: 'ic:twotone-cloud',
-        items: [
-          { text: 'JVM', link: '/JVM/初识JVM/', icon: 'devicon-plain:java' },
         ],
       },
       {
