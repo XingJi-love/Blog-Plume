@@ -20,6 +20,8 @@ cover: ./Linux.jpg
 
 > Linux根目录下的常见目录及作用
 
+![Linux的目录结构](./第三章-Linux的目录结构/img-1.jpg)
+
 1\. /bin：★(/usr/bin,/usr/local/bin)
 
 是Binary的缩写, 这个目录存放着最经常使用的命令,Linux默认的环境变量已经包含该路径,所以可以直接使用该路径下的指令如 cd指令&#x20;
