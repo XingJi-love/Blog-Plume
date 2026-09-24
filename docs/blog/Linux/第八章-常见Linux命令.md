@@ -23,9 +23,11 @@ cover: ./Linux.jpg
     *   显示当前工作目录的绝对路径
 
     ```shell
-    [root@hadoop101 ~]# pwd
+    [root@hadoop101 ~]# pwd  //-L 显示逻辑路径  -P 显示实际物理路径
     /root
     ```
+
+![常见Linux命令](./第八章-常见Linux命令/img-1.jpg)
 
 
 
@@ -58,6 +60,12 @@ cover: ./Linux.jpg
     drwxrwxrwx. 2 root    root    4096 5月  27 14:14 hello
     -rwxrw-r--. 1 atguigu atguigu   34 5月  27 14:20 test.txt
     ```
+
+![常见Linux命令](./第八章-常见Linux命令/img-2.jpg)
+
+> **扩展知识:**
+>
+> ![常见Linux命令](./第八章-常见Linux命令/img-3.jpg)
 
 
 
@@ -111,6 +119,8 @@ cover: ./Linux.jpg
     [root@hadoop101 公共的]# cd ..
     ```
 
+![常见Linux命令](./第八章-常见Linux命令/img-4.jpg)
+
 
 
 ### （4）mkdir(Make directory) 建立目录
@@ -141,13 +151,16 @@ cover: ./Linux.jpg
     [root@hadoop101 ~]# mkdir -p xiyou/dssz/meihouwang
     ```
 
+![常见Linux命令](./第八章-常见Linux命令/img-5.jpg)
 
 
 ### （5）rmdir(Remove directory) 删除目录
 
-*   基本语法
+* 基本语法
 
-    *   rmdir 要删除的【**空目录**】
+  *   rmdir 要删除的文件夹 （**空目录**）
+  *   rmdir 文件夹名 xx/x/x/x (**嵌套多层**)
+  *   rmdir -v 文件名 显示删除过程
 
 *   实操案例
 
@@ -157,13 +170,17 @@ cover: ./Linux.jpg
     [root@hadoop101 ~]# rmdir xiyou/dssz/meihouwang
     ```
 
+![常见Linux命令](./第八章-常见Linux命令/img-6.jpg)
+
 
 
 ### （6）touch 创建空文件
 
-*   基本语法
+* 基本语法
 
-    *   touch 文件名称
+  *   touch 文件名 创建一个空文件
+  *   vim 文件名 注意：空 wq会创建 q不会创建
+  *   echo "内容" >文件名
 
 *   实操案例
 
@@ -175,13 +192,17 @@ cover: ./Linux.jpg
 
     vim也可以创建文件,vim atguigu.txt 进入编辑模式,然后输入内容保存退出即可,但是如果不输出内容直接空文件下退出,则不会创建文件
     
+    ![常见Linux命令](./第八章-常见Linux命令/img-7.jpg)
+    
     
 
 ### （7）cp 复制文件或目录
 
-*   基本语法
+* 基本语法
 
-    *   cp \[选项] source dest             （功能描述：复制source文件到dest）
+  *   cp \[选项：-r 多文件或者文件夹 -f 强制覆盖] source dest（功能描述：复制source文件到dest）
+  *   cp -r 文件夹地址 目标文件夹 (复制整个文件夹)
+  *   cp -r 文件夹/* 目标文件夹(复制文件夹下文件)
 
 *   选项说明
 
@@ -210,7 +231,10 @@ cover: ./Linux.jpg
   [root@hadoop101 ~]# cp -r a/b/ ./
   ```
 
+  ![常见Linux命令](./第八章-常见Linux命令/img-8.jpg)
   
+
+
 
 ### （8）rm移除文件或者目录
 
@@ -239,6 +263,8 @@ cover: ./Linux.jpg
     ```shell
     [root@hadoop101 ~]# rm -rf ./*
     ```
+
+![常见Linux命令](./第八章-常见Linux命令/img-9.jpg)
 
 
 
@@ -272,6 +298,8 @@ cover: ./Linux.jpg
     [root@hadoop101 ~]# mv xiyou/dssz/houge.txt ./
     ```
 
+![常见Linux命令](./第八章-常见Linux命令/img-10.jpg)
+
 
 
 ### （10）cat查看文件内容
@@ -299,6 +327,8 @@ cover: ./Linux.jpg
     ```shell
     [atguigu@hadoop101 ~]$ cat -n houge.txt 
     ```
+
+![常见Linux命令](./第八章-常见Linux命令/img-11.jpg)
 
 
 
@@ -334,9 +364,13 @@ cover: ./Linux.jpg
     [root@hadoop101 ~]# more smartd.conf
     ```
 
+![常见Linux命令](./第八章-常见Linux命令/img-12.jpg)
+
 
 
 ### （12）less 分屏显示文件内容
+
+![常见Linux命令](./第八章-常见Linux命令/img-13.jpg)
 
 *   基本语法
 
@@ -365,9 +399,13 @@ cover: ./Linux.jpg
     [root@hadoop101 ~]# less smartd.conf
     ```
 
+![常见Linux命令](./第八章-常见Linux命令/img-14.jpg)
+
 
 
 ### （13）head显示文件头部内容
+
+![常见Linux命令](./第八章-常见Linux命令/img-15.jpg)
 
 *   基本语法
 
@@ -392,9 +430,13 @@ cover: ./Linux.jpg
     [root@hadoop101 ~]# head -n 2 smartd.conf
     ```
 
+![常见Linux命令](./第八章-常见Linux命令/img-16.jpg)
+
 
 
 ### （14）tail 输出文件尾部内容
+
+![常见Linux命令](./第八章-常见Linux命令/img-15.jpg)
 
 *   基本语法
 
@@ -425,6 +467,8 @@ cover: ./Linux.jpg
     ```shell
     [root@hadoop101 ~]# tail -f houge.txt
     ```
+
+![常见Linux命令](./第八章-常见Linux命令/img-16.jpg)
 
 
 
@@ -467,6 +511,8 @@ cover: ./Linux.jpg
     [atguigu@hadoop101 ~]$ echo $PATH
     ```
 
+![常见Linux命令](./第八章-常见Linux命令/img-4.jpg)
+
 
 
 ### （16）\> 覆盖和>>追加
@@ -499,6 +545,10 @@ cover: ./Linux.jpg
     ```shell
     [root@hadoop101 ~]# echo hello>>houge.txt
     ```
+
+![常见Linux命令](./第八章-常见Linux命令/img-18.jpg)
+
+![常见Linux命令](./第八章-常见Linux命令/img-19.jpg)
 
 
 
@@ -549,6 +599,10 @@ cover: ./Linux.jpg
     [root@hadoop101 ~]# cd -P dssz/
     ```
 
+![常见Linux命令](./第八章-常见Linux命令/img-20.jpg)
+
+![常见Linux命令](./第八章-常见Linux命令/img-21.jpg)
+
 
 
 ### （18）history查看历史命令
@@ -573,6 +627,7 @@ cover: ./Linux.jpg
     history >> zhaoweifeng.txt
     ```
 
+![常见Linux命令](./第八章-常见Linux命令/img-17.jpg)
 
 
 
@@ -596,6 +651,8 @@ cover: ./Linux.jpg
     [root@hadoop101 ~]# useradd tangseng
     [root@hadoop101 ~]#ll /home/
     ```
+
+![常见Linux命令](./第八章-常见Linux命令/img-24.jpg)
 
 
 
@@ -633,6 +690,8 @@ cover: ./Linux.jpg
     [root@hadoop101 ~]#id tangseng
     ```
 
+![常见Linux命令](./第八章-常见Linux命令/img-22.jpg)
+
 
 
 > cat /etc/passwd 查看创建的所有用户
@@ -644,6 +703,8 @@ cover: ./Linux.jpg
     ```shell
     [root@hadoop101 ~]# cat /etc/passwd
     ```
+
+![常见Linux命令](./第八章-常见Linux命令/img-23.jpg)
 
 
 
