@@ -40,6 +40,7 @@ export default defineNavbarConfig([
         icon: 'hugeicons:permanent-job',
         items: [
           { text: '求职指南', link: '/Job/1.求职指南/', icon: 'hugeicons:permanent-job' },
+          { text: '简历描述', link: '/Job/2.简历描述/', icon: 'hugeicons:permanent-job' },
         ],
       },
     ],

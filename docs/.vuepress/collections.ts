@@ -129,6 +129,7 @@ export default defineCollections([
     title: "Job",
     sidebar: [
     { text: '求职指南', prefix: '/Job/1.求职指南/', items: 'auto' },
+    { text: '简历描述', prefix: '/Job/2.简历描述/', items: 'auto' },
     ],
   },
 
