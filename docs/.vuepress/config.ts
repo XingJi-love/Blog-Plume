@@ -12,6 +12,14 @@
 import { viteBundler } from '@vuepress/bundler-vite'
 import { defineUserConfig } from 'vuepress'
 import { plumeTheme } from 'vuepress-theme-plume'
+import { resolve } from 'node:path'
+
+// rolldown-vite 8.3.8 无法解析主题包 exports 中 "./features/*" 的目录重映射，
+// 显式 alias 到物理目录绕过；vite 修复后可移除
+const themeFeaturesDir = resolve(
+  process.cwd(),
+  'node_modules/vuepress-theme-plume/dist/client/features/components/',
+)
 
 export default defineUserConfig({
   base: '/',
@@ -46,7 +54,15 @@ export default defineUserConfig({
     ], 
   ],
 
-  bundler: viteBundler(),
+  bundler: viteBundler({
+    viteOptions: {
+      resolve: {
+        alias: {
+          'vuepress-theme-plume/features/': themeFeaturesDir,
+        },
+      },
+    },
+  }),
   shouldPrefetch: false, // 站点较大，页面数量较多时，不建议启用
 
   theme: plumeTheme({
